@@ -6,17 +6,24 @@
 <link rel="stylesheet" href="assets/styles.css">
   <link rel="canonical" href="https://plannaturel.fr/">
   <meta property="og:url" content="https://plannaturel.fr/">
-  <title>Plan Naturel — Plans de camping dessinés sur mesure</title>
+  <title>Création de plan de camping illustré | Plan Naturel</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <meta name="theme-color" content="#faf7f2">
-  <meta name="description" content="Plans de camping dessinés sur mesure : allées, emplacements numérotés et services, en fichiers prêts pour l'imprimeur, vos panneaux et votre site. Devis gratuit.">
+  <meta name="description" content="Plan Naturel dessine le plan illustré de votre camping à partir de votre ancien plan ou de vues aériennes. Plans 2D et 3D prêts à imprimer. Devis gratuit.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Plan Naturel — Plans de camping dessinés sur mesure">
+  <meta property="og:title" content="Création de plan de camping illustré | Plan Naturel">
   <meta property="og:description" content="Vos vacanciers trouvent leur emplacement du premier coup d'œil. Plans 2D et 3D pour campings, villages vacances et parcs de loisirs.">
   <meta property="og:image" content="https://plannaturel.fr/assets/plan-camping-les-varennes-139-emplacements.png">
+  <meta property="og:image:width" content="1742">
+  <meta property="og:image:height" content="1229">
+  <meta name="twitter:card" content="summary_large_image">
   <meta property="og:locale" content="fr_FR">
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "WebSite", "name": "Plan Naturel", "alternateName": "plannaturel.fr", "url": "https://plannaturel.fr/" }
+  </script>
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-512.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,8 +41,8 @@
         "areaServed": { "@type": "Country", "name": "France" },
         "knowsLanguage": ["fr", "en"],
         "makesOffer": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan 2D de camping sur mesure" }, "priceSpecification": { "@type": "PriceSpecification", "price": "200", "priceCurrency": "EUR", "valueAddedTaxIncluded": true } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Légende personnalisée" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan 2D de camping sur mesure" }, "priceSpecification": { "@type": "PriceSpecification", "price": "200", "priceCurrency": "EUR" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Légende typographique" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan 3D illustré" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan interactif web" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Signalétique et panneaux d'accueil" } }
@@ -54,8 +61,7 @@
     ]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Karla:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
   <style>
     :root {
       --font-heading: "Newsreader", Georgia, serif;
@@ -106,7 +112,7 @@
     a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible {
       outline: 2px solid var(--color-accent-700); outline-offset: 3px;
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } html a:hover, html button:hover, html [data-hover]:hover { transform: none !important; } }
     [data-burger] { display: none; }
     [data-cta-desktop] { white-space: nowrap; }
     @media (max-width: 1080px) {
@@ -117,6 +123,15 @@
       [data-menu-panel] { padding: 4px 16px 20px !important; }
     }
     [data-tel-mobile] { display: none; }
+    [data-grid-real] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    @media (max-width: 1080px) { [data-grid-real] { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { [data-grid-real] { grid-template-columns: minmax(0, 1fr); } }
+    [data-grid-3] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 1080px) { [data-grid-3] { grid-template-columns: minmax(0, 1fr); } }
+    [data-legal] a, [data-copy] { white-space: nowrap; }
+    [data-cta-mobile] { display: none; }
+    @media (max-width: 1080px) { [data-cta-mobile] { display: flex !important; } }
+    [data-cta-mobile][data-off] { display: none !important; }
     @media (max-width: 360px) { [data-brand-name] { font-size: 17px !important; } }
     a { color: var(--color-accent-700); }
     a:hover { color: var(--color-accent-800); }
@@ -135,7 +150,7 @@
     <div data-header-inner="" style="max-width: 1160px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
       <div style="display: flex; align-items: center; gap: 16px; flex-wrap: nowrap; margin-right: auto; min-width: 0;">
         <a href="#top" data-action="fermerMenu" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text); min-height: 44px;">
-          <img src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 30px; width: auto;">
+          <img width="285" height="187" src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 30px; width: auto;">
           <span data-brand-name="" style="font-family: var(--font-heading); font-size: 19px; letter-spacing: -0.02em; white-space: nowrap;">Plan Naturel</span>
         </a>
         <a data-tel-desktop="" href="tel:+33681896752" style="font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; padding-left: 16px; border-left: 1px solid var(--color-divider);">06 81 89 67 52</a>
@@ -145,6 +160,7 @@
         <a href="#prestations" style="text-decoration: none; color: var(--color-text);">Prestations</a>
         <a href="#tarifs" style="text-decoration: none; color: var(--color-text);">Tarifs</a>
         <a href="#methode" style="text-decoration: none; color: var(--color-text);">Méthode</a>
+        <a href="creation-site-internet-camping" style="text-decoration: none; color: var(--color-text);">Site internet</a>
         <a href="#faq" style="text-decoration: none; color: var(--color-text);">FAQ</a>
       </nav>
       <a class="btn btn-primary" data-cta-desktop="" href="#devis" style="border-radius: 999px;">Demander un devis</a>
@@ -166,35 +182,37 @@
         <a href="#prestations" data-action="fermerMenu" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Prestations</a>
         <a href="#tarifs" data-action="fermerMenu" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Tarifs</a>
         <a href="#methode" data-action="fermerMenu" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Méthode</a>
+        <a href="creation-site-internet-camping" data-action="fermerMenu" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Site internet</a>
         <a href="#faq" data-action="fermerMenu" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text);">FAQ</a>
         <a class="btn btn-primary" href="#devis" data-action="fermerMenu" style="border-radius: 999px; margin-top: 14px; padding: 13px; text-align: center;">Demander un devis</a>
         <a href="tel:+33681896752" style="margin-top: 8px; min-height: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600;">06 81 89 67 52</a>
       </div>
     </div>
   </header>
+  <a class="btn btn-primary" data-cta-mobile="" href="#devis" style="position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 30; justify-content: center; border-radius: 999px; padding: 14px; font-size: 15px; box-shadow: var(--shadow-lg);">Demander un devis gratuit</a>
 
   <section id="top" style="max-width: 1160px; margin: 0 auto; padding: 64px 24px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 48px; align-items: center;">
     <div>
-      <span class="tag tag-accent-2" style="margin-bottom: 18px;">Plans de camping sur mesure · France</span>
-      <h1 style="font-size: clamp(38px, 5vw, 62px); margin: 0 0 20px; text-wrap: pretty; font-weight: 500; line-height: 1.05;"><span style="font-size: clamp(38px, 5vw, 62px); letter-spacing: -0.01em; text-wrap-mode: initial; color: var(--color-text);">Vos vacanciers trouvent leur emplacement du </span><i style="font-size: clamp(38px, 5vw, 62px); letter-spacing: -0.01em; text-wrap-mode: initial; color: var(--color-text);">premier coup&nbsp;d'œil.</i></h1>
+      <span class="tag tag-accent-2" style="margin-bottom: 18px; white-space: nowrap;">Création de plans de camping · France</span>
+      <h1 style="font-size: clamp(38px, 5vw, 62px); margin: 0 0 20px; text-wrap: pretty; font-weight: 500; line-height: 1.05;"><span style="font-size: clamp(38px, 5vw, 62px); letter-spacing: -0.01em; text-wrap-mode: initial; color: var(--color-text);">Un plan qui se lit d'un regard, </span><i style="font-size: clamp(38px, 5vw, 62px); letter-spacing: -0.01em; text-wrap-mode: initial; color: var(--color-text);">un accueil qui&nbsp;respire.</i></h1>
       <p style="font-size: 18px; max-width: 46ch; color: var(--color-neutral-800);">Nous dessinons le plan de votre établissement — chaque allée, chaque emplacement, chaque service — dans un visuel clair et à votre image. Papier, panneau d'accueil, site web&nbsp;: un seul plan, tous vos supports.</p>
       <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
-        <a class="btn btn-primary" href="#devis" style="border-radius: 999px; padding: 13px 26px; font-size: 15px;">Demander un devis gratuit</a>
-        <a class="btn btn-secondary" href="#realisations" style="border-radius: 999px; padding: 13px 26px; font-size: 15px;">Voir des plans réalisés</a>
+        <a class="btn btn-primary" href="#devis" style="border-radius: 999px; padding: 13px 26px; font-size: 15px; white-space: nowrap;">Demander un devis gratuit</a>
+        <a class="btn btn-secondary" href="#realisations" style="border-radius: 999px; padding: 13px 26px; font-size: 15px; white-space: nowrap;">Voir des plans réalisés</a>
       </div>
-      <p style="margin-top: 26px; font-size: 14px; color: var(--color-neutral-700);">À partir de <strong>200 € TTC tout compris</strong> pour un camping jusqu'à 49 emplacements (forfait + ouverture de dossier).</p>
+      <p style="margin-top: 26px; font-size: 14px; color: var(--color-neutral-700);">À partir de <strong>200 € tout compris</strong> pour un camping jusqu'à 49 emplacements (forfait + ouverture de dossier).</p>
     </div>
     <div style="position: relative;">
       <div style="position: absolute; width: 220px; height: 220px; border-radius: 999px; background: var(--color-accent-2-200); top: -34px; right: -50px; z-index: 0;"></div>
       <div style="position: absolute; width: 120px; height: 120px; border-radius: 999px; background: var(--color-accent-200); bottom: -30px; left: -34px; z-index: 0;"></div>
       <figure class="washed" style="position: relative; z-index: 1; border-radius: 6px; overflow: hidden; box-shadow: var(--shadow-lg); background: #faf5ec;">
-        <img src="assets/plan-camping-bois-soleil-vue-densemble.webp" alt="Plan illustré du camping Bois Soleil : allées, emplacements numérotés, services et légende bilingue" style="width: 100%; height: auto;">
+        <img width="1384" height="958" fetchpriority="high" src="assets/plan-camping-bois-soleil-vue-densemble.webp" alt="Plan illustré du camping Bois Soleil : allées, emplacements numérotés, services et légende bilingue" style="width: 100%; height: auto;">
       </figure>
     </div>
   </section>
 
   <section style="max-width: 1160px; margin: 0 auto; padding: 28px 24px 64px;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px;">
+    <div data-grid-real="" style="display: grid; gap: 16px;">
       
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 26px 24px;">
         <div style="font-family: var(--font-heading); font-size: 40px; line-height: 1; color: var(--color-accent-700);">800+</div>
@@ -223,13 +241,13 @@
   </section>
 
   <section id="realisations" style="max-width: 1160px; margin: 0 auto; padding: 24px 24px 72px;">
-    <h6 style="color: var(--color-accent-700); margin-bottom: 10px;">Réalisations</h6>
+    <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-700); margin-bottom: 10px;">Réalisations</p>
     <h2 style="font-size: clamp(30px, 3.4vw, 42px); max-width: 22ch;">Des plans lus par des milliers de vacanciers chaque saison</h2>
     <p style="max-width: 56ch; color: var(--color-neutral-800); margin-bottom: 32px;">Cliquez sur un plan pour l'agrandir, ou ouvrez la réalisation pour le détail du projet.</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px;">
+    <div data-grid-real="" style="display: grid; gap: 22px;">
       <div style="display: flex; flex-direction: column; gap: 10px;"><button type="button" data-action="ouvrirBoisSoleil" style="display: block; text-align: left; border: 0; padding: 0; cursor: pointer; background: var(--color-surface); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); font-family: var(--font-body); color: var(--color-text);" data-hover="">
         <div style="aspect-ratio: 4 / 3; background: #faf5ec; overflow: hidden;">
-          <img loading="lazy" decoding="async" class="washed" src="assets/plan-camping-bois-soleil-categories-hebergements.webp" alt="Plan 2D du camping Bois Soleil, 231 emplacements et légende par catégorie d'hébergement" style="width: 100%; height: 100%; object-fit: cover;">
+          <img width="1296" height="958" loading="lazy" decoding="async" class="washed" src="assets/plan-camping-bois-soleil-categories-hebergements.webp" alt="Plan 2D du camping Bois Soleil, 231 emplacements et légende par catégorie d'hébergement" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="padding: 20px 22px 22px;">
           <div style="font-family: var(--font-heading); font-size: 21px;">Bois Soleil</div>
@@ -241,11 +259,11 @@
           </div>
         </div>
       </button>
-        <a href="plan-camping-bois-soleil.html" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Bois Soleil →</a>
+        <a href="plan-camping-bois-soleil" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Bois Soleil →</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px;"><button type="button" data-action="ouvrirGrandPre" style="display: block; text-align: left; border: 0; padding: 0; cursor: pointer; background: var(--color-surface); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); font-family: var(--font-body); color: var(--color-text);" data-hover="">
         <div style="aspect-ratio: 4 / 3; background: #faf5ec; overflow: hidden;">
-          <img loading="lazy" decoding="async" class="washed" src="assets/plan-camping-le-grand-pre.webp" alt="Plan 2D du camping Le Grand Pré, secteurs A à H avec emplacements nus et locatifs" style="width: 100%; height: 100%; object-fit: cover;">
+          <img width="1827" height="1300" loading="lazy" decoding="async" class="washed" src="assets/plan-camping-le-grand-pre.webp" alt="Plan 2D du camping Le Grand Pré, secteurs A à H avec emplacements nus et locatifs" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="padding: 20px 22px 22px;">
           <div style="font-family: var(--font-heading); font-size: 21px;">Le Grand Pré</div>
@@ -256,11 +274,11 @@
           </div>
         </div>
       </button>
-        <a href="plan-camping-le-grand-pre.html" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Le Grand Pré →</a>
+        <a href="plan-camping-le-grand-pre" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Le Grand Pré →</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px;"><button type="button" data-action="ouvrirVarennes" style="display: block; text-align: left; border: 0; padding: 0; cursor: pointer; background: var(--color-surface); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); font-family: var(--font-body); color: var(--color-text);" data-hover="">
         <div style="aspect-ratio: 4 / 3; background: #faf5ec; overflow: hidden;">
-          <img loading="lazy" decoding="async" class="washed" src="assets/plan-camping-les-varennes-139-emplacements.webp" alt="Plan 2D du camping Les Varennes, 139 emplacements et 11 catégories d'hébergements" style="width: 100%; height: 100%; object-fit: cover;">
+          <img width="1742" height="1229" loading="lazy" decoding="async" class="washed" src="assets/plan-camping-les-varennes-139-emplacements.webp" alt="Plan 2D du camping Les Varennes, 139 emplacements et 11 catégories d'hébergements" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="padding: 20px 22px 22px;">
           <div style="font-family: var(--font-heading); font-size: 21px;">Les Varennes</div>
@@ -272,14 +290,14 @@
           </div>
         </div>
       </button>
-        <a href="plan-camping-les-varennes.html" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Les Varennes →</a>
+        <a href="plan-camping-les-varennes" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Les Varennes →</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px;"><button type="button" data-action="ouvrirDomaine" style="display: block; text-align: left; border: 0; padding: 0; cursor: pointer; background: var(--color-surface); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); font-family: var(--font-body); color: var(--color-text);" data-hover="">
         <div style="aspect-ratio: 4 / 3; background: #faf5ec; overflow: hidden;">
-          <img loading="lazy" decoding="async" class="washed" src="assets/plan-camping-yellow-village-le-jard.webp" alt="Plan 2D du camping Yelloh! Village Le Jard, plus de 800 emplacements en huit secteurs" style="width: 100%; height: 100%; object-fit: cover;">
+          <img width="1718" height="1206" loading="lazy" decoding="async" class="washed" src="assets/plan-camping-yelloh-village-le-jard.webp" alt="Plan 2D du camping Yelloh! Village Le Jard, plus de 800 emplacements en huit secteurs" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="padding: 20px 22px 22px;">
-          <div style="font-family: var(--font-heading); font-size: 21px;">Yelloh! Village Le Jard&nbsp;</div>
+          <div style="font-family: var(--font-heading); font-size: 21px;">Yelloh! Village Le Jard</div>
           <div style="margin-top: 6px; font-size: 14px; color: var(--color-neutral-700);">Plus de 800 emplacements répartis en huit secteurs</div>
           <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px;">
             <span class="tag tag-outline">Plan 2D</span>
@@ -287,59 +305,59 @@
           </div>
         </div>
       </button>
-        <a href="plan-camping-le-jard.html" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Le Jard →</a>
+        <a href="plan-camping-le-jard" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 2px 0;">Voir la réalisation Le Jard →</a>
       </div>
     </div>
   </section>
 
   <div data-if="ouvertBoisSoleil" style="display: contents;" hidden>
     <div class="dialog-backdrop" data-action="fermerPlan" style="position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px;">
-      <div class="dialog" role="dialog" aria-modal="true" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
+      <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-1" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
         <div style="display: flex; align-items: flex-start; gap: 16px;">
-          <div class="dialog-title" style="margin: 0;">Bois Soleil</div>
+          <div class="dialog-title" id="dlg-1" style="margin: 0;">Bois Soleil</div>
           <button type="button" class="btn btn-ghost" data-action="fermerPlan" style="margin-left: auto; border-radius: 999px;">Fermer</button>
         </div>
         <div style="margin-top: 16px; background: #faf5ec; border-radius: var(--radius-md); overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 0;">
-          <img loading="lazy" decoding="async" src="assets/plan-camping-bois-soleil-categories-hebergements.webp" alt="Plan du camping Bois Soleil agrandi, légende par catégorie d'hébergement" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
+          <img width="1296" height="958" loading="lazy" decoding="async" src="assets/plan-camping-bois-soleil-categories-hebergements.webp" alt="Plan du camping Bois Soleil agrandi, légende par catégorie d'hébergement" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
         </div>
       </div>
     </div>
   </div>
   <div data-if="ouvertGrandPre" style="display: contents;" hidden>
     <div class="dialog-backdrop" data-action="fermerPlan" style="position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px;">
-      <div class="dialog" role="dialog" aria-modal="true" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
+      <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-2" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
         <div style="display: flex; align-items: flex-start; gap: 16px;">
-          <div class="dialog-title" style="margin: 0;">Le Grand Pré</div>
+          <div class="dialog-title" id="dlg-2" style="margin: 0;">Le Grand Pré</div>
           <button type="button" class="btn btn-ghost" data-action="fermerPlan" style="margin-left: auto; border-radius: 999px;">Fermer</button>
         </div>
         <div style="margin-top: 16px; background: #faf5ec; border-radius: var(--radius-md); overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 0;">
-          <img loading="lazy" decoding="async" src="assets/plan-camping-le-grand-pre.webp" alt="Plan du camping Le Grand Pré agrandi" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
+          <img width="1827" height="1300" loading="lazy" decoding="async" src="assets/plan-camping-le-grand-pre.webp" alt="Plan du camping Le Grand Pré agrandi" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
         </div>
       </div>
     </div>
   </div>
   <div data-if="ouvertVarennes" style="display: contents;" hidden>
     <div class="dialog-backdrop" data-action="fermerPlan" style="position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px;">
-      <div class="dialog" role="dialog" aria-modal="true" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
+      <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-3" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
         <div style="display: flex; align-items: flex-start; gap: 16px;">
-          <div class="dialog-title" style="margin: 0;">Les Varennes</div>
+          <div class="dialog-title" id="dlg-3" style="margin: 0;">Les Varennes</div>
           <button type="button" class="btn btn-ghost" data-action="fermerPlan" style="margin-left: auto; border-radius: 999px;">Fermer</button>
         </div>
         <div style="margin-top: 16px; background: #faf5ec; border-radius: var(--radius-md); overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 0;">
-          <img loading="lazy" decoding="async" src="assets/plan-camping-les-varennes-139-emplacements.webp" alt="Plan du camping Les Varennes agrandi" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
+          <img width="1742" height="1229" loading="lazy" decoding="async" src="assets/plan-camping-les-varennes-139-emplacements.webp" alt="Plan du camping Les Varennes agrandi" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
         </div>
       </div>
     </div>
   </div>
   <div data-if="ouvertDomaine" style="display: contents;" hidden>
     <div class="dialog-backdrop" data-action="fermerPlan" style="position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px;">
-      <div class="dialog" role="dialog" aria-modal="true" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
+      <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-4" data-action="stop" style="max-width: 1400px; width: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; min-height: 0;">
         <div style="display: flex; align-items: flex-start; gap: 16px;">
-          <div class="dialog-title" style="margin: 0;">Yelloh! Village Le Jard</div>
+          <div class="dialog-title" id="dlg-4" style="margin: 0;">Yelloh! Village Le Jard</div>
           <button type="button" class="btn btn-ghost" data-action="fermerPlan" style="margin-left: auto; border-radius: 999px;">Fermer</button>
         </div>
         <div style="margin-top: 16px; background: #faf5ec; border-radius: var(--radius-md); overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 0;">
-          <img loading="lazy" decoding="async" src="assets/plan-camping-yellow-village-le-jard.webp" alt="Plan du camping Yelloh! Village Le Jard agrandi" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
+          <img width="1718" height="1206" loading="lazy" decoding="async" src="assets/plan-camping-yelloh-village-le-jard.webp" alt="Plan du camping Yelloh! Village Le Jard agrandi" style="max-width: 100%; max-height: 74vh; width: auto; height: auto; object-fit: contain; display: block;">
         </div>
       </div>
     </div>
@@ -347,41 +365,38 @@
 
   <section id="prestations" style="background: var(--color-accent-2-100); padding: 72px 0;">
     <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
-      <h6 style="color: var(--color-accent-2-700); margin-bottom: 10px;">Prestations</h6>
+      <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-2-700); margin-bottom: 10px;">Prestations</p>
       <h2 style="font-size: clamp(30px, 3.4vw, 42px); max-width: 24ch;">Le plan de base, puis tout ce que vous voulez autour</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 36px;">
+      <div data-grid-real="" style="display: grid; gap: 22px; margin-top: 36px;">
         <div class="card elev-sm" style="border-radius: var(--radius-lg);">
           <div class="card-kicker">Le socle</div>
           <div class="card-title">Plan 2D sur mesure</div>
-          <p class="card-body">Relevé de votre terrain, tracé des allées, numérotation complète des emplacements, bâtiments et services. Livré en fichiers haute définition prêts à imprimer et en version web.</p>
+          <p class="card-body">Reconstitution de votre terrain, tracé des allées, numérotation complète des emplacements, bâtiments et services. Livré en fichiers haute définition prêts à imprimer et en version web.</p>
           <div class="card-meta">Inclus : légende bilingue standard, 2 tours de corrections</div>
         </div>
         <div class="card elev-sm" style="border-radius: var(--radius-lg);">
           <div class="card-kicker">Identité</div>
-          <div class="card-title">Légende personnalisée</div>
+          <div class="card-title">Légende typographique</div>
           <p class="card-body">Pictogrammes dessinés pour vos services, typographie et couleurs reprises de votre charte, catégories d'hébergements différenciées par teinte comme sur vos brochures.</p>
           <div class="card-meta">+150 €</div>
         </div>
-        <div class="card elev-sm" style="border-radius: var(--radius-lg);">
-          <div class="card-kicker">Relief</div>
-          <div class="card-title">Plan 3D illustré</div>
-          <p class="card-body">Vue en volume : bâtiments, piscines, végétation et dénivelés. L'outil de vente idéal pour votre page d'accueil et vos supports commerciaux.</p>
-          <div class="card-meta">+500 €</div>
-        </div>
+        <a class="card elev-sm" href="plan-evacuation-camping" style="border-radius: var(--radius-lg); text-decoration: none; color: inherit;" data-hover="">
+          <div class="card-kicker">Sécurité</div>
+          <div class="card-title">Plan d'évacuation</div>
+          <p class="card-body">Affiche de consignes de sécurité à partir de votre plan : points de rassemblement, pictogrammes normalisés, consignes en plusieurs langues et numéros d'urgence.</p>
+          <div class="card-meta">+50 € · <span style="text-decoration: underline; white-space: nowrap;">Voir le détail</span></div>
+        </a>
+        <a class="card elev-sm" href="panneaux-signaletique-camping" style="border-radius: var(--radius-lg); text-decoration: none; color: inherit;" data-hover="">
+          <div class="card-kicker">Signalétique</div>
+          <div class="card-title">Panneaux</div>
+          <p class="card-body">Entrée, directions, aire de jeux, piscine, animations, tri : toute la signalétique du camping dans le style de votre plan.</p>
+          <div class="card-meta">Sur devis · <span style="text-decoration: underline; white-space: nowrap;">Voir les panneaux</span></div>
+        </a>
       </div>
       <div style="margin-top: 22px; background: var(--color-bg); border-radius: var(--radius-lg); padding: 30px 32px;">
         <h4 style="margin-bottom: 6px;">Options</h4>
         <p style="font-size: 14px; color: var(--color-neutral-800); max-width: 60ch;">À ajouter à n'importe quelle formule — chiffrées sur devis selon votre établissement.</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 22px;">
-          <div style="display: flex; gap: 14px; align-items: flex-start;">
-            <div style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 999px; background: var(--color-accent-200); display: flex; align-items: center; justify-content: center;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
-            </div>
-            <div>
-              <div style="font-weight: 700; font-size: 15px;">Plan interactif web</div>
-              <div style="font-size: 14px; color: var(--color-neutral-700);">Emplacements cliquables, recherche par numéro, intégrable sur votre site.</div>
-            </div>
-          </div>
+        <div data-grid-real="" style="display: grid; gap: 18px; margin-top: 22px;">
           <div style="display: flex; gap: 14px; align-items: flex-start;">
             <div style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 999px; background: var(--color-accent-200); display: flex; align-items: center; justify-content: center;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3M20 20h.01M17 20h.01M20 17h.01"></path></svg>
@@ -393,11 +408,11 @@
           </div>
           <div style="display: flex; gap: 14px; align-items: flex-start;">
             <div style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 999px; background: var(--color-accent-200); display: flex; align-items: center; justify-content: center;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"></path><path d="M4 4h13l3 4-3 4H4z"></path></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7l9 5 9-5-9-5z"></path><path d="M3 7v10l9 5 9-5V7"></path><path d="M12 12v10"></path></svg>
             </div>
             <div>
-              <div style="font-weight: 700; font-size: 15px;">Signalétique</div>
-              <div style="font-size: 14px; color: var(--color-neutral-700);">Panneaux d'entrée, totems de carrefour, plaques d'allées, fléchage.</div>
+              <div style="font-weight: 700; font-size: 15px;">Plan 3D illustré</div>
+              <div style="font-size: 14px; color: var(--color-neutral-700);">Vue en volume : bâtiments, piscines, végétation et dénivelés. L'outil de vente idéal pour votre site.</div>
             </div>
           </div>
           <div style="display: flex; gap: 14px; align-items: flex-start;">
@@ -409,38 +424,47 @@
               <div style="font-size: 14px; color: var(--color-neutral-700);">Nouveaux hébergements, emplacements renumérotés : le plan suit la saison.</div>
             </div>
           </div>
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <div style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 999px; background: var(--color-accent-200); display: flex; align-items: center; justify-content: center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"></path><path d="M9 4v14M15 6v14"></path></svg>
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 15px;">Plan interactif web</div>
+              <div style="font-size: 14px; color: var(--color-neutral-700);">Votre plan intégré au site : zoom, emplacements et services cliquables.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <section id="tarifs" style="max-width: 1160px; margin: 0 auto; padding: 72px 24px;">
-    <h6 style="color: var(--color-accent-700); margin-bottom: 10px;">Tarifs</h6>
+    <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-700); margin-bottom: 10px;">Tarifs</p>
     <h2 style="font-size: clamp(30px, 3.4vw, 42px); max-width: 24ch;">Un prix à l'emplacement, annoncé d'avance</h2>
-    <p style="max-width: 58ch; color: var(--color-neutral-800);">Un forfait de base, puis des paliers progressifs : chaque tranche d'emplacements est facturée à son propre tarif, afin que les petites structures puissent elles aussi se payer les services d'un plan haut de gamme. Pas d'abonnement, pas de frais cachés. Tous nos prix sont TTC.</p>
+    <p style="max-width: 58ch; color: var(--color-neutral-800);">Un forfait de base, puis des paliers progressifs : chaque tranche d'emplacements est facturée à son propre tarif, afin que les petites structures puissent elles aussi se payer les services d'un plan haut de gamme. Pas d'abonnement, pas de frais cachés. Prix nets : TVA non applicable, art. 293 B du CGI.</p>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 26px; margin-top: 36px; align-items: start;">
       <div>
         <table class="table" style="width: 100%;">
           <thead>
-            <tr><th>Plan 2D simple</th><th style="text-align: right;">Tarif TTC</th></tr>
+            <tr><th>Plan 2D simple</th><th style="text-align: right;">Tarif</th></tr>
           </thead>
           <tbody>
             <tr><td>Socle, jusqu'à 49 emplacements</td><td style="text-align: right; white-space: nowrap;">150 € <span class="text-muted">forfait</span></td></tr>
             <tr><td>Tranche 50 → 100</td><td style="text-align: right; white-space: nowrap;">+3 € / empl.</td></tr>
             <tr><td>Tranche 101 → 200</td><td style="text-align: right; white-space: nowrap;">+2 € / empl.</td></tr>
             <tr><td>Au-delà de 200</td><td style="text-align: right; white-space: nowrap;">+1 € / empl.</td></tr>
-            <tr><td colspan="2" class="text-muted" style="font-size: 13px;">Exemple : 150 emplacements = 150 € + (51 × 3 €) + (50 × 2 €) + 50 € d'ouverture de dossier = 453 € TTC</td></tr>
+            <tr><td colspan="2" class="text-muted" style="font-size: 13px;">Exemple : 150 emplacements = 150 € + (51 × 3 €) + (50 × 2 €) + 50 € d'ouverture de dossier = 453 €</td></tr>
           </tbody>
         </table>
         <table class="table" style="width: 100%; margin-top: 26px;">
           <thead>
-            <tr><th>Frais complémentaires</th><th style="text-align: right;">Tarif TTC</th></tr>
+            <tr><th>Frais complémentaires</th><th style="text-align: right;">Tarif</th></tr>
           </thead>
           <tbody>
             <tr><td>Ouverture de dossier <span class="text-muted">(par nouveau projet)</span></td><td style="text-align: right; white-space: nowrap;">50 €</td></tr>
-            <tr><td>Légende personnalisée</td><td style="text-align: right; white-space: nowrap;">+150 €</td></tr>
-            <tr><td>Plan 3D</td><td style="text-align: right; white-space: nowrap;">+500 €</td></tr>
+            <tr><td>Légende typographique</td><td style="text-align: right; white-space: nowrap;">+150 €</td></tr>
+            <tr><td>Plan 3D</td><td style="text-align: right; white-space: nowrap;">sur devis</td></tr>
             <tr><td>Suivi et mises à jour</td><td style="text-align: right; white-space: nowrap;">sur devis</td></tr>
           </tbody>
         </table>
@@ -450,24 +474,20 @@
         <h4 style="margin-bottom: 4px;">Estimez votre plan</h4>
         <p style="font-size: 14px; color: var(--color-neutral-800);">Une estimation indicative, confirmée après le relevé.</p>
 
-        <label style="display: block; margin-top: 24px; font-size: 14px; font-weight: 700;">Nombre d'emplacements</label>
+        <label for="calc-range" style="display: block; margin-top: 24px; font-size: 14px; font-weight: 700;">Nombre d'emplacements</label>
         <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px;">
           <span id="calc-n" style="font-family: var(--font-heading); font-size: 34px; line-height: 1;">120</span>
           <span style="font-size: 14px; color: var(--color-neutral-700);">emplacements</span>
         </div>
         <input type="range" min="10" max="1000" step="5" id="calc-range" value="120" aria-label="Nombre d'emplacements" style="width: 100%; margin-top: 12px; accent-color: var(--color-accent);">
-        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--color-neutral-600);">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--color-neutral-700);">
           <span>10</span><span>1000</span>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
           <label style="display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer;">
             <input type="checkbox" id="calc-legende" style="width: 18px; height: 18px; accent-color: var(--color-accent);">
-            Légende personnalisée <span class="text-muted">+150 €</span>
-          </label>
-          <label style="display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer;">
-            <input type="checkbox" id="calc-3d" style="width: 18px; height: 18px; accent-color: var(--color-accent);">
-            Plan 3D <span class="text-muted">+500 €</span>
+            Légende typographique <span class="text-muted">+150 €</span>
           </label>
         </div>
 
@@ -476,14 +496,11 @@
           <div style="display: flex; justify-content: space-between; gap: 12px; padding-top: 8px; border-top: 1px dashed var(--color-divider);"><span style="flex: 1; min-width: 0;">Sous-total plan 2D</span><strong id="calc-base" style="white-space: nowrap;">—</strong></div>
           <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="flex: 1; min-width: 0;">Ouverture de dossier</span><strong style="white-space: nowrap;">50 €</strong></div>
           <div data-if="legende" style="display: contents;" hidden>
-            <div style="display: flex; justify-content: space-between;"><span>Légende personnalisée</span><strong>150 €</strong></div>
-          </div>
-          <div data-if="plan3d" style="display: contents;" hidden>
-            <div style="display: flex; justify-content: space-between;"><span>Plan 3D</span><strong>500 €</strong></div>
+            <div style="display: flex; justify-content: space-between;"><span>Légende typographique</span><strong>150 €</strong></div>
           </div>
         </div>
         <div style="margin-top: 18px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
-          <span style="font-size: 14px; font-weight: 700;">Estimation TTC</span>
+          <span style="font-size: 14px; font-weight: 700;">Estimation</span>
           <span id="calc-total" style="font-family: var(--font-heading); font-size: 38px; line-height: 1; color: var(--color-accent-700);">—</span>
         </div>
         <a class="btn btn-primary btn-block" href="#devis" style="border-radius: 999px; margin-top: 22px; padding: 13px;">Faire chiffrer précisément</a>
@@ -493,9 +510,9 @@
 
   <section id="methode" style="background: var(--color-surface); padding: 72px 0;">
     <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
-      <h6 style="color: var(--color-accent-700); margin-bottom: 10px;">Méthode</h6>
+      <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-700); margin-bottom: 10px;">Méthode</p>
       <h2 style="font-size: clamp(30px, 3.4vw, 42px); max-width: 26ch;">Quatre étapes, du premier appel au fichier prêt à imprimer</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 26px; margin-top: 40px;">
+      <div data-grid-real="" style="display: grid; gap: 26px; margin-top: 40px;">
         <div>
           <div style="width: 64px; height: 64px; border-radius: 999px; background: var(--color-accent-2-300); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 26px; color: var(--color-accent-2-900);">1</div>
           <h4 style="margin-top: 18px;">Échange</h4>
@@ -521,18 +538,18 @@
   </section>
 
   <section style="max-width: 1160px; margin: 0 auto; padding: 72px 24px;">
-    <h6 style="color: var(--color-accent-700); margin-bottom: 10px;">Avant / après</h6>
+    <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-700); margin-bottom: 10px;">Avant / après</p>
     <h2 style="font-size: clamp(30px, 3.4vw, 42px); max-width: 26ch;">Du plan photocopié depuis quinze ans au plan qu'on garde</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; margin-top: 34px;">
       <figure style="margin: 0;">
         <div style="aspect-ratio: 4 / 3; overflow: hidden; background: #fff; border: 1px solid var(--color-divider); border-radius: var(--radius-lg);">
-          <img loading="lazy" decoding="async" src="assets/plan-camping-le-grand-pre-avant.webp" alt="Ancien plan du camping Le Grand Pré, emplacements en blocs orange sans légende détaillée" style="width: 100%; height: 100%; object-fit: contain;">
+          <img width="1024" height="883" loading="lazy" decoding="async" src="assets/plan-camping-le-grand-pre-avant.webp" alt="Ancien plan du camping Le Grand Pré, emplacements en blocs orange sans légende détaillée" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
         <figcaption style="font-size: 13px; margin-top: 10px; color: var(--color-neutral-700);">Avant — le plan que Le Grand Pré distribuait à l'accueil</figcaption>
       </figure>
       <figure style="margin: 0;">
         <div style="aspect-ratio: 4 / 3; overflow: hidden; background: #faf5ec; box-shadow: var(--shadow-md); border-radius: var(--radius-lg);">
-          <img loading="lazy" decoding="async" class="washed" src="assets/plan-camping-le-grand-pre.webp" alt="Plan du camping Le Grand Pré redessiné par Plan Naturel, allées, végétation et services repérables" style="width: 100%; height: 100%; object-fit: contain;">
+          <img width="1827" height="1300" loading="lazy" decoding="async" class="washed" src="assets/plan-camping-le-grand-pre.webp" alt="Plan du camping Le Grand Pré redessiné par Plan Naturel, allées, végétation et services repérables" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
         <figcaption style="font-size: 13px; margin-top: 10px; color: var(--color-neutral-700);">Après — le même terrain, redessiné : allées, végétation, services et secteurs A à H</figcaption>
       </figure>
@@ -541,16 +558,16 @@
 
   <section style="background: var(--color-accent-2-100); padding: 72px 0;">
     <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
-      <h6 style="color: var(--color-accent-2-700); margin: 0 0 10px;">Ils nous font confiance</h6>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 26px;">
+      <h2 style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-2-700); margin: 0 0 10px;">Ils nous font confiance</h2>
+      <div data-grid-3="" style="display: grid; gap: 22px; margin-top: 26px;">
         <blockquote style="margin: 0; background: var(--color-bg); border-radius: var(--radius-lg); padding: 30px 32px; display: flex; flex-direction: column; gap: 18px;">
           <p style="margin: 0; font-size: 17px; font-family: var(--font-heading); line-height: 1.35;">« Avec un domaine de cette taille, nous n'arrivions plus à faire tenir quoi que ce soit de lisible sur une A4. Ils ont réussi&nbsp;: tout y est, et on s'y repère. »</p>
           <footer style="font-size: 14px; color: var(--color-neutral-700); margin-top: auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
             <span>Direction — Yelloh! Village Le Jard</span>
             <span style="display: flex; align-items: center; gap: 10px;">
-             <img loading="lazy" decoding="async" src="assets/logo-yelloh-village.jpeg" alt="Logo Yelloh! Village" style="height: 22px; width: auto; mix-blend-mode: multiply;">
+             <img width="333" height="151" loading="lazy" decoding="async" src="assets/logo-yelloh-village.jpeg" alt="Logo Yelloh! Village" style="height: 22px; width: auto; mix-blend-mode: multiply;">
              <span style="width: 1px; height: 18px; background: var(--color-divider);"></span>
-             <img loading="lazy" decoding="async" src="assets/logo-camping-du-jard.jpg" alt="Logo Camping du Jard" style="height: 28px; width: auto; mix-blend-mode: multiply;">
+             <img width="522" height="481" loading="lazy" decoding="async" src="assets/logo-camping-du-jard.jpg" alt="Logo Camping du Jard" style="height: 28px; width: auto; mix-blend-mode: multiply;">
             </span>
           </footer>
         </blockquote>
@@ -559,7 +576,7 @@
           <footer style="font-size: 14px; color: var(--color-neutral-700); margin-top: auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
             <span>Direction — Camping Le Grand Pré</span>
             <span style="display: flex; align-items: center; gap: 10px;">
-             <img loading="lazy" decoding="async" src="assets/logo-le-grand-pre.png" alt="Logo Camping Le Grand Pré" style="height: 32px; width: auto; mix-blend-mode: multiply;">
+             <img width="217" height="217" loading="lazy" decoding="async" src="assets/logo-le-grand-pre.png" alt="Logo Camping Le Grand Pré" style="height: 32px; width: auto; mix-blend-mode: multiply;">
             </span>
           </footer>
         </blockquote>
@@ -568,7 +585,7 @@
           <footer style="font-size: 14px; color: var(--color-neutral-700); margin-top: auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
             <span>Direction — Camping Les Varennes</span>
             <span style="display: flex; align-items: center; gap: 10px;">
-             <img loading="lazy" decoding="async" src="assets/logo-les-varennes.jpeg" alt="Logo Camping Les Varennes" style="height: 30px; width: auto; mix-blend-mode: multiply;">
+             <img width="260" height="180" loading="lazy" decoding="async" src="assets/logo-les-varennes.jpeg" alt="Logo Camping Les Varennes" style="height: 30px; width: auto; mix-blend-mode: multiply;">
             </span>
           </footer>
         </blockquote>
@@ -577,7 +594,7 @@
   </section>
 
   <section id="faq" style="max-width: 900px; margin: 0 auto; padding: 72px 24px;">
-    <h6 style="color: var(--color-accent-700); margin-bottom: 10px;">FAQ</h6>
+    <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-700); margin-bottom: 10px;">FAQ</p>
     <h2 style="font-size: clamp(30px, 3.4vw, 42px);">Les questions qu'on nous pose</h2>
     <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 32px;">
       <details style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 20px 26px;">
@@ -607,7 +624,7 @@
     <div style="background: #2f4038; color: #fbf9f5; border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 44px;">
       <div>
         <h2 style="font-size: clamp(30px, 3.2vw, 42px); color: var(--color-neutral-100); max-width: 20ch;">Demandez votre devis</h2>
-        <p style="color: rgba(255,255,255,0.78); max-width: 40ch;">Décrivez-nous votre établissement, nous revenons vers vous avec un prix ferme et un délai de livraison.</p>
+        <p style="color: rgba(255,255,255,0.78); max-width: 40ch;">Décrivez-nous votre établissement, nous revenons vers vous sous 48&nbsp;heures avec un prix ferme et un délai de livraison.</p>
         <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px; font-size: 15px;">
           <a href="mailto:plannaturel@gmail.com" style="color: #fbf9f5; font-weight: 700;">plannaturel@gmail.com</a>
           <a href="tel:+33681896752" style="color: #fbf9f5; font-weight: 700;">06 81 89 67 52</a>
@@ -643,27 +660,27 @@
         <div data-if="envoiErreur" style="display: contents;" hidden>
           <p role="alert" style="margin: 0; padding: 12px 14px; border-radius: 6px; background: #fbf9f5; color: #7a2e1f; font-size: 14px; font-weight: 600;"><span id="devis-err">L'envoi n'a pas abouti.</span> Vous pouvez aussi écrire à <a href="mailto:plannaturel@gmail.com" style="color: #7a2e1f;">plannaturel@gmail.com</a>.</p>
         </div>
-        <p style="font-size: 12px; color: rgba(255,255,255,0.68); margin: 0;">Vos informations servent uniquement à répondre à votre demande. <a href="confidentialite.html" style="color: rgba(255,255,255,0.85);">Confidentialité</a></p>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.68); margin: 0;">Vos informations servent uniquement à répondre à votre demande. <a href="confidentialite" style="color: rgba(255,255,255,0.85);">Confidentialité</a></p>
       </form>
     </div>
   </section>
 
   <section style="max-width: 1160px; margin: 0 auto; padding: 0 24px 88px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 44px; align-items: center;">
     <div>
-      <h6 style="color: var(--color-accent-700); margin-bottom: 10px;">À propos</h6>
+      <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-700); margin-bottom: 10px;">À propos</p>
       <h2 style="font-size: clamp(28px, 3vw, 38px); max-width: 20ch;">Une petite équipe, basée en France</h2>
       <p style="color: var(--color-neutral-800); max-width: 52ch;">Plan Naturel est une équipe de passionnés, engagée dans chaque projet. Notre mission est simple : valoriser vos espaces et faciliter l'expérience de vos visiteurs grâce à des plans clairs, esthétiques et adaptés à votre identité.</p>
       <p style="color: var(--color-neutral-800); max-width: 52ch;">Nous travaillons avec des campings indépendants comme avec des groupes, des villages vacances, des aires de camping-car, des parcs de loisirs et des collectivités.</p>
       <p style="color: var(--color-neutral-800); max-width: 52ch;">Diplômés en gestion de projet digital, nous allons aussi au-delà du plan : création de sites internet, référencement local et accompagnement sur vos outils de communication.</p>
     </div>
-    <img loading="lazy" decoding="async" src="assets/equipe-plan-naturel.webp" alt="Pierre-Nicolas et Amandine, l'équipe Plan Naturel" style="width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block;">
+    <img width="1600" height="1200" loading="lazy" decoding="async" src="assets/equipe-plan-naturel.webp" alt="Pierre-Nicolas et Amandine, l'équipe Plan Naturel" style="width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block;">
   </section>
 
   <footer style="background: var(--color-surface); border-top: 1px solid var(--color-divider);">
-    <div style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 40px;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 0; display: grid; gap: 40px;" data-grid-real="">
       <div>
         <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 34px; width: auto;">
+          <img width="285" height="187" src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 34px; width: auto;">
           <span style="font-family: var(--font-heading); font-size: 20px; letter-spacing: -0.02em;">Plan Naturel</span>
         </div>
         <p style="font-size: 14px; color: var(--color-neutral-800); margin: 16px 0 0; max-width: 30ch;">Plans illustrés sur mesure pour campings, villages vacances, aires de camping-car et parcs de loisirs. Partout en France.</p>
@@ -672,18 +689,21 @@
       <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
         <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Prestations</div>
         <a href="#prestations" style="text-decoration: none; color: var(--color-text);">Plan 2D sur mesure</a>
-        <a href="#prestations" style="text-decoration: none; color: var(--color-text);">Légende personnalisée</a>
+        <a href="#prestations" style="text-decoration: none; color: var(--color-text);">Légende typographique</a>
         <a href="#prestations" style="text-decoration: none; color: var(--color-text);">Plan 3D illustré</a>
+        <a href="plan-evacuation-camping" style="text-decoration: none; color: var(--color-text);">Plan d'évacuation</a>
+        <a href="panneaux-signaletique-camping" style="text-decoration: none; color: var(--color-text);">Panneaux et signalétique</a>
+        <a href="creation-site-internet-camping" style="text-decoration: none; color: var(--color-text);">Site internet</a>
         <a href="#tarifs" style="text-decoration: none; color: var(--color-text);">Tarifs et estimation</a>
         <a href="#methode" style="text-decoration: none; color: var(--color-text);">Notre méthode</a>
       </nav>
 
       <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
         <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Réalisations</div>
-        <a href="plan-camping-bois-soleil.html" style="text-decoration: none; color: var(--color-text);">Camping Bois Soleil</a>
-        <a href="plan-camping-le-grand-pre.html" style="text-decoration: none; color: var(--color-text);">Camping Le Grand Pré</a>
-        <a href="plan-camping-les-varennes.html" style="text-decoration: none; color: var(--color-text);">Camping Les Varennes</a>
-        <a href="plan-camping-le-jard.html" style="text-decoration: none; color: var(--color-text);">Yelloh! Village Le Jard</a>
+        <a href="plan-camping-bois-soleil" style="text-decoration: none; color: var(--color-text);">Camping Bois Soleil</a>
+        <a href="plan-camping-le-grand-pre" style="text-decoration: none; color: var(--color-text);">Camping Le Grand Pré</a>
+        <a href="plan-camping-les-varennes" style="text-decoration: none; color: var(--color-text);">Camping Les Varennes</a>
+        <a href="plan-camping-le-jard" style="text-decoration: none; color: var(--color-text);">Yelloh! Village Le Jard</a>
       </nav>
 
       <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
@@ -696,11 +716,11 @@
 
     <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
       <div style="border-top: 1px solid var(--color-divider); margin-top: 48px; padding: 22px 0 32px; display: flex; gap: 18px 26px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--color-neutral-700);">
-        <span>© 2026 Plan Naturel</span>
-        <span style="margin-left: auto; display: flex; gap: 20px; flex-wrap: wrap;">
-          <a href="mentions-legales.html">Mentions légales</a>
-          <a href="cgv.html">CGV</a>
-          <a href="confidentialite.html">Politique de confidentialité</a>
+        <span data-copy="">© 2026 Plan Naturel</span>
+        <span data-legal="" style="margin-left: auto; display: flex; gap: 8px 20px; flex-wrap: wrap;">
+          <a href="mentions-legales">Mentions légales</a>
+          <a href="cgv">CGV</a>
+          <a href="confidentialite">Politique de confidentialité</a>
         </span>
       </div>
     </div>
@@ -711,25 +731,26 @@
 (function(){
 var q=function(s){return document.querySelector(s)};
 function setIf(k,v){document.querySelectorAll('[data-if="'+k+'"]').forEach(function(el){el.hidden=!v})}
-var menu=false,ouvert=null;
+var menu=false,ouvert=null,retour=null;function btnDlg(){return q('[data-if="'+ouvert+'"] [role=dialog] button')}
 function setMenu(v){menu=v;setIf('menuOuvert',v);setIf('menuFerme',!v);var b=q('[data-burger]');b.setAttribute('aria-expanded',v?'true':'false');b.setAttribute('aria-label',v?'Fermer le menu':'Ouvrir le menu')}
-function ouvrir(id){ouvert=id;document.body.style.overflow='hidden';setIf(id,true)}
-function fermer(){if(ouvert)setIf(ouvert,false);ouvert=null;document.body.style.overflow=''}
+function ouvrir(id){retour=document.activeElement;ouvert=id;document.body.style.overflow='hidden';setIf(id,true);var b=btnDlg();if(b)b.focus()}
+function fermer(){if(ouvert)setIf(ouvert,false);ouvert=null;document.body.style.overflow='';if(retour)retour.focus();retour=null}
 var A={toggleMenu:function(){setMenu(!menu)},fermerMenu:function(){setMenu(false)},
 ouvrirBoisSoleil:function(){ouvrir('ouvertBoisSoleil')},ouvrirGrandPre:function(){ouvrir('ouvertGrandPre')},ouvrirVarennes:function(){ouvrir('ouvertVarennes')},ouvrirDomaine:function(){ouvrir('ouvertDomaine')},
 fermerPlan:fermer,stop:function(){}};
 document.addEventListener('click',function(e){var el=e.target.closest('[data-action]');if(el&&A[el.getAttribute('data-action')])A[el.getAttribute('data-action')](e)});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(ouvert)fermer();else if(menu)setMenu(false)}});
+document.addEventListener('keydown',function(e){if(e.key==='Tab'&&ouvert){e.preventDefault();var b=btnDlg();if(b)b.focus();return}if(e.key==='Escape'){if(ouvert)fermer();else if(menu)setMenu(false)}});
 window.addEventListener('resize',function(){if(window.innerWidth>1080&&menu)setMenu(false)});
 var euro=function(v){return v.toLocaleString('fr-FR')+' €'};
-function calc(){var n=Number(q('#calc-range').value),leg=q('#calc-legende').checked,p3=q('#calc-3d').checked;
+function calc(){var n=Number(q('#calc-range').value),leg=q('#calc-legende').checked,p3=false;
 var lignes=[["Forfait de base (jusqu'à 49 empl.)",150]],base=150;
 [[50,100,3],[101,200,2],[201,Infinity,1]].forEach(function(t){var k=Math.max(0,Math.min(n,t[1])-t[0]+1);if(!k)return;base+=k*t[2];lignes.push([k+' empl. × '+t[2]+' €',k*t[2]])});
 q('#calc-n').textContent=n.toLocaleString('fr-FR');
 var box=q('#calc-lignes');box.innerHTML='';lignes.forEach(function(l){var d=document.createElement('div');d.style.cssText='display:flex;justify-content:space-between;gap:12px;';var a=document.createElement('span');a.style.cssText='flex:1;min-width:0;';a.textContent=l[0];var b=document.createElement('strong');b.style.whiteSpace='nowrap';b.textContent=euro(l[1]);d.appendChild(a);d.appendChild(b);box.appendChild(d)});
 q('#calc-base').textContent=euro(base);setIf('legende',leg);setIf('plan3d',p3);
 q('#calc-total').textContent=euro(base+50+(leg?150:0)+(p3?500:0))}
-['#calc-range','#calc-legende','#calc-3d'].forEach(function(s){q(s).addEventListener('input',calc);q(s).addEventListener('change',calc)});calc();
+['#calc-range','#calc-legende'].forEach(function(s){q(s).addEventListener('input',calc);q(s).addEventListener('change',calc)});var cta=document.querySelector('[data-cta-mobile]');if(cta&&'IntersectionObserver' in window){var vis=new Set();var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)vis.add(e.target);else vis.delete(e.target)});if(vis.size)cta.setAttribute('data-off','');else cta.removeAttribute('data-off')});var fs=document.querySelectorAll('footer');[document.getElementById('top'),document.getElementById('devis'),fs[fs.length-1]].forEach(function(el){if(el)io.observe(el)})};
+calc();
 var f=q('#devis-form'),btn=q('#devis-btn'),busy=false;
 f.addEventListener('submit',function(e){e.preventDefault();if(busy)return;busy=true;
 var data=new FormData(f);data.append('_subject','Demande de devis — '+((data.get('nom')||'').trim()||'nouveau projet'));
