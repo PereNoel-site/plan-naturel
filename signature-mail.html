@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Signature mail — Plan Naturel</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>body{margin:0;background:#fff;} a{color:#8a5e3e;} a:hover{color:#6e4a31;} #copy:hover{background:#5d5549;}</style>
+</head>
+<body>
+<div style="min-height:100vh;padding:48px 24px;box-sizing:border-box;font-family:Karla,system-ui,sans-serif;color:#3b362e;display:flex;flex-direction:column;align-items:center;gap:24px;">
+  <div style="width:100%;max-width:640px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+    <div style="font-family:Newsreader,Georgia,serif;font-size:22px;flex:1 1 auto;min-width:0;">Signature mail — Plan Naturel</div>
+    <button id="copy" type="button" style="font-family:Karla,sans-serif;font-weight:700;font-size:14px;padding:10px 18px;border:none;border-radius:999px;background:#3b362e;color:#fdfcfa;cursor:pointer;white-space:nowrap;flex-shrink:0;">Copier la signature</button>
+  </div>
+  <div style="width:100%;max-width:640px;border:1px solid #e6e1d8;border-radius:10px;padding:32px;box-sizing:border-box;">
+    <div style="font-size:14px;color:#766f63;margin-bottom:24px;">Bonjour,<br>…<br>Bien cordialement,</div>
+    <div id="sig">
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Georgia,serif;color:#3b362e;background:transparent;">
+        <tbody>
+          <tr>
+            <td style="padding:0 18px 0 0;vertical-align:middle;border-right:1px solid #ded4c5;">
+              <a href="https://plannaturel.fr/" style="text-decoration:none;"><img src="https://plannaturel.fr/assets/logo-plan-naturel.png" width="96" alt="Plan Naturel" style="display:block;width:96px;height:auto;border:0;"></a>
+            </td>
+            <td style="padding:0 0 0 18px;vertical-align:middle;">
+              <div style="font-family:Georgia,serif;font-size:18px;line-height:22px;color:#3b362e;">Pierre-Nicolas Marton</div>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#a5734d;font-weight:bold;letter-spacing:0.5px;padding-top:2px;">PLAN NATUREL · Plans illustrés de campings</div>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#5d5549;padding-top:8px;">
+                <a href="tel:+33681896752" style="color:#3b362e;text-decoration:none;">06 81 89 67 52</a>
+                <span style="color:#c8bfb1;"> · </span>
+                <a href="mailto:plannaturel@gmail.com" style="color:#3b362e;text-decoration:none;">plannaturel@gmail.com</a>
+                <br>
+                <a href="https://plannaturel.fr/" style="color:#8a5e3e;text-decoration:none;font-weight:bold;">plannaturel.fr</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding:18px 0 0 0;">
+              <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                <tbody>
+                  <tr>
+                    <td style="padding:0 8px 0 0;"><a href="https://plannaturel.fr/plan-camping-les-varennes.html"><img src="https://plannaturel.fr/assets/miniature-plan-les-varennes.jpg" width="112" height="76" alt="Plan camping Les Varennes" style="display:block;width:112px;height:76px;object-fit:cover;border:1px solid #ebe2d5;border-radius:4px;"></a></td>
+                    <td style="padding:0 8px 0 0;"><a href="https://plannaturel.fr/plan-camping-bois-soleil.html"><img src="https://plannaturel.fr/assets/miniature-plan-bois-soleil.jpg" width="112" height="76" alt="Plan camping Bois Soleil" style="display:block;width:112px;height:76px;object-fit:cover;border:1px solid #ebe2d5;border-radius:4px;"></a></td>
+                    <td style="padding:0 8px 0 0;"><a href="https://plannaturel.fr/plan-camping-le-grand-pre.html"><img src="https://plannaturel.fr/assets/miniature-plan-le-grand-pre.jpg" width="112" height="76" alt="Plan camping Le Grand Pré" style="display:block;width:112px;height:76px;object-fit:cover;border:1px solid #ebe2d5;border-radius:4px;"></a></td>
+                    <td style="padding:0;"><a href="https://plannaturel.fr/plan-camping-le-jard.html"><img src="https://plannaturel.fr/assets/miniature-plan-le-jard.jpg" width="112" height="76" alt="Plan camping Le Jard" style="display:block;width:112px;height:76px;object-fit:cover;border:1px solid #ebe2d5;border-radius:4px;"></a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:16px;color:#8d8578;padding-top:6px;">Quelques plans réalisés — <a href="https://plannaturel.fr/" style="color:#8a5e3e;">voir toutes les réalisations</a></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="max-width:640px;font-size:13px;line-height:1.5;color:#766f63;">« Copier » puis coller dans Gmail → Paramètres → Signature, ou Mail (Apple) → Réglages → Signatures.</div>
+</div>
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var el = document.getElementById('sig'), r = document.createRange(), s = window.getSelection();
+  r.selectNodeContents(el); s.removeAllRanges(); s.addRange(r);
+  try { document.execCommand('copy'); } catch (e) {}
+  s.removeAllRanges();
+  var b = this; b.textContent = 'Copié ✓'; setTimeout(function () { b.textContent = 'Copier la signature'; }, 2000);
+});
+</script>
+</body>
+</html>
