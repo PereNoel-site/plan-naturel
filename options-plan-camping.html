@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/styles.css">
-  
+<style>[hidden]{display:none !important}[data-hover]{transition:box-shadow .2s ease, transform .2s ease}[data-hover]:hover{box-shadow:var(--shadow-md) !important;transform:translateY(-3px) !important}</style>
+
   <title>Options d'un plan de camping : légende, 3D, évacuation, signalétique | Plan Naturel</title>
   <meta name="description" content="Toutes les options d'un plan de camping Plan Naturel : légende classique ou typographique, plan 3D, plan d'évacuation, panneaux, plan interactif web, QR code, traductions, mises à jour. Tous les prix de départ annoncés.">
   <link rel="canonical" href="https://plannaturel.fr/options-plan-camping">
@@ -22,16 +23,19 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Légende typographique" }, "price": "150", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan d'évacuation" }, "price": "50", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan 3D illustré" }, "price": "490", "priceCurrency": "EUR" },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panneaux et signalétique" }, "price": "10", "priceCurrency": "EUR" },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan interactif web" }, "price": "200", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panneaux et signalétique" }, "price": "20", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan interactif web" }, "price": "290", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "QR code d'accueil" }, "price": "20", "priceCurrency": "EUR" },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mise à jour annuelle" }, "price": "60", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Abonnement mises à jour" }, "price": "19", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mise à jour ponctuelle" }, "price": "20", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Relevé sur site" }, "price": "150", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Création de site internet de camping" }, "price": "500", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Langue supplémentaire" }, "price": "30", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pictogramme sur mesure" }, "price": "20", "priceCurrency": "EUR" },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Version brochure ou flyer" }, "price": "90", "priceCurrency": "EUR" },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Grand format panneau d'accueil" }, "price": "60", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Flyer du camping" }, "price": "50", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Livret d'accueil" }, "price": "50", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Supports imprimés sur mesure" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Grand format panneau d'accueil" }, "price": "90", "priceCurrency": "EUR" },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Correction supplémentaire" }, "price": "40", "priceCurrency": "EUR" }
     ] }
   </script>
@@ -52,8 +56,10 @@
     a:hover { color: var(--color-accent-800); }
     a:focus-visible { outline: 2px solid var(--color-accent-700); outline-offset: 3px; }
   </style>
+
 </head>
 <body>
+
 
 <div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); overflow-x: clip; min-height: 100vh;">
 
@@ -78,6 +84,7 @@
       <a class="tag tag-outline" href="#plan" style="text-decoration: none;">Le plan</a>
       <a class="tag tag-outline" href="#legende" style="text-decoration: none;">La légende</a>
       <a class="tag tag-outline" href="#securite" style="text-decoration: none;">Sécurité et signalétique</a>
+      <a class="tag tag-outline" href="#imprimes" style="text-decoration: none;">Supports imprimés</a>
       <a class="tag tag-outline" href="#numerique" style="text-decoration: none;">Numérique</a>
       <a class="tag tag-outline" href="#complements" style="text-decoration: none;">Compléments</a>
       <a class="tag tag-outline" href="#suivi" style="text-decoration: none;">Suivi</a>
@@ -118,7 +125,7 @@
         <span style="font-size: 14px; color: var(--color-neutral-700);">Exemple : <a href="plan-camping-le-grand-pre">camping Le Grand Pré</a></span>
       </div>
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Légende typographique</h3><span class="tag tag-outline">À partir de 150 €</span></div>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Légende typographique</h3><span class="tag tag-outline">150 €</span></div>
         <p style="margin: 0; color: var(--color-neutral-800);">Tout ce que contient la légende classique, plus un code couleur par catégorie d'hébergement reporté sur chaque emplacement, avec le nom de la gamme, la surface et le nombre de chambres. Typographie, couleurs et pictogrammes repris de votre charte.</p>
         <span style="font-size: 14px; color: var(--color-neutral-700);">Exemple : <a href="plan-camping-les-varennes">camping Les Varennes</a>, 11 catégories</span>
       </div>
@@ -129,14 +136,41 @@
     <h2 style="font-size: clamp(26px, 3vw, 36px); margin: 0 0 22px;">Sécurité et signalétique</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px;">
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Plan d'évacuation</h3><span class="tag tag-outline">À partir de 50 €</span></div>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Plan d'évacuation</h3><span class="tag tag-outline">50 €</span></div>
         <p style="margin: 0; color: var(--color-neutral-800);">L'affiche de consignes de sécurité réalisée à partir de votre plan : points de rassemblement, pictogrammes normalisés, consignes en plusieurs langues et numéros d'urgence.</p>
         <a href="plan-evacuation-camping" style="font-size: 14px; font-weight: 600; margin-top: auto;">Voir le plan d'évacuation →</a>
       </div>
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Panneaux et signalétique</h3><span class="tag tag-outline">À partir de 10 € / panneau</span></div>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Panneaux et signalétique</h3><span class="tag tag-outline">À partir de 20 € / panneau</span></div>
         <p style="margin: 0; color: var(--color-neutral-800);">Toute la signalétique du camping dans le style de votre plan : panneau d'accueil, directions, aire de jeux, piscine, animations, tri des déchets.</p>
         <a href="panneaux-signaletique-camping" style="font-size: 14px; font-weight: 600; margin-top: auto;">Voir les panneaux →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="imprimes" style="max-width: 1160px; margin: 0 auto; padding: 32px 24px;">
+    <h2 style="font-size: clamp(26px, 3vw, 36px); margin: 0 0 8px;">Supports imprimés</h2>
+    <p style="margin: 0 0 22px; color: var(--color-neutral-800); max-width: 60ch;">Nous concevons tous les documents de votre camping, avec ou sans plan, aux couleurs de votre établissement. <a href="supports-imprimes-camping" style="font-weight: 600;">Voir tous les supports imprimés</a></p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px;">
+      <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Flyer</h3><span class="tag tag-outline">À partir de 50 €</span></div>
+        <p style="margin: 0; color: var(--color-neutral-800);">Un flyer A5 ou A4 plié pour présenter votre camping, vos hébergements, vos tarifs ou vos animations. À distribuer à l'accueil ou dans les offices de tourisme.</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 14px; color: var(--color-neutral-800); display: flex; flex-direction: column; gap: 4px;">
+          <li>Recto-verso, plan du camping en option</li>
+          <li>Fichier prêt pour l'imprimeur</li>
+        </ul>
+      </div>
+      <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Livret d'accueil</h3><span class="tag tag-outline">À partir de 50 €</span></div>
+        <p style="margin: 0; color: var(--color-neutral-800);">Le livret remis au vacancier à son arrivée : horaires des services, règlement intérieur, consignes de sécurité, numéros utiles et bonnes adresses alentour.</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 14px; color: var(--color-neutral-800); display: flex; flex-direction: column; gap: 4px;">
+          <li>Version imprimée et version PDF consultable par QR code</li>
+          <li>Aux couleurs de votre charte</li>
+        </ul>
+      </div>
+      <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Tous vos documents</h3><span class="tag tag-outline">Sur devis</span></div>
+        <p style="margin: 0; color: var(--color-neutral-800);">Brochures, dépliants, affiches d'animations, cartes de restaurant, programmes de la semaine, cartes de visite, règlement intérieur : tout support imprimé, conçu et livré prêt pour l'imprimeur.</p>
       </div>
     </div>
   </section>
@@ -145,7 +179,7 @@
     <h2 style="font-size: clamp(26px, 3vw, 36px); margin: 0 0 22px;">Numérique</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px;">
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Plan interactif web</h3><span class="tag tag-outline">200 €</span></div>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Plan interactif web</h3><span class="tag tag-outline">290 €</span></div>
         <p style="margin: 0; color: var(--color-neutral-800);">Votre plan intégré au site : zoom, emplacements et services cliquables, consultable sur mobile.</p>
       </div>
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
@@ -172,11 +206,7 @@
         <p style="margin: 0; color: var(--color-neutral-800);">Un pictogramme dessiné pour un service propre à votre camping : tyrolienne, ferme pédagogique, spa, location de vélos.</p>
       </div>
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Version brochure ou flyer</h3><span class="tag tag-outline">À partir de 90 €</span></div>
-        <p style="margin: 0; color: var(--color-neutral-800);">Votre plan simplifié et mis en page pour un flyer A5 ou une page de brochure, avec vos textes et vos tarifs.</p>
-      </div>
-      <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Grand format panneau d'accueil</h3><span class="tag tag-outline">À partir de 60 €</span></div>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Grand format panneau d'accueil</h3><span class="tag tag-outline">90 €</span></div>
         <p style="margin: 0; color: var(--color-neutral-800);">Le plan adapté à un grand panneau d'entrée (jusqu'à 2 m) : textes agrandis, repère « Vous êtes ici », fichier prêt pour l'imprimeur.</p>
       </div>
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
@@ -194,8 +224,13 @@
     <h2 style="font-size: clamp(26px, 3vw, 36px); margin: 0 0 22px;">Suivi</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px;">
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Mise à jour annuelle</h3><span class="tag tag-outline">À partir de 60 €</span></div>
-        <p style="margin: 0; color: var(--color-neutral-800);">Nouveaux hébergements, emplacements renumérotés, service déplacé : le plan suit la saison, pour bien moins qu'une création complète.</p>
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Abonnement</h3><span class="tag tag-accent-2">Dès 19 € / mois</span></div>
+        <p style="margin: 0; color: var(--color-neutral-800);">Mises à jour illimitées pendant toute la saison, livrées en 48 h, sur tous vos supports.</p>
+        <a href="abonnement-plan-camping" style="font-size: 14px; font-weight: 600; margin-top: auto;">Voir la formule →</a>
+      </div>
+      <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Mise à jour ponctuelle</h3><span class="tag tag-outline">À partir de 20 €</span></div>
+        <p style="margin: 0; color: var(--color-neutral-800);">Nouveaux hébergements, emplacements renumérotés, service déplacé : une modification à la demande, sans abonnement.</p>
       </div>
       <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;"><h3 style="font-size: 22px; margin: 0;">Relevé sur site</h3><span class="tag tag-outline">À partir de 150 € + déplacement</span></div>
@@ -215,15 +250,59 @@
   </section>
 
   <footer style="background: var(--color-surface); border-top: 1px solid var(--color-divider);">
-    <div style="max-width: 1160px; margin: 0 auto; padding: 22px 24px 32px; display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--color-neutral-700);">
-      <span>© 2026 Plan Naturel</span>
-      <span style="margin-left: auto; display: flex; gap: 8px 20px; flex-wrap: wrap;">
-        <a href="mentions-legales">Mentions légales</a>
-        <a href="cgv">CGV</a>
-        <a href="confidentialite">Politique de confidentialité</a>
-      </span>
+    <div style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 0; display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 34px; width: auto;">
+          <span style="font-family: var(--font-heading); font-size: 20px; letter-spacing: -0.02em;">Plan Naturel</span>
+        </div>
+        <p style="font-size: 14px; color: var(--color-neutral-800); margin: 16px 0 0; max-width: 30ch;">Plans illustrés sur mesure pour campings, villages vacances, aires de camping-car et parcs de loisirs. Partout en France.</p>
+      </div>
+
+      <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+        <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Prestations</div>
+        <a href="./#prestations" style="text-decoration: none; color: var(--color-text);">Plan 2D sur mesure</a>
+        <a href="./#legendes" style="text-decoration: none; color: var(--color-text);">Légende typographique</a>
+        <a href="options-plan-camping" style="text-decoration: none; color: var(--color-text);">Toutes les options</a>
+        <a href="options-plan-camping#plan" style="text-decoration: none; color: var(--color-text);">Plan 3D illustré</a>
+        <a href="plan-evacuation-camping" style="text-decoration: none; color: var(--color-text);">Plan d'évacuation</a>
+        <a href="panneaux-signaletique-camping" style="text-decoration: none; color: var(--color-text);">Panneaux et signalétique</a>
+        <a href="supports-imprimes-camping" style="text-decoration: none; color: var(--color-text);">Livret d'accueil</a>
+        <a href="supports-imprimes-camping" style="text-decoration: none; color: var(--color-text);">Flyer et brochure</a>
+        <a href="abonnement-plan-camping" style="text-decoration: none; color: var(--color-text);">Abonnement</a>
+        <a href="creation-site-internet-camping" style="text-decoration: none; color: var(--color-text);">Site internet</a>
+        <a href="./#tarifs" style="text-decoration: none; color: var(--color-text);">Tarifs et estimation</a>
+        <a href="./#methode" style="text-decoration: none; color: var(--color-text);">Notre méthode</a>
+      </nav>
+
+      <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+        <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Réalisations</div>
+        <a href="plan-camping-bois-soleil" style="text-decoration: none; color: var(--color-text);">Camping Bois Soleil</a>
+        <a href="plan-camping-le-grand-pre" style="text-decoration: none; color: var(--color-text);">Camping Le Grand Pré</a>
+        <a href="plan-camping-les-varennes" style="text-decoration: none; color: var(--color-text);">Camping Les Varennes</a>
+        <a href="plan-camping-le-jard" style="text-decoration: none; color: var(--color-text);">Yelloh! Village Le Jard</a>
+      </nav>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+        <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Nous contacter</div>
+        <a href="mailto:plannaturel@gmail.com" style="font-weight: 600;">plannaturel@gmail.com</a>
+        <a href="tel:+33681896752" style="font-weight: 600;">06 81 89 67 52</a>
+        <a class="btn btn-primary" href="./#devis" style="border-radius: 999px; margin-top: 10px; text-align: center;">Demander un devis</a>
+      </div>
+    </div>
+
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
+      <div style="border-top: 1px solid var(--color-divider); margin-top: 48px; padding: 22px 0 32px; display: flex; gap: 18px 26px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--color-neutral-700);">
+        <span data-copy="">© 2026 Plan Naturel</span>
+        <span data-legal="" style="margin-left: auto; display: flex; gap: 8px 20px; flex-wrap: wrap;">
+          <a href="mentions-legales">Mentions légales</a>
+          <a href="cgv">CGV</a>
+          <a href="confidentialite">Politique de confidentialité</a>
+        </span>
+      </div>
     </div>
   </footer>
 </div>
+
 </body>
 </html>
