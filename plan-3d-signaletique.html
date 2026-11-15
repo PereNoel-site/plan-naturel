@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fdfcfa">
+<title>Plan de camping 3D interactif | Plan Naturel</title>
+<meta name="description" content="Plan de camping 3D interactif : tournez autour du camping, zoomez et cliquez sur chaque zone pour découvrir sa signalétique, de l'entrée à la piscine. Un exemple réalisé par Plan Naturel.">
+<meta property="og:title" content="Plan de camping 3D interactif | Plan Naturel">
+<meta property="og:description" content="Explorez un plan de camping 3D interactif : bâtiments, piscine, allées et toute la signalétique, zone par zone.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fdfcfa;--surface:#f6f4ef;--ink:#3b362e;--muted:#766f63;--soft:#8d8578;
+  --accent:#b37c55;--accent-d:#8a5e3e;--accent-l:#f7ece3;
+  --sage:#869176;--sage-d:#4e5644;--sage-l:#eef1e7;--sage-m:#e2e6d8;
+  --n100:#f4ece1;--n200:#ebe2d5;--n300:#ded4c5;
+  --line:rgba(59,54,46,.11);
+  --sh-sm:0 1px 2px rgba(46,43,37,.14);--sh-md:0 3px 10px rgba(46,43,37,.12);--sh-lg:0 12px 32px rgba(46,43,37,.16);
+  --serif:'Newsreader',Georgia,serif;--sans:'Karla',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:var(--sans);color:var(--ink);background:radial-gradient(ellipse 70% 70% at 40% 48%,#fdfcfa 0%,#f6f4ef 58%,#ebe2d5 100%)}
+button{font:inherit;color:inherit;cursor:pointer}
+#scene{position:fixed;inset:0}
+#scene canvas{display:block;outline:none}
+#labels{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+
+/* ---- Pastilles du plan ---- */
+.pin{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;display:flex;flex-direction:column;align-items:center;transition:opacity .3s;will-change:transform}
+.pin .dot{position:relative;width:34px;height:34px;border-radius:50%;background:var(--c);border:2.5px solid #fdfcfa;box-shadow:0 3px 10px rgba(46,43,37,.25);display:grid;place-items:center;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.pin .dot svg{width:17px;height:17px;stroke:#fdfcfa;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pin .num{position:absolute;top:-7px;right:-9px;background:#fdfcfa;color:var(--c);font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;box-shadow:var(--sh-sm);padding:0 4px}
+.pin .tail{width:2px;height:15px;background:linear-gradient(#fdfcfa,rgba(253,252,250,.1));border-radius:2px}
+.pin .lbl{position:absolute;bottom:58px;white-space:nowrap;background:#fdfcfa;padding:4px 11px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--ink);box-shadow:var(--sh-md);opacity:0;transform:translateY(4px);transition:.2s;pointer-events:none}
+.pin:hover .lbl,.pin.active .lbl,body.show-labels .pin .lbl{opacity:1;transform:none}
+.pin:hover .dot{transform:scale(1.12)}
+.pin.active .dot{transform:scale(1.28)}
+.pin.dim{opacity:.14;pointer-events:none}
+
+/* ---- Bandeau du haut ---- */
+.top{position:fixed;top:16px;left:16px;right:432px;display:flex;align-items:center;gap:18px;background:rgba(253,252,250,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:28px;padding:10px 14px 10px 12px;box-shadow:var(--sh-md);z-index:3}
+.brand{display:flex;align-items:center;gap:11px;flex:none}
+.logo{width:44px;height:44px;flex:none}
+.kick{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--sage-d);font-weight:700}
+.brand h1{font-family:var(--serif);font-weight:500;font-size:25px;margin:1px 0 0;letter-spacing:-.01em;line-height:1.05;white-space:nowrap}
+.brand h1 em{font-style:italic;color:var(--accent-d)}
+.stars{color:#c79a4b;font-size:13px;letter-spacing:1.5px;vertical-align:4px;margin-left:5px;font-family:var(--sans)}
+.filters{display:flex;flex-wrap:wrap;gap:5px;flex:1;min-width:0;border-left:1px solid var(--line);padding-left:16px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fdfcfa;padding:5px 10px;border-radius:999px;font-size:12.5px;font-weight:500;transition:.15s;white-space:nowrap;color:var(--ink)}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+.chip:hover{border-color:var(--n300);background:var(--surface)}
+.chip.off{opacity:.5}
+.chip.off i{background:transparent;box-shadow:inset 0 0 0 1.8px var(--c)}
+.chip.all{background:var(--sage-l);border-color:var(--sage-m);font-weight:600;color:var(--sage-d)}
+
+/* ---- Légende (panneau droit) ---- */
+#panel{position:fixed;top:16px;right:16px;bottom:16px;width:400px;background:var(--bg);border:1px solid var(--line);border-radius:28px;box-shadow:var(--sh-lg);display:flex;flex-direction:column;overflow:hidden;z-index:3}
+.p-scroll{overflow-y:auto;padding:24px 22px 26px;flex:1;scrollbar-width:thin;scrollbar-color:var(--n300) transparent}
+.p-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface)}
+.ghost{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:500}
+.ghost:hover{border-color:var(--n300);background:#fff}
+.navs{display:flex;gap:6px}
+.navs .ghost{width:34px;height:32px;padding:0;display:grid;place-items:center;font-size:16px}
+.cat{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--c);background:color-mix(in srgb,var(--c) 10%,transparent);padding:4px 10px 4px 8px;border-radius:999px}
+.cat i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+#panel h2{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.08;margin:12px 0 10px;letter-spacing:-.015em}
+#panel h2 em{font-style:italic;color:var(--accent-d)}
+.intro{font-size:14.5px;line-height:1.6;color:#5d5549;margin:0 0 20px}
+.cards{display:flex;flex-direction:column;gap:10px}
+.card{display:grid;grid-template-columns:58px 1fr;gap:13px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--n300);box-shadow:var(--sh-md)}
+.thumb{width:58px;height:58px;border-radius:12px;background:var(--surface);display:grid;place-items:center}
+.thumb svg{width:44px;height:44px}
+.card h3{font-family:var(--serif);font-weight:500;font-size:17px;margin:0 0 3px;line-height:1.2}
+.card p{font-size:13px;line-height:1.5;color:#5d5549;margin:0 0 9px}
+.card .row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.tag{font-size:11.5px;color:var(--muted);background:var(--surface);border-radius:8px;padding:3px 8px}
+.add{border:1px solid var(--accent);color:var(--accent-d);background:var(--bg);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;transition:.15s}
+.add:hover{background:var(--accent-l)}
+.add.on{background:var(--accent);border-color:var(--accent);color:#fdfcfa}
+.stats{display:flex;gap:8px;margin:0 0 22px}
+.stat{flex:1;background:var(--surface);border-radius:20px;padding:12px 14px}
+.stat b{font-family:var(--serif);font-weight:500;font-size:30px;display:block;line-height:1;color:var(--accent-d)}
+.stat span{font-size:12px;color:var(--muted)}
+.zlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.zlist li button{width:100%;display:flex;align-items:center;gap:11px;border:0;background:transparent;padding:7px 8px;border-radius:12px;text-align:left;transition:background .15s}
+.zlist li button:hover{background:var(--surface)}
+.zlist .zd{width:28px;height:28px;border-radius:50%;background:var(--c);display:grid;place-items:center;flex:none}
+.zlist .zd svg{width:14px;height:14px;stroke:#fdfcfa;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.zlist .zn{flex:1;font-size:14.5px;font-weight:500}
+.zlist .zc{font-size:12px;color:var(--soft)}
+.zlist li.dim{opacity:.32}
+.sec{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-d);font-weight:700;margin:4px 0 8px}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:st}
+.steps li{position:relative;background:var(--surface);border-radius:16px;padding:10px 12px 10px 46px;counter-increment:st}
+.steps li::before{content:counter(st);position:absolute;left:12px;top:10px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fdfcfa;font-family:var(--serif);font-size:14px;display:grid;place-items:center}
+.steps b{display:block;font-family:var(--serif);font-weight:500;font-size:16px}
+.steps span{font-size:13px;color:#5d5549;line-height:1.45}
+.foot a{color:var(--accent-d);font-weight:600}
+.foot{font-size:12px;color:var(--soft);line-height:1.55;margin-top:20px;padding-top:14px;border-top:1px dashed var(--n300)}
+
+/* ---- Barre d'outils ---- */
+.toolbar{position:fixed;left:16px;bottom:16px;display:flex;gap:6px;flex-wrap:wrap;z-index:3}
+.tb{border:1px solid var(--line);background:rgba(253,252,250,.94);backdrop-filter:blur(8px);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:7px;box-shadow:var(--sh-md)}
+.tb.on{background:var(--sage-d);color:#fdfcfa;border-color:var(--sage-d)}
+.tb svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tb.sel{background:var(--accent);border-color:var(--accent);color:#fdfcfa;font-family:var(--serif);font-size:14.5px}
+.tb.sel b{background:#fdfcfa;color:var(--accent-d);border-radius:9px;min-width:20px;height:20px;display:inline-grid;place-items:center;font-size:11.5px;padding:0 5px;font-family:var(--sans)}
+.hint{position:fixed;left:calc((100% - 432px)/2);bottom:22px;transform:translateX(-50%);font-size:12px;color:var(--muted);background:rgba(253,252,250,.88);padding:6px 14px;border-radius:999px;white-space:nowrap;transition:opacity .8s;box-shadow:var(--sh-sm)}
+
+/* ---- Sélection ---- */
+#modal{position:fixed;inset:0;background:rgba(59,54,46,.32);display:none;place-items:center;padding:20px;z-index:20}
+#modal.open{display:grid}
+.mbox{background:var(--bg);border-radius:28px;width:min(560px,100%);max-height:86vh;display:flex;flex-direction:column;box-shadow:var(--sh-lg)}
+.mhead{padding:22px 24px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.mhead h2{font-family:var(--serif);font-weight:500;margin:0;font-size:28px}
+.mhead p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.mbody{padding:4px 24px 10px;overflow:auto;flex:1}
+.mgroup{margin-bottom:12px}
+.mgroup h4{margin:8px 0 6px;font-size:13.5px;display:flex;align-items:center;gap:7px}
+.mgroup h4 i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.mitem{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 11px;margin-bottom:5px;font-size:13.5px}
+.mitem button{border:0;background:none;color:var(--soft);font-size:18px;line-height:1;padding:0 4px}
+.mitem button:hover{color:#bf5545}
+.mfoot{padding:12px 24px 22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.mfoot textarea{width:100%;height:84px;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font:12px/1.45 ui-monospace,Menlo,monospace;background:#fff;color:#5d5549;resize:none}
+.mfoot .acts{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.primary{text-decoration:none;display:inline-flex;align-items:center;background:var(--accent);color:#fdfcfa;border:0;border-radius:999px;padding:9px 18px;font-family:var(--serif);font-size:15px}
+.primary:hover{background:var(--accent-d)}
+.empty{font-size:14px;color:var(--muted);padding:22px 0;text-align:center;line-height:1.6}
+.copied{font-size:12.5px;color:var(--sage-d);font-weight:600;margin-right:auto}
+
+#loading{position:fixed;inset:0;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--muted);pointer-events:none;transition:opacity .8s}
+
+@media (max-width:1180px){
+  .brand h1{font-size:22px}
+  .chip{font-size:12px;padding:4px 9px}
+}
+@media (max-width:860px){
+  .top{left:8px;right:8px;top:8px;flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px;border-radius:22px}
+  .filters{border-left:0;padding-left:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .brand h1{font-size:20px}
+  .logo{width:36px;height:36px}
+  #panel{top:auto;left:8px;right:8px;bottom:8px;width:auto;height:44vh;border-radius:22px}
+  .toolbar{left:10px;bottom:calc(44vh + 18px)}
+  .tb .t{display:none}
+  .hint{display:none}
+  #panel h2{font-size:24px}
+}
+.chip{padding:4px 9px;font-size:12px;gap:5px}
+.filters{gap:4px}
+body.embedded .top{flex-wrap:wrap;row-gap:8px}
+body.embedded .filters{flex:1 1 100%;border-left:0;padding-left:0}
+body.embedded .logo{width:36px;height:36px}
+body.embedded .brand h1{font-size:21px}
+body.embedded .top{padding:8px 10px;border-radius:22px}
+
+/* légende sous le plan */
+#panel{top:auto;left:16px;right:16px;bottom:16px;width:auto;height:clamp(230px, 34vh, 360px);border-radius:24px}
+.top{right:16px}
+.toolbar{bottom:calc(clamp(230px, 34vh, 360px) + 26px)}
+.hint{left:50%;bottom:calc(clamp(230px, 34vh, 360px) + 76px)}
+.p-scroll{padding:16px 20px 18px}
+.p-top{padding:8px 12px}
+#panel h2{font-size:22px;margin:8px 0 6px}
+.intro{font-size:13px;line-height:1.5;margin:0 0 12px;max-width:90ch}
+.sec{margin:2px 0 6px}
+.zlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:2px 10px}
+.zlist li button{padding:5px 6px;gap:9px}
+.zlist .zd{width:24px;height:24px}
+.zlist .zd svg{width:12px;height:12px}
+.zlist .zn{font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.card{grid-template-columns:46px 1fr;gap:10px;padding:10px}
+.thumb{width:46px;height:46px}
+.thumb svg{width:34px;height:34px}
+.card h3{font-size:15px}
+.card p{font-size:12px;margin:0 0 7px}
+.tag{font-size:11px}
+.add{font-size:11.5px;padding:3px 10px}
+@media (max-width:860px){
+  #panel{left:8px;right:8px;bottom:8px;height:44vh;border-radius:22px}
+  .top{right:8px}
+  .toolbar{bottom:calc(44vh + 18px)}
+  .zlist,.cards{grid-template-columns:1fr}
+}
+
+/* familles : une ligne ; Hôtels & gîtes et Création & déco à droite du titre */
+.filters2{display:flex;gap:4px;flex:none;order:3;border-left:1px solid var(--line);padding-left:12px}
+body.embedded .filters.filters2{order:0;margin-left:auto;border-left:0;padding-left:0;flex:0 0 auto;flex-wrap:nowrap}
+body.embedded .filters{flex-wrap:wrap;flex:1 0 100%;order:1;border-left:0;padding-left:0}
+.filters2:empty{display:none}
+@media (max-width:860px){.filters2{order:3;border-left:0;padding-left:0;margin-left:0}body.embedded .filters2{margin-left:0}}
+</style>
+</head>
+<body class="show-labels">
+<script>if(window.self!==window.top)document.body.classList.add("embedded")</script>
+<div id="scene"></div>
+<div id="labels"></div>
+<div id="loading">Le plan de camping 3D se dessine…</div>
+<p style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Plan de camping 3D interactif réalisé par Plan Naturel : faites tourner le camping, zoomez et cliquez sur chaque zone (réception, sanitaires, espace aquatique, jeux, restauration, hébergements) pour voir la signalétique adaptée.</p>
+
+<header class="top">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 44 44" aria-hidden="true">
+      <circle cx="22" cy="22" r="21" fill="#e2e6d8"/>
+      <path d="M4 30c7-2 9-8 16-8s9 5 20 2" stroke="#fdfcfa" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M8 36c6-3 12-4 18-3s9 1 12-1" stroke="#b3bba3" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="14" cy="15" r="5.5" fill="#869176"/><rect x="13.2" y="18" width="1.6" height="5" fill="#8a5e3e"/>
+      <path d="M30 8.5a6 6 0 0 0-6 6c0 4.5 6 10.5 6 10.5s6-6 6-10.5a6 6 0 0 0-6-6z" fill="#b37c55"/><circle cx="30" cy="14.5" r="2.2" fill="#fdfcfa"/>
+    </svg>
+    <div>
+      <div class="kick">Plan de camping 3D · Signalétique</div>
+      <h1>Camping <em>Plan Naturel</em><span class="stars">★★★★★</span></h1>
+    </div>
+  </div>
+  <nav class="filters filters2" id="filters2" aria-label="Autres familles"></nav>
+  <nav class="filters" id="filters"></nav>
+</header>
+
+<aside id="panel"></aside>
+
+<div class="toolbar">
+  <button class="tb" id="bHome" title="Vue d'ensemble"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span class="t">Vue d'ensemble</span></button>
+  <button class="tb on" id="bRot" title="Rotation automatique"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg><span class="t">Rotation</span></button>
+  <button class="tb on" id="bLbl" title="Afficher les noms"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg><span class="t">Noms</span></button>
+  <button class="tb sel" id="bSel"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg><span class="t">Ma sélection</span><b id="selCount">0</b></button>
+</div>
+<div class="hint" id="hint">Glissez pour tourner · clic droit pour déplacer · molette pour zoomer · cliquez une pastille</div>
+
+<div id="modal">
+  <div class="mbox">
+    <div class="mhead">
+      <div><h2>Ma sélection</h2><p>Vérifiez votre sélection : elle sera ajoutée à votre demande de devis.</p></div>
+      <button class="ghost" id="mClose">Fermer</button>
+    </div>
+    <div class="mbody" id="mBody"></div>
+    <div class="mfoot" id="mFoot">
+      <textarea id="mText" readonly></textarea>
+      <div class="acts"><span class="copied" id="mMsg"></span><button class="ghost" id="mClear">Vider</button><button class="ghost" id="mCopy">Copier la liste</button><a class="primary" id="mDevis" href="devis" target="_parent">Demander un devis →</a></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+/* ---------- Données ---------- */
+const CATS={
+  terrain:{n:'Signalétique terrain',c:'#5f6d4c',s:'Terrain'},
+  accueil:{n:'Réception',c:'#b37c55',s:'Réception'},
+  sanit:{n:'Sanitaires, laverie & animaux',c:'#5f86a0',s:'Sanitaires & animaux'},
+  aqua:{n:'Espace aquatique',c:'#4b9aa2',s:'Aquatique'},
+  loisirs:{n:'Jeux & animations',c:'#c4953a',s:'Jeux & animations'},
+  resto:{n:'Restauration & bar',c:'#a0605f',s:'Restauration'},
+  eco:{n:'Éco-gestes & tri',c:'#7d9a4c',s:'Éco-gestes'},
+  secu:{n:'Sécurité',c:'#bf5545',s:'Sécurité'},
+  hotel:{n:'Hôtels & gîtes',c:'#7b7199',s:'Hôtels & gîtes'},
+  crea:{n:'Création & décoration',c:'#a5778a',s:'Création & déco'}
+};
+const ICON={
+  gate:'<path d="M4 20V9l8-5 8 5v11"/><path d="M4 13h16"/><path d="M9.5 20v-4h5v4"/>',
+  home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>',
+  park:'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M10 17V7h3a3 3 0 0 1 0 6h-3"/>',
+  drop:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+  wash:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 7.5h14"/><circle cx="12" cy="14" r="3.6"/>',
+  wave:'<path d="M2 14c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M2 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M8 10V4h3"/><path d="M16 10V6"/>',
+  swing:'<path d="M3 21L7 4h10l4 17"/><path d="M10 4v10M14 4v10"/><path d="M9 14h6"/>',
+  boule:'<circle cx="8" cy="14" r="4.2"/><circle cx="16.5" cy="11" r="4.2"/><circle cx="19" cy="19.5" r="1.4"/>',
+  cup:'<path d="M5 8h11v5.5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 10h1.5a2.2 2.2 0 0 1 0 4.4H16"/><path d="M8.5 3v2.5M12 3v2.5"/>',
+  tent:'<path d="M3 20L12 4l9 16z"/><path d="M9 20l3-6 3 6"/>',
+  leaf:'<path d="M5 19C5 10.5 11 5 20 5c0 9-6 14-15 14z"/><path d="M5 19l8-8"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6L12 16.7l-5.4 2.9 1.1-6L3.2 9.4l6.1-.8z"/>',
+  alert:'<path d="M12 3.5l9.5 17h-19z"/><path d="M12 10v4.5"/><path d="M12 17.6v.2"/>',
+  post:'<path d="M12 3v18"/><path d="M12 5h6.5l2 2.5-2 2.5H12"/><path d="M12 12H5.5l-2 2.5 2 2.5H12"/>',
+  bed:'<path d="M3 19V9"/><path d="M3 14h18v5"/><rect x="5.5" y="10" width="4.5" height="4" rx="1"/><path d="M10 14v-3h8.5A2.5 2.5 0 0 1 21 13.5"/>',
+  barn:'<path d="M3 21V10l9-6 9 6v11"/><path d="M8 21v-7h8v7"/><path d="M8 14l8 7M16 14l-8 7"/>',
+  brush:'<path d="M14.5 3.5l6 6-8.5 8.5-6-6z"/><path d="M6 12l-2.5 2.5a2.1 2.1 0 0 0 3 3L9 15"/>'
+};
+// [titre, description, type de support, matériau / format, catégorie (optionnelle)]
+const ZONES=[
+ {id:'entree',n:"Entrée du camping",cat:'terrain',icon:'gate',p:[0,42],h:10,
+  intro:"Premier contact avec vos clients : l'entrée doit être repérable depuis la route, porter votre identité et afficher les informations obligatoires.",
+  items:[
+   ["Enseigne & totem d'entrée","Totem double face aux couleurs du camping, visible de loin depuis la route d'accès.","totem","Alu composite 3 mm · H 2,5 à 4 m"],
+   ["Lettres découpées","Nom du camping en relief sur muret, portique ou façade.","lettres","PVC 10 mm ou alu · pose à entretoises"],
+   ["Bi-mâts bois ou alu","Panneau « Bienvenue » encadré par deux mâts, parfait en bord d'allée.","bimat","Bois ou aluminium · sur mesure"],
+   ["Panneau d'entrée avec vitrine","Plan, tarifs et arrêtés sous vitrine fermant à clé, à l'abri de la pluie.","vitrine","Vitrine extérieure · A3 à 4×A4"],
+   ["Panneau d'entrée & tarifs","Tarifs de la saison et informations pratiques affichés dès l'entrée.","panneau","Alu composite 3 mm"],
+   ["Pavillons & voiles personnalisés","Beach flags et oriflammes au logo pour signaler l'entrée.","pavillon","Voile imprimée · mât + pied"],
+   ["Ouvert / Fermé · Complet","Plaque réversible ou réglette pour informer les arrivants en un coup d'œil.","plaque","Alu ou PVC · réversible"],
+   ["Signalisation routière intérieure","Limitation 10 km/h, stop, sens interdit au passage de la barrière.","route","Panneau réglementaire · Ø 400 mm","secu"]
+  ]},
+ {id:'accueil',n:"Accueil & réception",cat:'accueil',icon:'home',p:[-14,33],h:11,
+  intro:"Le bâtiment d'accueil concentre l'information pratique : horaires, services, classement et numéros utiles.",
+  items:[
+   ["Enseigne « Réception »","Lettrage de façade et enseigne drapeau perpendiculaire, repérable depuis l'allée.","lettres","Lettres découpées ou caisson"],
+   ["Panonceau de classement","Panonceau officiel étoilé à apposer près de l'entrée de la réception.","plaque","Format réglementaire"],
+   ["Horaires d'ouverture","Horaires d'accueil sur la porte ou la vitrine, en français et en anglais.","adhesif","Adhésif vitrophanie"],
+   ["Services & prestations","Wi-Fi, paiement par carte, location de vélos, dépôt de pain : tout en pictogrammes.","picto","Plaque pictos · bilingue"],
+   ["Accessibilité PMR","Signalement du comptoir adapté, de la place réservée et du cheminement accessible.","picto","Picto + plaque"],
+   ["Numéros d'urgence","SAMU, pompiers, médecin et pharmacie de garde à portée de main.","plaque","Plaque alu ou adhésif"],
+   ["Plan de comptoir","Plan illustré en bloc A4/A3 à remettre à chaque client à son arrivée.","plan","Bloc détachable · 50 ou 100 feuilles"],
+   ["Vitrines de réception","Vitrines murales pour la météo, les excursions et les infos du jour.","vitrine","Vitrine intérieure · A4 à 6×A4"],
+   ["Tableau à clés & porte-clés","Tableau personnalisé et porte-clés numérotés aux couleurs du camping.","cles","Sur mesure · impression ou gravure","crea"],
+   ["Boîtes aux lettres 3 à 12 cases","Boîtes à courrier personnalisées pour les résidents et les locatifs.","boite","3 à 12 cases","crea"],
+   ["Tapis de sol personnalisé","Tapis d'entrée au logo du camping devant la réception.","tapis","Tapis imprimé · sur mesure","crea"],
+   ["Rénovation du comptoir","Habillage adhésif du comptoir d'accueil aux couleurs du camping.","porte","Adhésif rénovation","crea"]
+  ]},
+ {id:'parking',n:"Parking & bornes",cat:'terrain',icon:'park',p:[-38,36],h:8,
+  intro:"Organisez le stationnement des visiteurs, des camping-cars et des véhicules électriques avant la barrière.",
+  items:[
+   ["Panneau Parking visiteurs","Indication du parking et des règles de stationnement.","panneau","Alu composite 3 mm"],
+   ["Aire de camping-car","Services de vidange et d'eau, tarifs et consignes de l'aire.","panneau","Panneau sur poteaux"],
+   ["Recharge électrique","Signalisation des places de recharge et mode d'emploi des bornes.","picto","Picto VE + consignes","secu"],
+   ["Stop-trottoir","Chevalet extérieur pour le message du jour ou les offres du moment.","chevalet","Double face · interchangeable"],
+   ["Accès camping","« Accès réservé aux résidents », « Ne pas stationner devant la barrière ».","route","Panneau réglementaire"]
+  ]},
+ {id:'fleche',n:"Fléchage & plan général",cat:'terrain',icon:'post',p:[5,5],h:9,
+  intro:"Au carrefour principal, un fléchage clair et un grand plan « Vous êtes ici » évitent aux vacanciers de se perdre.",
+  items:[
+   ["Fléchage directionnel","Mâts multi-lames vers chaque service, avec code couleur par catégorie.","fleche","Lames alu · mât bois ou alu"],
+   ["Bloc plan « Vous êtes ici »","Grand plan illustré du camping sur pupitre ou bi-mâts.","plan","Alu composite · jusqu'à 2 m"],
+   ["Dessin de plan","Création ou refonte du plan illustré, décliné sur tous les supports.","plan","Création graphique · vectoriel"],
+   ["Mobilier extérieur","Supports et mobilier aux couleurs du camping le long des allées.","panneau","Bois ou aluminium"]
+  ]},
+ {id:'snack',n:"Snack, bar & épicerie",cat:'resto',icon:'cup',p:[16,33],h:10,
+  intro:"Un espace de restauration doit donner envie : enseigne visible, cartes lisibles et terrasse soignée.",
+  items:[
+   ["Enseigne bar / snack","Lettrage de façade ou caisson rétroéclairé visible depuis la terrasse.","lettres","Lettres découpées ou caisson"],
+   ["Ardoises & menus muraux","Ardoises effaçables pour le plat du jour, encadrées bois.","ardoise","Ardoise · cadre bois"],
+   ["Menus & sets de table","Mise en page des cartes, menus et sets de table à votre image.","menu","Création graphique + impression"],
+   ["Épicerie & dépôt de pain","Horaires, commandes de pain et produits disponibles.","adhesif","Adhésif ou plaque"],
+   ["Décoration de vitrages","Vitrophanie décorative sur les baies vitrées du bar.","adhesif","Adhésif dépoli ou couleur"],
+   ["Voiles & parasols personnalisés","Ombrage de terrasse au logo du camping.","pavillon","Voile imprimée","crea"],
+   ["Rénovation des tables","Plateaux de tables relookés par adhésif résistant, assortis au bar.","porte","Adhésif anti-rayures","crea"]
+  ]},
+ {id:'piscine',n:"Espace aquatique",cat:'aqua',icon:'wave',p:[30,14],h:9,
+  intro:"Affichages obligatoires, sécurité des baigneurs et informations claires pour chaque bassin.",
+  items:[
+   ["Règlement de la piscine","Règlement intérieur complet, affiché à l'entrée de l'espace aquatique.","panneau","Alu composite · bilingue"],
+   ["Profondeurs de bassins","Plaquettes et adhésifs de margelle indiquant la profondeur.","plaque","Adhésif antidérapant"],
+   ["Pataugeoire & jeux d'eau","Tranche d'âge, surveillance parentale obligatoire.","panneau","Alu composite 3 mm"],
+   ["Toboggan","Consignes d'utilisation, taille minimum, un seul à la fois.","panneau","Panneau sur poteaux"],
+   ["Espace bien-être","Consignes et horaires du spa, sauna ou hammam.","panneau","Plaque intérieure"],
+   ["Interdictions & pictos","Shorts de bain interdits, plongeon interdit, pas de verre.","picto","Pictos découpés"],
+   ["Bâches brise-vue","Bâches personnalisées sur la clôture du bassin.","bache","Bâche PVC à œillets"]
+  ]},
+ {id:'jeux',n:"Aire de jeux",cat:'loisirs',icon:'swing',p:[-24,12],h:8,
+  intro:"La signalisation d'une aire de jeux est encadrée : âges, responsable et numéros d'urgence doivent figurer.",
+  items:[
+   ["Panneau aire de jeux réglementaire","Tranches d'âge, exploitant, numéros d'urgence.","panneau","Alu composite 3 mm"],
+   ["Pictos par structure","Âge conseillé sur chaque jeu (toboggan, balançoires…).","picto","Plaquettes · vis inox"],
+   ["Panneau passe-tête","Panneau photo souvenir pour les familles.","passetete","Alu ou PVC découpé"]
+  ]},
+ {id:'petanque',n:"Terrain de pétanque",cat:'loisirs',icon:'boule',p:[50.5,31],h:6,
+  intro:"Un petit plus apprécié : le compteur de score et un panneau de terrain aux couleurs du camping.",
+  items:[
+   ["Compteur de score","Tableau à curseurs pour suivre les parties.","compteur","Alu composite · curseurs"],
+   ["Panneau du boulodrome","Nom du terrain, horaires et prêt de boules à l'accueil.","panneau","Alu composite 3 mm"],
+   ["Fléchage boulodrome","Lame directionnelle depuis les allées principales.","fleche","Lame alu"]
+  ]},
+ {id:'sanitaires',n:"Bloc sanitaire",cat:'sanit',icon:'drop',p:[-12,-10],h:9,
+  intro:"Signalétique intérieure et extérieure du bloc sanitaire, pictogrammes et éco-gestes au quotidien.",
+  items:[
+   ["Pictos Hommes / Femmes / PMR en découpe","Pictogrammes découpés à la forme, posés sur porte ou façade.","picto","Découpe PVC ou alu"],
+   ["Pictogrammes standards","Plaques pictos prêtes à poser : douches, lavabos, vaisselle, lessive.","picto","Plaques alu ou PVC"],
+   ["Identification du bloc","Nom ou numéro du bloc sanitaire en lettres sur la façade.","lettres","Lettres découpées"],
+   ["Éco-gestes eau & lumière","« Économisons l'eau », « Éteignez en sortant » sur les miroirs et les interrupteurs.","adhesif","Adhésifs · bilingues","eco"],
+   ["Chevalets de nettoyage","« Nettoyage en cours », « Sol glissant ».","chevalet","Chevalet pliant"],
+   ["Vidoir WC chimiques","Consignes de vidange des cassettes et pictogrammes.","panneau","Alu composite"],
+   ["Espace bébé & bacs à vaisselle","Pictos table à langer, plonge, lavoir.","picto","Plaquettes pictos"]
+  ]},
+ {id:'laverie',n:"Laverie",cat:'sanit',icon:'wash',p:[10,-10],h:8,
+  intro:"Machines, tarifs et horaires : une laverie bien signalée, c'est moins de questions à l'accueil.",
+  items:[
+   ["Enseigne laverie","Identification du local en façade.","lettres","Lettres découpées ou plaque"],
+   ["Mode d'emploi des machines","Étapes illustrées, tarifs des jetons, lessive.","panneau","Plaque intérieure · bilingue"],
+   ["Horaires & consignes","Horaires d'ouverture et règles d'utilisation.","adhesif","Adhésif"],
+   ["Éco-gestes laverie","Charge pleine, programme éco, séchage à l'air.","adhesif","Adhésifs","eco"]
+  ]},
+ {id:'animation',n:"Salle d'animation",cat:'loisirs',icon:'star',p:[46,-8],h:10,
+  intro:"Mettez en avant le programme de la semaine et les événements du camping.",
+  items:[
+   ["Vitrine d'animations & magnets","Vitrine aimantée pour changer le programme de la semaine en un instant.","vitrine","Vitrine aimantée"],
+   ["Vitrines vierges ou à fond personnalisé","Vitrines à affichage libre, fond uni ou décoré à vos couleurs.","vitrine","Vitrine extérieure · fermant à clé"],
+   ["Vitrine avec pochettes","Pochettes intégrées pour glisser plannings et fiches sans punaises.","pochettes","Vitrine + pochettes A4"],
+   ["Kit de magnets d'activités","Magnets illustrés : aquagym, soirée, tournoi, club enfants…","picto","Magnets personnalisés"],
+   ["Panneau d'animations","Programme de la semaine sur grand panneau extérieur.","panneau","Alu composite"],
+   ["Bâche événementielle","Bâche grand format pour les soirées et la scène.","bache","Bâche PVC à œillets"]
+  ]},
+ {id:'emplacements',n:"Emplacements & locatifs",cat:'terrain',icon:'tent',p:[-16,-30],h:7,
+  intro:"Numérotation lisible des emplacements et des mobil-homes, consignes de vie sur place.",
+  items:[
+   ["Numérotation des emplacements","Bornes ou plaquettes numérotées, couleur selon le type d'emplacement.","borne","Borne bois ou plaque alu"],
+   ["Numéros des locatifs","Plaques numérotées sur chaque mobil-home ou chalet.","plaque","Plaque alu ou PVC"],
+   ["Propreté des locatifs","Chevalet « logement nettoyé et contrôlé » à l'arrivée.","chevalet","Chevalet de table"],
+   ["Animaux","Chiens tenus en laisse, distributeurs de sacs, espace canin.","picto","Plaque + picto"],
+   ["Consignes barbecue","Barbecue autorisé ou interdit, zones de grillades.","picto","Picto réglementaire","secu"],
+   ["Décoration des locatifs","Adhésifs décoratifs et rénovation des portes des mobil-homes.","porte","Adhésif rénovation","crea"],
+   ["Décoration extérieure","Silhouettes, fresques et panneaux décoratifs pour habiller les espaces verts.","bache","Alu découpé ou bâche","crea"]
+  ]},
+ {id:'tri',n:"Tri sélectif & compostage",cat:'eco',icon:'leaf',p:[-50,-8],h:7,
+  intro:"Aidez vos vacanciers à bien trier : consignes par flux, compostage et sensibilisation.",
+  items:[
+   ["Panneaux de tri sélectif","Consignes par flux, illustrées et bilingues.","panneau","Alu composite 3 mm"],
+   ["Adhésifs pour conteneurs","Consignes directement sur chaque bac.","adhesif","Adhésif extérieur"],
+   ["Compostage","Ce qui va (et ne va pas) au composteur.","panneau","Panneau sur poteaux"],
+   ["Panneaux éco-responsables","Sensibilisation à la biodiversité et aux bons gestes.","panneau","Alu ou bois"]
+  ]},
+ {id:'secu',n:"Sécurité & évacuation",cat:'secu',icon:'alert',p:[26,-12],h:7,
+  intro:"Affichages réglementaires : point de rassemblement, consignes d'évacuation, risques et secours.",
+  items:[
+   ["Point de rassemblement","Panneau normalisé, visible de jour comme de nuit.","panneau","Alu composite · réflectorisé"],
+   ["Consignes & plan d'évacuation","Plan et consignes de sécurité par zone.","plan","Plaque alu ou adhésif"],
+   ["Risques incendie & inondation","Cahier de prescriptions et affichage obligatoire.","panneau","Format réglementaire"],
+   ["Vidéosurveillance · Interdiction de fumer","Pictos réglementaires d'information.","picto","Picto adhésif ou plaque"],
+   ["Gaz & locaux techniques","Signalétique des locaux à risque.","plaque","Plaque alu"],
+   ["Secours & urgences","Extincteur, défibrillateur, trousse de secours.","picto","Pictos photoluminescents"],
+   ["Règlement intérieur officiel","Règlement type des terrains de camping, à afficher à l'entrée et à l'accueil.","panneau","Format réglementaire · bilingue"]
+  ]},
+ {id:'hotel',n:"Gîte & résidence hôtelière",cat:'hotel',icon:'bed',p:[46,-46],h:10,
+  intro:"Pour les hôtels, gîtes et résidences de vacances : le toit se soulève pour montrer la signalétique d'intérieur, du hall jusqu'aux chambres.",
+  items:[
+   ["Signalétique d'extérieur","Enseigne de façade, plaque d'entrée et panonceau de classement.","lettres","Lettres découpées · plaque alu"],
+   ["Signalétique d'intérieur","Fléchage des couloirs, des étages et des espaces communs.","fleche","Plaques murales · drapeaux"],
+   ["Numéros de chambre","Plaques de porte numérotées, assorties à la décoration.","plaque","Plexi, alu ou bois"],
+   ["Chambre","Accroche-portes, consignes, Wi-Fi et informations pratiques.","accroche","Carton ou PVC · chevalets"],
+   ["Livret d'accueil","Livret de bienvenue imprimé pour chaque chambre ou gîte.","livret","Création + impression","crea"],
+   ["Piscine & espace bien-être","Règlement, horaires et consignes de l'espace détente.","panneau","Plaque intérieure","aqua"],
+   ["Restauration / bar","Horaires du petit-déjeuner, cartes et ardoises du bar.","ardoise","Ardoise · plaque","resto"],
+   ["Sécurité","Plan d'évacuation derrière chaque porte, consignes incendie.","plan","Format réglementaire","secu"],
+   ["Décoration","Adhésifs muraux, tableaux et cadres photo pour couloirs et chambres.","cadre","Adhésif · toile · cadre","crea"],
+   ["Tapis de sol","Tapis d'accueil au logo dans le hall d'entrée.","tapis","Tapis imprimé","crea"]
+  ]},
+ {id:'ferme',n:"Mini-ferme",cat:'sanit',icon:'barn',p:[57,17],h:7,
+  intro:"Le coin préféré des enfants : présentez les animaux et rappelez les bons gestes autour des enclos.",
+  items:[
+   ["Fiches des animaux","Nom, race et anecdotes pour chaque enclos, illustrées et bilingues.","panneau","Alu composite 3 mm"],
+   ["Consignes de la ferme","Ne pas nourrir, refermer le portail, se laver les mains.","picto","Pictos + texte"],
+   ["Horaires de nourrissage","Rendez-vous quotidiens avec l'animateur.","ardoise","Ardoise ou plaque"],
+   ["Portique d'entrée","Arche en bois avec le nom de la ferme.","bimat","Bois · sur mesure","terrain"],
+   ["Chiens & animaux de compagnie","Rappel des règles pour les chiens aux abords des enclos.","picto","Picto réglementaire"]
+  ]},
+ {id:'atelier',n:"Boutique & atelier déco",cat:'crea',icon:'brush',p:[28,34],h:9,
+  intro:"Tout ce qui fait l'identité du camping au-delà des panneaux : création graphique, rénovation, décoration et équipements.",
+  items:[
+   ["Identité visuelle","Création ou refonte du logo et de la charte du camping.","lettres","Logo · charte graphique"],
+   ["Cartes de visite & papier en-tête","Papeterie assortie pour l'accueil et la direction.","carte","Impression"],
+   ["Dépliants, brochures & flyers","Brochure de saison, dépliant tarifs, flyers d'animations.","flyer","Mise en page + impression"],
+   ["Cartes de vœux","Cartes de fin d'année pour vos clients fidèles et partenaires.","carte","Création + impression"],
+   ["Vectorisation","Remise au propre d'un logo ou d'un plan existant, prêt à imprimer.","vecteur","Fichiers vectoriels"],
+   ["Rénovation portes, comptoirs & tables","Habillage adhésif pour redonner vie au mobilier sans le remplacer.","porte","Adhésif rénovation"],
+   ["Décoration de vitrages","Vitrophanie décorative ou dépolie pour les baies vitrées.","adhesif","Adhésif dépoli ou couleur"],
+   ["Décoration extérieure","Fresques, silhouettes et panneaux décoratifs.","bache","Alu découpé · bâche"],
+   ["Cadres photo","Cadres décoratifs pour les espaces communs.","cadre","Alu · toile"],
+   ["Tapis de sol","Tapis d'entrée personnalisés au logo.","tapis","Tapis imprimé"],
+   ["Voiles & pavillons","Voiles personnalisées et pavillons standards ou à vos couleurs.","pavillon","Voile imprimée · mât"],
+   ["Stop-trottoir","Chevalet double face pour les promotions de la boutique.","chevalet","Double face"]
+  ]}
+];
+
+/* ---------- Pictos des supports ---------- */
+function sup(t,c){
+  const W='#fdfcfa',G='#766f63';
+  const s={
+   totem:`<rect x="15" y="5" width="18" height="34" rx="2" fill="${c}"/><rect x="18" y="10" width="12" height="9" rx="1" fill="${W}"/><rect x="18" y="23" width="12" height="2" fill="${W}" opacity=".7"/><rect x="18" y="27" width="8" height="2" fill="${W}" opacity=".7"/><rect x="12" y="39" width="24" height="4" rx="1" fill="${G}"/>`,
+   panneau:`<rect x="13" y="22" width="2.4" height="21" fill="${G}"/><rect x="32.6" y="22" width="2.4" height="21" fill="${G}"/><rect x="8" y="8" width="32" height="20" rx="2" fill="${c}"/><rect x="11" y="11" width="18" height="3" fill="${W}"/><rect x="11" y="17" width="26" height="2" fill="${W}" opacity=".7"/><rect x="11" y="21" width="20" height="2" fill="${W}" opacity=".7"/>`,
+   bimat:`<rect x="7" y="6" width="4" height="37" rx="1" fill="#a07650"/><rect x="37" y="6" width="4" height="37" rx="1" fill="#a07650"/><rect x="11" y="10" width="26" height="16" fill="${c}"/><rect x="14" y="15" width="20" height="3" fill="${W}"/><rect x="17" y="20" width="14" height="2" fill="${W}" opacity=".7"/>`,
+   lettres:`<text x="24" y="31" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-weight="700" font-size="19" fill="${c}">Abc</text><rect x="6" y="35" width="36" height="2" fill="${G}" opacity=".5"/>`,
+   vitrine:`<rect x="7" y="7" width="34" height="27" rx="2" fill="${c}"/><rect x="10" y="10" width="28" height="21" rx="1" fill="#e3eef0"/><rect x="12" y="12" width="10" height="13" fill="${W}"/><rect x="24" y="12" width="12" height="8" fill="${W}"/><path d="M27 23l6-6" stroke="#fff" stroke-width="1.5" opacity=".9"/><rect x="22" y="34" width="4" height="9" fill="${G}"/>`,
+   picto:`<rect x="9" y="9" width="30" height="30" rx="6" fill="${c}"/><circle cx="24" cy="16" r="3" fill="${W}"/><path d="M24 20v9M18 23h12M24 29l-4 6M24 29l4 6" stroke="${W}" stroke-width="2.6" stroke-linecap="round"/>`,
+   fleche:`<rect x="22.8" y="5" width="2.4" height="38" fill="${G}"/><path d="M25 9h13l4 4-4 4H25z" fill="${c}"/><path d="M23 19H10l-4 4 4 4h13z" fill="${c}" opacity=".8"/><path d="M25 29h11l4 4-4 4H25z" fill="${c}" opacity=".6"/>`,
+   borne:`<rect x="17" y="12" width="14" height="29" rx="2" fill="#a07650"/><rect x="17" y="12" width="14" height="4" fill="#8d6640"/><rect x="19" y="19" width="10" height="10" rx="2" fill="${c}"/><text x="24" y="27" text-anchor="middle" font-family="Karla,sans-serif" font-weight="700" font-size="8" fill="#fff">42</text>`,
+   adhesif:`<rect x="8" y="7" width="32" height="34" rx="2" fill="#e3eef0" stroke="${G}" stroke-width="1.5"/><path d="M14 15h20v14l-6 6H14z" fill="${c}"/><path d="M34 29l-6 6v-6z" fill="${W}"/><rect x="17" y="19" width="12" height="2.4" fill="${W}"/>`,
+   bache:`<rect x="6" y="11" width="36" height="24" rx="1" fill="${c}"/><circle cx="9" cy="14" r="1.5" fill="${W}"/><circle cx="39" cy="14" r="1.5" fill="${W}"/><circle cx="9" cy="32" r="1.5" fill="${W}"/><circle cx="39" cy="32" r="1.5" fill="${W}"/><rect x="13" y="19" width="22" height="4" fill="${W}"/><rect x="16" y="26" width="16" height="2.4" fill="${W}" opacity=".7"/>`,
+   pavillon:`<rect x="13" y="5" width="2" height="38" fill="${G}"/><path d="M15 6c12 1 19 6 18 16-1 6-6 12-18 15z" fill="${c}"/><path d="M19 14c5 1 8 3 8 7" stroke="${W}" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="9" y="41" width="10" height="3" rx="1" fill="${G}"/>`,
+   ardoise:`<rect x="8" y="7" width="32" height="34" rx="2" fill="#a07650"/><rect x="11" y="10" width="26" height="28" fill="#33373a"/><path d="M14 16h14M14 21h18M14 26h10M14 31h15" stroke="#fff" stroke-width="1.6" opacity=".8" stroke-linecap="round"/><circle cx="32" cy="16" r="2" fill="${c}"/>`,
+   plaque:`<rect x="8" y="13" width="32" height="22" rx="3" fill="${c}"/><circle cx="11.5" cy="16.5" r="1.1" fill="${W}"/><circle cx="36.5" cy="16.5" r="1.1" fill="${W}"/><circle cx="11.5" cy="31.5" r="1.1" fill="${W}"/><circle cx="36.5" cy="31.5" r="1.1" fill="${W}"/><rect x="15" y="20" width="18" height="3" fill="${W}"/><rect x="18" y="26" width="12" height="2" fill="${W}" opacity=".7"/>`,
+   plan:`<path d="M6 11l11-4 14 4 11-4v30l-11 4-14-4-11 4z" fill="#e8f0d8" stroke="${G}" stroke-width="1.2"/><path d="M17 7v30M31 11v30" stroke="${G}" stroke-width="1" opacity=".5"/><path d="M9 28c6-2 10 3 16-2s9-6 14-4" stroke="#e3cf9f" stroke-width="3" fill="none"/><circle cx="24" cy="19" r="4" fill="${c}"/><circle cx="24" cy="19" r="1.5" fill="#fff"/>`,
+   chevalet:`<path d="M16 8h16l7 34h-4L28 12h-8l-7 30H9z" fill="${G}"/><path d="M17.5 12h13l5.6 26H11.9z" fill="${c}"/><rect x="18" y="19" width="12" height="3" fill="${W}"/><rect x="17" y="25" width="14" height="2" fill="${W}" opacity=".7"/>`,
+   compteur:`<rect x="6" y="9" width="36" height="28" rx="2" fill="${c}"/><rect x="9" y="14" width="30" height="5" rx="2" fill="${W}"/><rect x="9" y="25" width="30" height="5" rx="2" fill="${W}"/><rect x="20" y="13" width="4" height="7" rx="1" fill="${G}"/><rect x="29" y="24" width="4" height="7" rx="1" fill="${G}"/><rect x="22" y="37" width="4" height="6" fill="${G}"/>`,
+   boite:`<rect x="8" y="8" width="32" height="32" rx="2" fill="${c}"/>${[0,1,2].map(r=>[0,1].map(k=>`<rect x="${11+k*14.5}" y="${11+r*9.6}" width="12" height="7.6" rx="1" fill="${W}"/><rect x="${13+k*14.5}" y="${13.5+r*9.6}" width="5" height="1.4" fill="${G}"/>`).join('')).join('')}`,
+   route:`<rect x="22.8" y="28" width="2.4" height="15" fill="${G}"/><circle cx="24" cy="18" r="13" fill="#fff" stroke="#bf5545" stroke-width="4"/><text x="24" y="23.5" text-anchor="middle" font-family="Karla,sans-serif" font-weight="700" font-size="14" fill="#2b2924">10</text>`,
+   passetete:`<rect x="9" y="5" width="30" height="35" rx="3" fill="${c}"/><circle cx="24" cy="16" r="6" fill="#faf7f2"/><path d="M14 40c0-8 4-14 10-14s10 6 10 14" fill="${W}" opacity=".5"/><rect x="13" y="40" width="3" height="4" fill="${G}"/><rect x="32" y="40" width="3" height="4" fill="${G}"/>`,
+   livret:`<rect x="9" y="8" width="30" height="32" rx="2" fill="${c}"/><rect x="9" y="8" width="5" height="32" fill="${G}" opacity=".35"/><rect x="18" y="15" width="16" height="3" fill="${W}"/><rect x="18" y="21" width="12" height="2" fill="${W}" opacity=".7"/><circle cx="26" cy="31" r="4" fill="${W}" opacity=".85"/>`,
+   tapis:`<path d="M5 16h38l-4 18H9z" fill="${c}"/><path d="M9.5 20h29l-2.6 10H12z" fill="none" stroke="${W}" stroke-width="1.4"/><text x="24" y="28" text-anchor="middle" font-family="Newsreader,Georgia,serif" font-style="italic" font-size="7.5" fill="${W}">Bienvenue</text>`,
+   cadre:`<rect x="8" y="8" width="32" height="32" rx="1" fill="#a07650"/><rect x="12" y="12" width="24" height="24" fill="#e3eef0"/><path d="M12 32l7-8 5 5 4-4 8 7v4H12z" fill="${c}"/><circle cx="30" cy="18" r="2.5" fill="#e2bf55"/>`,
+   cles:`<path d="M24 5l14 14-14 24L10 19z" fill="${c}"/><circle cx="24" cy="13" r="2.4" fill="${W}"/><text x="24" y="28" text-anchor="middle" font-family="Karla,sans-serif" font-weight="700" font-size="9" fill="${W}">12</text><path d="M24 10.6V5" stroke="${G}" stroke-width="1.5"/>`,
+   outil:`<rect x="8" y="30" width="32" height="5" rx="1.5" fill="${G}"/><rect x="12" y="7" width="4" height="23" rx="1" fill="${c}"/><rect x="32" y="7" width="4" height="23" rx="1" fill="${c}"/><rect x="10" y="14" width="8" height="3" rx="1" fill="${W}" stroke="${G}" stroke-width=".8"/><rect x="30" y="14" width="8" height="3" rx="1" fill="${W}" stroke="${G}" stroke-width=".8"/><circle cx="24" cy="40" r="2" fill="${G}"/>`,
+   carte:`<rect x="5" y="13" width="26" height="17" rx="2" fill="${W}" stroke="${G}" stroke-width="1" transform="rotate(-8 18 21)"/><rect x="14" y="19" width="29" height="18" rx="2" fill="${c}"/><rect x="18" y="24" width="12" height="2.6" fill="${W}"/><rect x="18" y="29" width="16" height="1.8" fill="${W}" opacity=".7"/><circle cx="37.5" cy="25" r="2.5" fill="${W}"/>`,
+   flyer:`<path d="M10 7h20l8 8v26H10z" fill="#fff" stroke="${G}" stroke-width="1"/><path d="M30 7v8h8" fill="${W}" stroke="${G}" stroke-width="1"/><rect x="14" y="13" width="13" height="10" fill="${c}"/><path d="M14 28h20M14 32h16M14 36h18" stroke="${G}" stroke-width="1.4"/>`,
+   porte:`<rect x="12" y="5" width="22" height="38" rx="1" fill="${c}"/><rect x="15" y="9" width="16" height="13" rx="1" fill="${W}" opacity=".35"/><rect x="15" y="25" width="16" height="14" rx="1" fill="${W}" opacity=".35"/><circle cx="29.5" cy="24" r="1.4" fill="${W}"/><path d="M35 33l7-7 2.2 2.2-7 7z" fill="${G}"/><path d="M35 33l-1 3.2 3.2-1z" fill="${G}"/>`,
+   vecteur:`<path d="M8 36C14 14 34 34 40 12" stroke="${c}" stroke-width="3" fill="none"/><path d="M24 24L14 13M24 24l10 11" stroke="${G}" stroke-width="1" stroke-dasharray="2 2"/><rect x="5" y="33" width="6" height="6" fill="${W}" stroke="${G}" stroke-width="1.5"/><rect x="37" y="9" width="6" height="6" fill="${W}" stroke="${G}" stroke-width="1.5"/><circle cx="24" cy="24" r="3" fill="${W}" stroke="${G}" stroke-width="1.5"/>`,
+   pochettes:`<rect x="6" y="6" width="36" height="31" rx="2" fill="${c}"/><rect x="9" y="9" width="30" height="25" fill="#e3eef0"/>${[0,1].map(r=>[0,1,2].map(k=>`<rect x="${11+k*9.3}" y="${11+r*11.5}" width="7.4" height="9.5" fill="${W}" stroke="${G}" stroke-width=".6"/><rect x="${12+k*9.3}" y="${13+r*11.5}" width="5" height="1.2" fill="${G}" opacity=".6"/>`).join('')).join('')}<rect x="22" y="37" width="4" height="6" fill="${G}"/>`,
+   accroche:`<path d="M15 6h18v35H15z" fill="${c}"/><circle cx="24" cy="13.5" r="4.2" fill="#f6f4ef"/><rect x="18.5" y="22" width="11" height="2.6" fill="${W}"/><rect x="18.5" y="27" width="11" height="2" fill="${W}" opacity=".7"/><rect x="18.5" y="31" width="8" height="2" fill="${W}" opacity=".7"/>`,
+   menu:`<path d="M10 8h14v32H10z" fill="#fff" stroke="${G}" stroke-width="1"/><path d="M24 8l14 3v32l-14-3z" fill="${W}" stroke="${G}" stroke-width="1"/><rect x="13" y="12" width="8" height="3" fill="${c}"/><path d="M13 19h8M13 23h6M13 27h8M13 31h5" stroke="${G}" stroke-width="1.3"/><path d="M27 16l8 1.7M27 21l8 1.7M27 26l6 1.3" stroke="${G}" stroke-width="1.3"/>`
+  };
+  return `<svg viewBox="0 0 48 48">${s[t]||s.panneau}</svg>`;
+}
+const iconSvg=k=>`<svg viewBox="0 0 24 24">${ICON[k]}</svg>`;
+
+/* ---------- Scène ---------- */
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+const rand=rng(11);
+const rr=(a,b)=>a+rand()*(b-a);
+const pick=a=>a[Math.floor(rand()*a.length)];
+const shade=(c,f)=>'#'+new THREE.Color(c).multiplyScalar(f||.88).getHexString();
+
+const wrap=$('#scene');
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+wrap.appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(30,1,1,1000);
+const HOME_POS=new THREE.Vector3(124,124,164),HOME_T=new THREE.Vector3(0,0,-2);
+camera.position.copy(HOME_POS);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.target.copy(HOME_T);
+controls.enableDamping=true;controls.dampingFactor=.08;
+controls.maxPolarAngle=1.2;controls.minPolarAngle=.28;
+controls.minDistance=18;controls.maxDistance=340;
+controls.screenSpacePanning=false;
+controls.autoRotate=true;controls.autoRotateSpeed=.4;
+
+scene.add(new THREE.HemisphereLight(0xfffbf2,0xd4c09c,.92));
+const sun=new THREE.DirectionalLight(0xfff0d8,.8);
+sun.position.set(-70,120,58);
+sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-100,right:100,top:100,bottom:-100,near:10,far:330});
+sun.shadow.bias=-.0006;
+scene.add(sun);
+
+/* --- Matériaux & primitives --- */
+const MC={};
+function mat(c){c=String(c);if(!MC[c])MC[c]=new THREE.MeshStandardMaterial({color:new THREE.Color(c),roughness:.95,metalness:0,flatShading:true});return MC[c];}
+function pathMat(c){const k='path'+c;if(!MC[k])MC[k]=new THREE.MeshStandardMaterial({color:new THREE.Color(c),roughness:1,side:THREE.DoubleSide});return MC[k];}
+function waterMat(c){return new THREE.MeshStandardMaterial({color:c,roughness:.12,metalness:.05,emissive:'#3f96a0',emissiveIntensity:.14});}
+const glowMat=new THREE.MeshStandardMaterial({color:'#fff4d6',emissive:'#ffe3a3',emissiveIntensity:.6,roughness:.6});
+function B(p,w,h,d,c,x,y,z,ry){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),typeof c==='string'?mat(c):c);m.position.set(x,(y||0)+h/2,z);if(ry)m.rotation.y=ry;p.add(m);return m;}
+function Cy(p,rt,rb,h,c,x,y,z,seg){const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||8),typeof c==='string'?mat(c):c);m.position.set(x,(y||0)+h/2,z);p.add(m);return m;}
+function Sp(p,r,c,x,y,z,det){const m=new THREE.Mesh(new THREE.IcosahedronGeometry(r,det||0),typeof c==='string'?mat(c):c);m.position.set(x,y,z);p.add(m);return m;}
+function Co(p,r,h,c,x,y,z,seg){const m=new THREE.Mesh(new THREE.ConeGeometry(r,h,seg||8),mat(c));m.position.set(x,(y||0)+h/2,z);p.add(m);return m;}
+function grp(p,x,z,ry,y){const g=new THREE.Group();g.position.set(x,y||0,z);g.rotation.y=ry||0;p.add(g);return g;}
+function roofGeo(w,d,h){const s=new THREE.Shape();s.moveTo(-d/2,0);s.lineTo(d/2,0);s.lineTo(0,h);s.closePath();const g=new THREE.ExtrudeGeometry(s,{depth:w,bevelEnabled:false});g.translate(0,0,-w/2);g.rotateY(Math.PI/2);return g;}
+
+/* --- Instanciation (arbres, herbes, fleurs, rochers) --- */
+const G={box:new THREE.BoxGeometry(1,1,1).translate(0,.5,0),cyl:new THREE.CylinderGeometry(1,1,1,6).translate(0,.5,0),cone:new THREE.ConeGeometry(1,1,7).translate(0,.5,0),ico0:new THREE.IcosahedronGeometry(1,0),ico1:new THREE.IcosahedronGeometry(1,1),rock:new THREE.DodecahedronGeometry(1,0)};
+const INST={};
+function I(g,c,a,ns){const k=g+'|'+c+(ns?'|n':'');(INST[k]||(INST[k]={g:g,c:c,ns:ns,l:[]})).l.push(a);}
+function flushInst(p){
+  const m=new THREE.Matrix4(),q=new THREE.Quaternion(),e=new THREE.Euler(),v=new THREE.Vector3(),s=new THREE.Vector3();
+  for(const k in INST){const o=INST[k];const im=new THREE.InstancedMesh(G[o.g],mat(o.c),o.l.length);
+    o.l.forEach((a,i)=>{e.set(0,a[6]||0,0);q.setFromEuler(e);v.set(a[0],a[1],a[2]);s.set(a[3],a[4]==null?a[3]:a[4],a[5]==null?a[3]:a[5]);m.compose(v,q,s);im.setMatrixAt(i,m);});
+    im.castShadow=!o.ns;im.receiveShadow=true;p.add(im);}
+}
+const FOL=['#7fa65a','#8db368','#98bd70','#739e55','#a6c67f','#86ad60'];
+function tree(x,z,s,k){
+  const ry=rand()*6;
+  if(k==='pine'){I('cyl','#7a5a3c',[x,0,z,.24*s,1.3*s,.24*s]);I('cone','#5f8a55',[x,.9*s,z,1.9*s,3*s,1.9*s,ry]);I('cone','#6a975c',[x,2.5*s,z,1.45*s,2.5*s,1.45*s,ry+.5]);I('cone','#78a465',[x,3.9*s,z,.95*s,1.9*s,.95*s,ry]);}
+  else if(k==='birch'){I('cyl','#efeae0',[x,0,z,.15*s,3.1*s,.15*s]);I('ico1',pick(['#a9c97c','#b6d18a','#9fc274']),[x,3.7*s,z,1.15*s,1.7*s,1.15*s,ry]);}
+  else if(k==='poplar'){I('cyl','#7a5a3c',[x,0,z,.18*s,1.2*s,.18*s]);I('ico1',pick(['#7b9f58','#86a963']),[x,3.4*s,z,1*s,2.9*s,1*s,ry]);}
+  else if(k==='bloom'){I('cyl','#7f5e40',[x,0,z,.2*s,1.8*s,.2*s]);I('ico1',pick(['#f1c9d1','#f5dfe3','#ece4f0','#f6e7c9']),[x,2.6*s,z,1.6*s,1.3*s,1.6*s,ry]);I('ico1','#9cc074',[x+.6*s,2.2*s,z+.5*s,.8*s,.6*s,.8*s,ry]);}
+  else{I('cyl','#7f5e40',[x,0,z,.24*s,2*s,.24*s]);I('ico1',pick(FOL),[x,2.9*s,z,1.75*s,1.5*s,1.75*s,ry]);
+    if(rand()<.75)I('ico1',pick(FOL),[x+.9*s,3.6*s,z-.3*s,1.1*s,.95*s,1.1*s,ry]);
+    if(rand()<.55)I('ico1',pick(FOL),[x-.8*s,3.3*s,z+.6*s,1*s,.85*s,1*s,ry]);}
+}
+function bush(x,z,s,fl){I('ico1',pick(['#7da35b','#88ad63','#729a52']),[x,.45*s,z,1*s,.72*s,1*s,rand()*6]);
+  if(fl){const c=pick(['#f2f0ea','#e9a8b8','#f3d36b','#b9a6d6']);for(let i=0;i<5;i++){const a=rand()*6.28,r=rr(.3,.8)*s;I('ico0',c,[x+Math.cos(a)*r,.75*s+rr(0,.25)*s,z+Math.sin(a)*r,.13,.13,.13],1);}}}
+function flowers(x,z,n,r,cols){for(let i=0;i<n;i++){const a=rand()*6.28,d=Math.sqrt(rand())*r;I('ico0',pick(cols),[x+Math.cos(a)*d,.2,z+Math.sin(a)*d,.15,.15,.15],1);}}
+function hedge(x1,z1,x2,z2,c){const L=Math.hypot(x2-x1,z2-z1),n=Math.max(1,Math.round(L/.85));for(let i=0;i<=n;i++){const t=i/n;I('ico1',c||'#7ea25c',[x1+(x2-x1)*t,.55,z1+(z2-z1)*t,.72,.64,.72,rand()*6]);}}
+
+/* --- Île au contour organique --- */
+const IA=76,IB=62;
+const wob=t=>1+.035*Math.sin(3*t+.6)+.025*Math.cos(5*t+1.3)+.015*Math.sin(9*t);
+function edgePt(t){const c=Math.cos(t),s=Math.sin(t),w=wob(t);return[IA*Math.sign(c)*Math.sqrt(Math.abs(c))*w,IB*Math.sign(s)*Math.sqrt(Math.abs(s))*w];}
+function inIsland(x,z,f){const v=Math.pow(Math.pow(Math.abs(x)/IA,4)+Math.pow(Math.abs(z)/IB,4),.25);return v<f*wob(Math.atan2(z/IB,x/IA));}
+const shape=new THREE.Shape();
+for(let i=0;i<180;i++){const p=edgePt(i/180*Math.PI*2);if(i)shape.lineTo(p[0],-p[1]);else shape.moveTo(p[0],-p[1]);}
+const isl=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:4.2,bevelEnabled:false}),[mat('#b5d096'),mat('#d2b48e')]);
+isl.rotation.x=-Math.PI/2;isl.position.y=-4.22;isl.receiveShadow=true;scene.add(isl);
+const lip=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:.55,bevelEnabled:false}),[mat('#b5d096'),mat('#9fbd7c')]);
+lip.rotation.x=-Math.PI/2;lip.position.y=-.57;lip.scale.set(1.004,1.004,1);lip.receiveShadow=true;scene.add(lip);
+const isl2=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:2.4,bevelEnabled:false}),[mat('#b8976f'),mat('#b8976f')]);
+isl2.rotation.x=-Math.PI/2;isl2.position.y=-6.6;isl2.scale.set(.972,.972,1);scene.add(isl2);
+{const cv=document.createElement('canvas');cv.width=cv.height=128;const x=cv.getContext('2d');const gr=x.createRadialGradient(64,64,8,64,64,64);gr.addColorStop(0,'rgba(110,80,45,.26)');gr.addColorStop(1,'rgba(110,80,45,0)');x.fillStyle=gr;x.fillRect(0,0,128,128);
+ const m=new THREE.Mesh(new THREE.PlaneGeometry(IA*2.9,IB*2.9),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));m.rotation.x=-Math.PI/2;m.position.y=-7.4;scene.add(m);}
+for(let i=0;i<46;i++){const p=edgePt(rand()*Math.PI*2);I('rock',pick(['#c9bda8','#bfb39e','#d3c8b5']),[p[0]*.996,-rr(1.2,3.6),p[1]*.996,rr(1.1,2.4),rr(.8,1.6),rr(1,2),rand()*6]);}
+
+const world=new THREE.Group();scene.add(world);
+
+/* --- Allées sinueuses (bordure + centre) --- */
+const PATHPTS=[];
+const ALLEES=[];
+function allee(pts,w,c,edge){ALLEES.push({pts:pts,w:w,c:c||'#f7efdc',edge:edge||'#e4d5b4'});}
+function ribbon(pts,w,c,y,keep){
+  const curve=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(p[0],0,p[1])),false,'catmullrom',.5);
+  const n=Math.max(16,Math.round(curve.getLength()/1));const pos=[],idx=[];
+  for(let i=0;i<=n;i++){const t=i/n,p=curve.getPointAt(t),tg=curve.getTangentAt(t);let nx=-tg.z,nz=tg.x;const l=Math.hypot(nx,nz)||1;nx/=l;nz/=l;
+    pos.push(p.x+nx*w/2,y,p.z+nz*w/2,p.x-nx*w/2,y,p.z-nz*w/2);
+    if(i<n){const a=i*2;idx.push(a,a+2,a+1,a+1,a+2,a+3);}
+    if(keep)PATHPTS.push([p.x,p.z,w/2]);}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeVertexNormals();
+  const m=new THREE.Mesh(g,pathMat(c));m.receiveShadow=true;world.add(m);return curve;
+}
+const zEdge=edgePt(Math.PI/2)[1]-.4;
+allee([[0,zEdge],[0,53],[0,45.5]],6.2,'#aaa69d','#d8ccb4');
+allee([[0,53],[-9,51.5],[-20,47],[-27,42]],5,'#aaa69d','#d8ccb4');
+const P_MAIN=[[0,47],[0,34],[1.5,18],[.5,2],[-1,-12],[0,-22],[.5,-38],[0,-50]];
+allee(P_MAIN,5);
+const P_EW=[[-62,3],[-46,1],[-34,1.5],[-18,2.5],[0,1.5],[18,.5],[33,1.5],[48,2.5],[63,1]];
+allee(P_EW,4.5);
+allee([[-62,-20],[-46,-22.5],[-30,-21.5],[-14,-22.5],[0,-22],[14,-21.5],[30,-22.5],[46,-21.5],[60,-23]],4);
+allee([[-56,-38],[-40,-38.5],[-20,-37.5],[0,-38],[20,-38.5],[40,-37.5],[54,-39]],3.5);
+allee([[-34,1.5],[-35.5,-10],[-33.5,-22],[-34.5,-38]],3.5);
+allee([[33,1.5],[34.5,-10],[32.5,-22],[33.5,-38]],3.5);
+allee([[1.5,12],[9,11],[17,10.5]],3);
+allee([[.5,9],[-8,9.5],[-16.5,10.5]],3);
+allee([[-31,13],[-37,14],[-42.5,16]],2.6);
+allee([[41.5,-38],[41.5,-40.9]],2.4);
+allee([[33,1.5],[42,5.5],[50,8],[57,10.4]],2.6);
+allee([[46,7],[46.6,16],[47.6,26.8]],2.4);
+const curves=[];
+ALLEES.forEach((a,i)=>ribbon(a.pts,a.w+.9,a.edge,.04+i*.002,false));
+ALLEES.forEach((a,i)=>curves.push(ribbon(a.pts,a.w,a.c,.075+i*.002,true)));
+for(let z=50;z<zEdge-1;z+=3.2)B(world,.22,.02,1.6,'#f4f1ea',0,.1,z);
+
+/* --- Lampadaires le long des allées --- */
+function lamp(x,z){const g=grp(world,x,z);Cy(g,.08,.1,3.2,'#5e574d',0,0,0,6);B(g,.5,.12,.5,'#5e574d',0,3.2,0);Sp(g,.24,glowMat,0,3.05,0,1);}
+[[1,curves[2]],[0,curves[3]]].forEach(([_,c],j)=>{for(let t=.06;t<.97;t+=j?.1:.12){const p=c.getPointAt(t),tg=c.getTangentAt(t);const sd=(Math.round(t*100)%2?1:-1)*3.4;lamp(p.x-tg.z*sd,p.z+tg.x*sd);}});
+
+const zoneGroups={};
+function Z(id){const g=new THREE.Group();g.userData.zone=id;world.add(g);zoneGroups[id]=g;return g;}
+
+/* --- Bâtiments en bois --- */
+function house(p,x,z,w,d,h,wall,roof,o){
+  o=o||{};const g=grp(p,x,z,o.ry);const b=.45;
+  B(g,w+.4,b,d+.4,'#d9d0c0',0,0,0);
+  B(g,w,h,d,wall,0,b,0);
+  const pc=shade(wall,.9);
+  for(let y=b+.6;y<b+h-.2;y+=.6)B(g,w+.05,.06,d+.05,pc,0,y,0);
+  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(c=>B(g,.3,h,.3,o.trim||'#8a6847',c[0]*(w/2-.1),b,c[1]*(d/2-.1)));
+  if(o.flat){B(g,w+.9,.45,d+.9,'#8c6c4c',0,b+h,0);B(g,w+.5,.35,d+.5,'#97b574',0,b+h+.45,0);
+    for(let i=0;i<Math.round(w*d/3);i++){const xx=rr(-w/2,w/2),zz=rr(-d/2,d/2);g.updateMatrixWorld();const v=new THREE.Vector3(xx,b+h+.8,zz).applyMatrix4(g.matrixWorld);I('ico1',pick(['#8fb06b','#a3c27c','#7fa45c']),[v.x,v.y,v.z,rr(.35,.6),rr(.25,.4),rr(.35,.6),rand()*6]);}}
+  else{const rh=o.rh||d*.42;const r=new THREE.Mesh(roofGeo(w+1.4,d+1.6,rh),mat(roof));r.position.y=b+h;g.add(r);
+    B(g,w+1.5,.22,.45,shade(roof,.78),0,b+h+rh-.12,0);
+    if(o.chim)B(g,.8,rh+.9,.8,'#cdc2b0',w/4,b+h,-d/6);}
+  const n=o.win||Math.max(1,Math.floor(w/3.4));const wy=b+h*.42;
+  for(let i=0;i<n;i++){const xx=-w/2+(i+.5)*w/n;
+    [1,-1].forEach(sd=>{if(sd===1&&Math.abs(xx)<1.4&&o.door!==false)return;const zf=sd*(d/2+.03);
+      B(g,1.35,1.2,.1,'#f7f3ea',xx,wy,zf);B(g,1.02,.88,.14,'#90a9b3',xx,wy+.16,zf);
+      B(g,.42,1.15,.1,o.shut||'#869176',xx-.92,wy+.02,zf);B(g,.42,1.15,.1,o.shut||'#869176',xx+.92,wy+.02,zf);
+      if(sd===1){B(g,1.3,.28,.32,'#8a6847',xx,wy-.32,zf+.16);const fc=pick(['#e9a8b8','#f3d36b','#f2f0ea','#e8935f']);for(let k=0;k<3;k++)Sp(g,.16,fc,xx-.4+k*.4,wy+.08,zf+.18,0);}});}
+  if(o.door!==false){B(g,1.4,2.3,.14,o.doorC||'#8a5e3e',0,b,d/2+.04);B(g,2.1,.14,1.1,o.flat?'#8c6c4c':shade(roof,.9),0,b+2.55,d/2+.55);}
+  return g;
+}
+// Panneau sur poteaux bois
+function sign(p,x,z,c,ry,w,h,ph){
+  const g=grp(p,x,z,ry);w=w||1.8;h=h||1.2;ph=ph||1.3;
+  Cy(g,.09,.1,ph+h+.15,'#8a6847',-w/2+.15,0,-.1,6);Cy(g,.09,.1,ph+h+.15,'#8a6847',w/2-.15,0,-.1,6);
+  B(g,w,h,.12,c,0,ph,0);B(g,w*.72,h*.2,.14,'#fdfcfa',0,ph+h*.58,0);B(g,w*.5,h*.1,.14,'#fdfcfa',-w*.11,ph+h*.3,0);
+  return g;
+}
+function totem(p,x,z,c,ry,h){const g=grp(p,x,z,ry);B(g,2.4,.6,1.3,'#d6ccbb',0,0,0);B(g,1.7,h,.75,'#a07650',0,.6,0);B(g,1.45,h*.72,.8,c,0,.6+h*.18,0);B(g,1.15,h*.22,.84,'#fdfcfa',0,.6+h*.62,0);B(g,1.15,h*.05,.84,'#fdfcfa',0,.6+h*.45,0);Co(g,1.1,.5,'#8a6847',0,.6+h,0,4).rotation.y=Math.PI/4;return g;}
+const flags=[];
+function flag(p,x,z,c,h){const g=grp(p,x,z);Cy(g,.06,.06,h,'#7a7266',0,0,0,6);const f=new THREE.Group();f.position.y=h*.42;g.add(f);B(f,.07,h*.52,1.05,c,0,0,.55);flags.push(f);return g;}
+function bimat(p,x,z,c,ry){const g=grp(p,x,z,ry);Cy(g,.2,.22,4.4,'#a07650',-2.3,0,0,8);Cy(g,.2,.22,4.4,'#a07650',2.3,0,0,8);Co(g,.25,.45,'#8a6847',-2.3,4.4,0,8);Co(g,.25,.45,'#8a6847',2.3,4.4,0,8);B(g,4.2,1.8,.14,c,0,1.9,0);B(g,3.2,.42,.16,'#fdfcfa',0,2.95,0);B(g,2.2,.2,.16,'#fdfcfa',0,2.35,0);return g;}
+function arrowPost(p,x,z,cols){const g=grp(p,x,z);Cy(g,.14,.16,6.2,'#a07650',0,0,0,8);Co(g,.2,.35,'#8a6847',0,6.2,0,8);cols.forEach((c,i)=>{const a=new THREE.Group();a.position.y=5.4-i*.64;a.rotation.y=i*1.2-.4;g.add(a);B(a,2.6,.48,.1,c,1.35,0,0);const tip=new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,.1,3),mat(c));tip.rotation.x=Math.PI/2;tip.rotation.z=-Math.PI/2;tip.position.set(2.76,.24,0);a.add(tip);B(a,1.6,.1,.12,'#fdfcfa',1.2,.19,0);});return g;}
+function car(p,x,z,c,ry){const g=grp(p,x,z,ry);B(g,1.9,.8,3.8,c,0,.3,0);B(g,1.6,.7,2,'#dfe8ec',0,1.1,-.2);B(g,1.7,.08,2.1,c,0,1.8,-.2);[[-.95,1.2],[.95,1.2],[-.95,-1.2],[.95,-1.2]].forEach(w=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(.35,.35,.3,10),mat('#4a4741'));m.rotation.z=Math.PI/2;m.position.set(w[0],.35,w[1]);g.add(m);});return g;}
+function parasol(p,x,z,c){Cy(p,.05,.05,2.5,'#e8e1d3',x,0,z,5);Co(p,1.6,.7,c,x,2.3,z,8);}
+function picnic(p,x,z,ry){const g=grp(p,x,z,ry);B(g,2.4,.12,1,'#a07650',0,.85,0);B(g,2.4,.1,.35,'#a07650',0,.45,.75);B(g,2.4,.1,.35,'#a07650',0,.45,-.75);[-1,1].forEach(s=>{B(g,.12,.85,.12,'#8a6847',s*1,0,0);B(g,.12,.45,1.8,'#8a6847',s*1,0,0);});return g;}
+function bench(p,x,z,ry){const g=grp(p,x,z,ry);B(g,2,.1,.5,'#a07650',0,.45,0);B(g,2,.5,.08,'#a07650',0,.55,-.25);[-.85,.85].forEach(s=>B(g,.1,.45,.45,'#5e574d',s,0,0));return g;}
+function lounger(p,x,z,ry){const g=grp(p,x,z,ry);B(g,.8,.25,1.7,'#f4efe4',0,.25,.2);const bk=B(g,.8,.15,.8,'#f4efe4',0,.6,-.85);bk.rotation.x=.6;B(g,.8,.25,.1,'#a07650',0,0,.9);B(g,.8,.25,.1,'#a07650',0,0,-.6);return g;}
+function signFace(p,x,y,z,w,h,c){B(p,w,h,.12,c,x,y,z);B(p,w*.75,h*.3,.14,'#fdfcfa',x,y+h*.35,z);}
+
+/* --- Entrée --- */
+{const g=Z('entree');
+ B(g,7,1.1,.9,'#d9cfbd',-7.6,0,46.6);B(g,7,1.1,.9,'#d9cfbd',7.6,0,46.6);
+ B(g,7.2,.18,1.05,'#c9bea9',-7.6,1.1,46.6);B(g,7.2,.18,1.05,'#c9bea9',7.6,1.1,46.6);
+ for(let i=0;i<6;i++)B(g,.55,.55,.12,CATS.terrain.c,-10.2+i*.95,.3,47.1);
+ for(let i=0;i<5;i++)B(g,.55,.55,.12,CATS.accueil.c,5.6+i*.95,.3,47.1);
+ totem(g,-13.5,44.2,CATS.terrain.c,.3,6.2);
+ bimat(g,8,41.2,CATS.terrain.c,-.15);
+ flag(g,13,44.6,'#869176',5.4);flag(g,14.8,44.1,'#b37c55',5.4);flag(g,16.6,43.6,'#c4953a',5.4);
+ const gh=house(g,-6.6,40,3,2.6,2.6,'#e9d6b6','#869176',{win:1,door:false});
+ Cy(g,.32,.32,1.3,'#d9d0c0',-3.4,0,42.5,8);
+ for(let i=0;i<6;i++)B(g,.95,.22,.22,i%2?'#fdfcfa':'#bf5545',-2.5+i*.95,1.05,42.5);
+ Cy(g,.12,.12,.9,'#7a7266',2.9,0,42.5,6);
+ const r=grp(g,3.6,44.4);Cy(r,.05,.05,1.9,'#7a7266',0,0,0,6);const disc=new THREE.Mesh(new THREE.CylinderGeometry(.5,.5,.08,18),mat('#fdfcfa'));disc.rotation.x=Math.PI/2;disc.position.y=2;r.add(disc);const ring=new THREE.Mesh(new THREE.TorusGeometry(.46,.08,6,18),mat('#bf5545'));ring.position.y=2;r.add(ring);
+ sign(g,4.4,37.6,'#a07650',-.35,1.9,1.4,1.1);B(g,1.6,1.1,.08,'#e3eef0',4.4+.02,1.25,37.7,-.35);
+ flowers(-7.6,45.3,22,1.8,['#e9a8b8','#f3d36b','#f2f0ea']);flowers(7.6,45.3,22,1.8,['#b9a6d6','#f2f0ea','#e9a8b8']);
+ flowers(-13.5,42.4,14,1.2,['#f3d36b','#e8935f']);
+}
+/* --- Accueil --- */
+{const g=Z('accueil');
+ house(g,-14,33,12,8,3.8,'#ecdcc0','#b9785a',{win:4,chim:true});
+ B(g,12.4,.2,3.4,'#c9a87f',-14,.45,38.6);
+ for(let i=0;i<4;i++)Cy(g,.14,.14,3,'#8a6847',-19.8+i*3.87,.45,40.1,6);
+ const pr=B(g,12.8,.25,3.8,'#b37c55',-14,3.6,38.5);pr.rotation.x=.08;
+ B(g,5.2,1,.16,CATS.accueil.c,-14,4.75,37.1);B(g,4,.3,.18,'#fdfcfa',-14,5.1,37.1);
+ B(g,.95,.95,.1,'#c79a4b',-11.1,1.95,37.08);
+ sign(g,-7.2,39.8,CATS.accueil.c,-.5,1.5,1.1,1);
+ bench(g,-18,40.8,0);
+ for(let i=0;i<5;i++)for(let k=0;k<2;k++)I('ico1','#a497c9',[-19+i*1.2,.4,42.2+k*.9,.45,.55,.45,rand()*6]);
+ bush(-21,37.5,1.2,true);bush(-7,36.3,1,true);
+}
+/* --- Parking --- */
+{const g=Z('parking');
+ B(g,23,.06,13,'#e4dac6',-38.5,0,36.5);
+ for(let i=0;i<7;i++)B(g,.12,.02,4.4,'#fdfcfa',-48.5+i*3.2,.06,40.2);
+ car(g,-46.9,40.2,'#6f8fa3');car(g,-43.7,40.2,'#e6dccb');car(g,-37.3,40.2,'#b9785a');car(g,-34.1,40.2,'#55524c');
+ const cc=grp(g,-44,31.6,Math.PI/2);B(cc,2.3,2.6,6.6,'#f4f2ee',0,.4,0);B(cc,2.3,.9,1.4,'#f4f2ee',0,2.6,-1.6);B(cc,2.32,.35,6.62,'#869176',0,1.3,0);B(cc,2.1,1,.1,'#cfe0ea',0,1.5,3.31);
+ [-31,-29.4].forEach(x=>{B(g,.7,1.5,.5,'#7d9a4c',x,0,31);B(g,.5,.4,.52,'#e3efd6',x,1,31);});
+ sign(g,-27.6,42.8,CATS.terrain.c,-.4,1.4,1.4,1.2);
+ const ch=grp(g,-26.2,34.8,.4);const a=new THREE.Mesh(new THREE.BoxGeometry(1,1.4,.08),mat('#b37c55'));a.position.set(0,.68,.22);a.rotation.x=-.28;ch.add(a);const b=a.clone();b.position.z=-.22;b.rotation.x=.28;ch.add(b);
+ hedge(-50,29.6,-27,29.6);hedge(-50.4,30,-50.4,43);
+ [-46,-40,-34].forEach(x=>tree(x,36.4,.75,'round'));
+}
+/* --- Snack --- */
+{const g=Z('snack');
+ house(g,16,32,10,7,3.4,'#f0e2c8','#869176',{win:3,shut:'#b37c55'});
+ B(g,10.6,.3,5.2,'#c9a87f',16,0,38.1);
+ for(let i=0;i<4;i++){Cy(g,.12,.12,3,'#8a6847',11.3+i*3.13,.3,40.5,6);}
+ for(let i=0;i<9;i++)B(g,.14,.14,5,'#8a6847',11.4+i*1.15,3.3,38.1);
+ B(g,10.6,.16,.16,'#8a6847',16,3.15,40.5);
+ for(let i=0;i<8;i++)I('ico1',pick(['#7fa65a','#93b86c']),[11.2+i*1.3,3.45,40.5+rr(-.3,.3),.6,.35,.5,rand()*6]);
+ [[12.8,37.4],[16.2,38.4],[19.4,37.4]].forEach(t=>{Cy(g,.6,.6,.08,'#f4efe4',t[0],.95,t[1],12);Cy(g,.08,.08,.65,'#5e574d',t[0],.3,t[1],5);Cy(g,.32,.32,.5,'#a07650',t[0]+.9,.3,t[1],8);Cy(g,.32,.32,.5,'#a07650',t[0]-.9,.3,t[1],8);});
+ B(g,4.4,.85,.16,CATS.resto.c,16,3.95,35.6);B(g,3.2,.26,.18,'#fdfcfa',16,4.25,35.6);
+ B(g,1.3,1.7,.1,'#3c4042',20.6,.45,35.6);B(g,1.5,.1,.12,'#a07650',20.6,2.15,35.6);
+ [[10.6,41.4],[21.4,41.4]].forEach(p=>{Cy(g,.5,.4,.6,'#c9a87f',p[0],0,p[1],8);bush(p[0],p[1],.7,true);});
+}
+/* --- Piscine --- */
+{const g=Z('piscine');
+ B(g,27,.3,19,'#dcc29b',30,0,14);
+ for(let i=0;i<15;i++)B(g,27,.02,.05,'#c9ad84',30,.3,5+i*1.25);
+ B(g,17.2,.36,10.2,'#f4efe4',27,0,13);
+ const water=B(g,16,.4,9,waterMat('#8fd3dc'),27,0,13);water.receiveShadow=true;
+ for(let i=0;i<3;i++)B(g,15.4,.02,.08,'#e9fbfd',27,.41,10.4+i*2.6);
+ Cy(g,3,3,.36,'#f4efe4',39.5,0,9.4,24);
+ const pat=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,.4,24),waterMat('#a6dde3'));pat.position.set(39.5,.2,9.4);g.add(pat);
+ Sp(g,.5,'#c4953a',39.5,.45,9.4,1);
+ B(g,1.7,3.8,1.7,'#c4953a',19.6,0,18.8);B(g,2,.25,2,'#a07650',19.6,3.8,18.8);
+ const sl=new THREE.Mesh(new THREE.BoxGeometry(1,.22,6.4),mat('#4b9aa2'));sl.position.set(19.6,2.05,14.8);sl.rotation.x=-.5;g.add(sl);
+ for(let i=0;i<5;i++)lounger(g,22.2+i*2.4,21.2,0);
+ parasol(g,34.4,21.4,'#efe6d2');parasol(g,24.8,21.6,'#869176');parasol(g,29.6,21.6,'#efe6d2');
+ house(g,39.5,19.6,6,4.4,2.8,'#efe5d4','#4b9aa2',{win:2,shut:'#4b9aa2'});
+ sign(g,17.6,6.2,CATS.aqua.c,.5,1.6,1.2,1.1);
+ hedge(16.8,4.3,43.6,4.3);hedge(43.6,4.3,43.6,23.6);hedge(16.8,23.6,43.6,23.6);hedge(16.8,13,16.8,23.6);
+ tree(42.4,24.8,.8,'birch');
+}
+/* --- Étang naturel (à gauche) --- */
+const LX=-55,LZ=19,LS=1.25;
+{const g=world;
+ const ps=new THREE.Shape();for(let i=0;i<56;i++){const t=i/56*Math.PI*2,r=6.4*LS*(1+.12*Math.sin(3*t+1)+.06*Math.cos(5*t));const x=Math.cos(t)*r*1.15,y=Math.sin(t)*r;if(i)ps.lineTo(x,y);else ps.moveTo(x,y);}
+ const rim=new THREE.Mesh(new THREE.ShapeGeometry(ps),pathMat('#e3d7bb'));rim.rotation.x=-Math.PI/2;rim.position.set(LX,.05,LZ);rim.scale.set(1.13,1.13,1);rim.receiveShadow=true;g.add(rim);
+ const pw=new THREE.Mesh(new THREE.ShapeGeometry(ps),waterMat('#9fd3d6'));pw.rotation.x=-Math.PI/2;pw.position.set(LX,.12,LZ);pw.receiveShadow=true;g.add(pw);
+ [[-3,3],[1.2,4.6],[4,-2.2],[-1.2,-3.8],[2.8,1.6],[-5.6,-.6],[-2.2,.4]].forEach((p,i)=>{const x=LX+p[0]*LS,z=LZ+p[1]*LS;Cy(g,.6,.6,.04,'#7fa65a',x,.13,z,10);if(i%2==0)Sp(g,.15,'#efc2cc',x+.2,.26,z,0);});
+ for(let i=0;i<46;i++){const t=rand()*6.28,r=7.2*LS*(1+.12*Math.sin(3*t+1));const dx=Math.cos(t)*r*1.15,dz=Math.sin(t)*r;if(dx>6&&Math.abs(dz+3)<2.5)continue;I('cone',pick(['#8ea65e','#7d9a4c','#9db46a']),[LX+dx,0,LZ+dz,.09,rr(1,1.9),.09,0]);}
+ for(let i=0;i<6;i++){Cy(g,.09,.09,.8,'#8a6847',-43.6-i*.95,-.2,LZ-3.9,5);Cy(g,.09,.09,.8,'#8a6847',-43.6-i*.95,-.2,LZ-2.1,5);}
+ for(let i=0;i<7;i++)B(g,.85,.14,2,'#b08a62',-43.4-i*.9,.36,LZ-3);
+ bench(g,-42,9.6,-.6);picnic(g,-39.5,24.6,.3);picnic(g,-35.6,27.4,-.2);
+ tree(-66,9,1.1,'bloom');tree(-64.4,29.6,1,'birch');tree(-62.4,7,.9,'birch');tree(-46.6,28.6,.95,'bloom');
+ [[-48.6,29],[-45.4,26.6],[-65.6,16]].forEach(p=>{I('rock','#c9bda8',[p[0],.1,p[1],.7,.45,.6,rand()*6]);});
+}
+const ducks=[];
+for(let i=0;i<3;i++){const d=new THREE.Group();const s=i?.8:1;Sp(d,.38*s,i===1?'#a0805e':'#fbf8f2',0,.3,0,1).scale.set(1,.75,1.35);Sp(d,.22*s,i===1?'#5f7a55':'#fbf8f2',0,.62,.42*s,1);B(d,.12,.08,.2,'#e2a14a',0,.56,.66*s);d.position.set(LX,.12,LZ);d.userData={a:i*2.1,r:2.6+i*.9,sp:.18+i*.05};world.add(d);ducks.push(d);}
+
+/* --- Aire de jeux --- */
+{const g=Z('jeux');
+ const sd=Cy(g,7,7,.08,'#ecdba2',-24,0,12,28);sd.scale.set(1.05,1,.75);
+ const sw=grp(g,-28,12);
+ [-2.4,2.4].forEach(x=>{[-.9,.9].forEach(z=>{const l=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,3.4,6),mat('#a07650'));l.position.set(x,1.6,z*.5);l.rotation.x=z>0?-.28:.28;sw.add(l);});});
+ const top=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,5,6),mat('#8a6847'));top.rotation.z=Math.PI/2;top.position.y=3.2;sw.add(top);
+ [-1.1,1.1].forEach((x,i)=>{B(sw,.03,2.2,.03,'#666',x-.3,1,0);B(sw,.03,2.2,.03,'#666',x+.3,1,0);B(sw,.8,.1,.35,i?'#c4953a':'#869176',x,.9,0);});
+ const tw=grp(g,-19.5,14);for(let i=0;i<4;i++)Cy(tw,.11,.11,2.4,'#8a6847',i%2?.9:-.9,0,i<2?.9:-.9,5);B(tw,2.1,.15,2.1,'#a07650',0,1.4,0);B(tw,2.1,.8,.08,'#a07650',0,1.55,-1);Co(tw,1.75,1.4,'#b37c55',0,2.4,0,4).rotation.y=Math.PI/4;
+ const sl=new THREE.Mesh(new THREE.BoxGeometry(1,.15,3.6),mat('#c4953a'));sl.position.set(-19.5,.85,10.6);sl.rotation.x=.4;g.add(sl);
+ [[-23,8.8,'#7d9a4c'],[-24.8,15.4,'#b37c55']].forEach(p=>{Cy(g,.08,.08,.5,'#555',p[0],0,p[1],5);const b=Sp(g,.5,p[2],p[0],.85,p[1],1);b.scale.set(.8,.9,1.3);});
+ B(g,3,.3,3,'#a07650',-24.6,0,10.2);B(g,2.6,.12,2.6,'#ecdba2',-24.6,.3,10.2);
+ sign(g,-31.2,6.4,CATS.loisirs.c,.3,1.6,1.2,1.1);
+ bench(g,-17.5,7.6,-.4);
+ const pt=grp(g,-15.6,16.8,-.6);B(pt,2.2,2.8,.15,CATS.loisirs.c,0,0,0);Sp(pt,.38,'#e3eef0',0,2.1,.05,1).scale.set(1,1,.3);
+}
+/* --- Pétanque --- */
+{const g0=Z('petanque');const g=grp(g0,96.5,17);
+ B(g,13,.12,5.4,'#e3cf9f',-46,0,14);
+ B(g,13.4,.32,.25,'#a07650',-46,0,11.2);B(g,13.4,.32,.25,'#a07650',-46,0,16.8);B(g,.25,.32,5.6,'#a07650',-52.7,0,14);B(g,.25,.32,5.6,'#a07650',-39.3,0,14);
+ [[-48,13.4],[-47.2,14.6],[-46.4,13.8],[-45,14.4]].forEach(b=>Sp(g,.24,'#a9a9ad',b[0],.36,b[1],1));Sp(g,.12,'#c4953a',-46.8,.26,14.2,1);
+ bench(g,-46,19,Math.PI);bench(g,-50,19,Math.PI);
+ const cp=grp(g,-41,18.6,-.3);Cy(cp,.08,.08,2.4,'#8a6847',-.8,0,0,6);Cy(cp,.08,.08,2.4,'#8a6847',.8,0,0,6);B(cp,1.9,1.1,.1,CATS.loisirs.c,0,1.1,0);B(cp,1.6,.18,.12,'#fdfcfa',0,1.75,0);B(cp,1.6,.18,.12,'#fdfcfa',0,1.35,0);
+ tree(52.5,38.6,1.15,'round');tree(45.5,39,1,'round');
+}
+/* --- Fléchage & plan --- */
+{const g=Z('fleche');
+ arrowPost(g,4.6,4.4,[CATS.accueil.c,CATS.aqua.c,CATS.sanit.c,CATS.resto.c,CATS.loisirs.c]);
+ const cv=document.createElement('canvas');cv.width=256;cv.height=170;const x=cv.getContext('2d');
+ x.fillStyle='#fdfcfa';x.fillRect(0,0,256,170);x.fillStyle='#d6e6c3';x.beginPath();x.ellipse(128,92,114,68,0,0,Math.PI*2);x.fill();
+ x.strokeStyle='#fdfcfa';x.lineWidth=7;x.lineCap='round';x.beginPath();x.moveTo(128,165);x.quadraticCurveTo(132,90,126,26);x.moveTo(18,94);x.quadraticCurveTo(128,82,238,92);x.moveTo(36,60);x.quadraticCurveTo(128,50,222,62);x.stroke();
+ x.fillStyle='#9fd3d6';x.fillRect(150,100,42,22);x.beginPath();x.ellipse(44,112,14,10,0,0,7);x.fill();
+ for(let i=0;i<34;i++){x.fillStyle=['#7fa65a','#98bd70','#6f9a52'][i%3];x.beginPath();x.arc(20+Math.random()*216,30+Math.random()*130,4+Math.random()*3,0,7);x.fill();}
+ [['#b37c55',100,128],['#5f86a0',100,104],['#4b9aa2',170,112],['#c4953a',82,104],['#a0605f',150,140],['#bf5545',165,100],['#7d9a4c',40,100]].forEach(d=>{x.fillStyle=d[0];x.beginPath();x.arc(d[1],d[2],5,0,7);x.fill();});
+ x.fillStyle='#bf5545';x.beginPath();x.arc(130,94,6,0,7);x.fill();x.strokeStyle='#fdfcfa';x.lineWidth=2;x.stroke();
+ x.fillStyle='#4e5644';x.font='italic 18px Georgia,serif';x.fillText('Plan du camping',10,22);
+ const pl=grp(g,-5.2,4.8,.15);Cy(pl,.17,.2,4,'#a07650',-2.1,0,0,8);Cy(pl,.17,.2,4,'#a07650',2.1,0,0,8);B(pl,4.5,3,.18,'#8a6847',0,.8,0);
+ const face=new THREE.Mesh(new THREE.PlaneGeometry(4.1,2.65),new THREE.MeshStandardMaterial({map:new THREE.CanvasTexture(cv),roughness:1}));face.position.set(0,2.3,.1);pl.add(face);
+ const rf=B(pl,5,.18,.9,'#869176',0,3.95,.1);
+ flowers(-5.2,6.4,16,1.4,['#f3d36b','#f2f0ea','#e9a8b8']);
+}
+/* --- Sanitaires (toiture végétalisée) --- */
+{const g=Z('sanitaires');
+ house(g,-12,-10,14,8,3.4,'#efe6d6','',{win:5,doorC:'#5f86a0',flat:true,shut:'#5f86a0'});
+ [-16,-8].forEach(x=>B(g,1,1,.1,CATS.sanit.c,x,2.5,-5.94));
+ B(g,.95,.95,.1,'#5f86a0',-12,3,-5.94);
+ B(g,5,.7,.14,CATS.sanit.c,-12,3.35,-5.92);B(g,3.6,.2,.16,'#fdfcfa',-12,3.6,-5.92);
+ const ch=grp(g,-9.2,-4.4,.5);const a=new THREE.Mesh(new THREE.BoxGeometry(.8,1.2,.06),mat('#e2bf55'));a.position.set(0,.58,.17);a.rotation.x=-.27;ch.add(a);const b=a.clone();b.position.z=-.17;b.rotation.x=.27;ch.add(b);
+ Cy(g,.8,.9,1.6,'#a07650',-19.8,0,-12,10);
+ bush(-19.8,-7,1.1,true);bush(-4.4,-13.6,1.1,false);
+}
+/* --- Laverie --- */
+{const g=Z('laverie');
+ house(g,10,-10,8,6,3.2,'#ede3d1','#7d8a8f',{win:2,shut:'#7d8a8f'});
+ B(g,3.6,.6,.14,CATS.sanit.c,10,3.85,-6.92);B(g,2.6,.18,.16,'#fdfcfa',10,4.05,-6.92);
+ const cl=grp(g,15.4,-11);Cy(cl,.07,.07,2.2,'#7a7266',-1.6,0,0,5);Cy(cl,.07,.07,2.2,'#7a7266',1.6,0,0,5);B(cl,3.2,.03,.03,'#bbb',0,2.1,0);
+ ['#f2f0ea','#b9cfe0','#e9a8b8'].forEach((c,i)=>B(cl,.6,.7,.04,c,-1+i*.9,1.4,0));
+ sign(g,14.8,-5.4,CATS.sanit.c,-.4,1.2,1,1);
+}
+/* --- Salle d'animation --- */
+{const g=Z('animation');
+ house(g,46,-8,14,9,4.4,'#e3cfae','#a5734d',{win:4,rh:4.2,shut:'#c4953a'});
+ B(g,10,.6,4,'#c9a87f',46,0,-1.5);
+ const sp=grp(g,46,-8);const ang=Math.atan(4.2/5.3);for(let i=0;i<3;i++){const pnl=B(sp,2.4,.08,1.6,'#3f4f60',-3+i*2.8,0,0);pnl.position.set(-3.3+i*2.8,7.4,2.4);pnl.rotation.x=ang;}
+ const vt=grp(g,40.4,.6);Cy(vt,.07,.07,1,'#5e574d',-1.3,0,-.05,5);Cy(vt,.07,.07,1,'#5e574d',1.3,0,-.05,5);B(vt,3.4,2.2,.12,'#c4953a',0,.9,0);B(vt,3,1.8,.14,'#e3eef0',0,1.1,0);B(vt,.8,1.1,.16,'#fdfcfa',-.6,1.3,0);B(vt,.9,.6,.16,'#b37c55',.6,1.6,0);
+ for(let i=0;i<9;i++)Sp(g,.18,['#bf5545','#c4953a','#5f86a0','#7d9a4c'][i%4],41+i*1.25,4.75-Math.sin(i/8*Math.PI)*.6,.4,0);
+ B(g,10.4,.04,.04,'#7a7266',46,4.7,.4);
+ picnic(g,52.6,1.8,.2);
+}
+/* --- Emplacements & locatifs --- */
+{const g=Z('emplacements');
+ const xs=[-56,-46,-24,-14,14,24,44,54];
+ xs.forEach((x,i)=>{
+   B(g,9.4,.04,7.6,'#c6dcaa',x,0,-30);
+   const ch=house(g,x,-31,7,4.4,2.6,pick(['#d9b98e','#dcc29b','#cfae86']),['#7a5a40','#869176','#9c6b4a','#6f7d5c'][i%4],{win:2,shut:['#869176','#b37c55','#5f86a0'][i%3]});
+   B(g,4,.35,2,'#c4a57d',x+1.2,0,-27.6);
+   for(let k=0;k<5;k++)B(g,.08,.7,.08,'#8a6847',x-.7+k*.95,.35,-26.65);B(g,4,.07,.08,'#8a6847',x+1.2,1.05,-26.65);
+   Cy(g,.4,.4,.06,'#f4efe4',x+1.7,1,-27.7,10);Cy(g,.05,.05,.65,'#5e574d',x+1.7,.35,-27.7,5);
+   B(g,.65,.42,.06,CATS.terrain.c,x-2.7,2.1,-28.77);
+   const b=grp(g,x-4,-26.6);B(b,.38,.95,.38,'#a07650',0,0,0);B(b,.42,.32,.42,CATS.terrain.c,0,.62,0);
+   if(i<xs.length-1&&xs[i+1]-x<12)hedge(x+4.9,-33.4,x+4.9,-26.8);
+ });
+ const tc=['#efe6d2','#d9c7a3','#b8c4a0','#e3c9b0','#c9d4c0'];
+ [-54,-44,-26,-16,-7,7,16,25].forEach((x,i)=>{
+   B(g,8,.04,6.6,'#c6dcaa',x,0,-46);
+   if(i%3===1){const c=grp(g,x,-46.4,.08);B(c,2.3,2.1,4.4,'#f6f3ec',0,.35,0);B(c,2.32,.32,4.42,pick(['#869176','#b37c55','#5f86a0']),0,1.2,0);B(c,2,.8,.1,'#cfe0ea',0,1.5,2.2);Cy(c,.32,.32,.3,'#4a4741',1.2,.15,0,8).rotation.z=Math.PI/2;
+     const aw=B(c,2.6,.08,4,'#efe6d2',2.4,2.2,0);aw.rotation.z=-.2;Cy(c,.05,.05,1.9,'#bbb',3.6,0,1.8,5);Cy(c,.05,.05,1.9,'#bbb',3.6,0,-1.8,5);}
+   else{const t=new THREE.Mesh(roofGeo(3.6,3,2.2),mat(tc[i%5]));t.position.set(x,0,-46);t.rotation.y=Math.PI/2+rr(-.25,.25);g.add(t);B(g,.9,1.4,.05,shade(tc[i%5],.7),x,0,-44.25);}
+   picnic(g,x+2.6,-43.6,Math.PI/2);
+   const b=grp(g,x-3.4,-42.6);B(b,.38,.95,.38,'#a07650',0,0,0);B(b,.42,.32,.42,CATS.terrain.c,0,.62,0);
+   if(i<7)hedge(x+4.2,-49,x+4.2,-43.2);
+ });
+}
+/* --- Tri sélectif & compost --- */
+{const g=Z('tri');
+ B(g,10,.1,6,'#ddd3c1',-50,0,-8);
+ ['#e2bf55','#7d9a4c','#5f86a0','#9a948a'].forEach((c,i)=>{B(g,1.6,1.7,1.4,c,-53.4+i*2,.1,-9);B(g,1.7,.15,1.5,shade(c,.85),-53.4+i*2,1.8,-9);B(g,.9,.5,.04,'#fdfcfa',-53.4+i*2,.9,-8.28);});
+ Cy(g,.1,.1,3,'#8a6847',-54.6,0,-10.2,5);Cy(g,.1,.1,3,'#8a6847',-45.4,0,-10.2,5);Cy(g,.1,.1,2.7,'#8a6847',-54.6,0,-7.6,5);Cy(g,.1,.1,2.7,'#8a6847',-45.4,0,-7.6,5);
+ const rf=B(g,10.4,.2,3.6,'#97b574',-50,2.85,-8.9);rf.rotation.x=.1;
+ for(let i=0;i<2;i++){const c=grp(g,-46.6+i*2,-5.6);for(let k=0;k<4;k++){B(c,1.6,.3,.12,'#a07650',0,k*.34,.75);B(c,1.6,.3,.12,'#a07650',0,k*.34,-.75);B(c,.12,.3,1.6,'#a07650',.75,k*.34,0);B(c,.12,.3,1.6,'#a07650',-.75,k*.34,0);}B(c,1.4,.9,1.4,'#7a5a3c',0,0,0);}
+ sign(g,-51.2,-4,CATS.eco.c,0,1.8,1.2,1.1);
+ for(let i=0;i<6;i++)I('ico1',pick(['#7fa65a','#93b86c']),[-56.5+i*.4,.4,-3.6+i*.1,.5,.45,.5,rand()*6]);
+}
+/* --- Sécurité --- */
+{const g=Z('secu');
+ const ring=new THREE.Mesh(new THREE.RingGeometry(3.6,4.3,40),pathMat('#efe7d6'));ring.rotation.x=-Math.PI/2;ring.position.set(26,.06,-12);g.add(ring);
+ sign(g,26,-12,'#4f8f5a',-.25,2,1.5,1.6);
+ const ext=grp(g,31.4,-8);Cy(ext,.06,.06,.6,'#555',0,0,0,5);B(ext,.7,1,.4,'#bf5545',0,.6,0);
+ const dae=grp(g,21,-15.2);Cy(dae,.06,.06,.6,'#555',0,0,0,5);B(dae,.8,1.1,.4,'#4f8f5a',0,.6,0);B(dae,.4,.4,.42,'#fdfcfa',0,1.0,0);
+ const cam=grp(g,29.8,-16.4);Cy(cam,.07,.07,3.2,'#7a7266',0,0,0,6);B(cam,.3,.3,.7,'#3b362e',0,3,.2);
+ flowers(26,-12,24,2.8,['#f2f0ea','#f3d36b']);
+}
+
+/* --- Gîte / résidence hôtelière (toit amovible) --- */
+const hotelRoof={k:0};
+{const g=Z('hotel');const w=14,d=10,h=3.4,b=.45;
+ const hg=grp(g,46,-46);
+ B(hg,w+.4,b,d+.4,'#d9d0c0',0,0,0);B(hg,w-.3,.06,d-.3,'#dcc29b',0,b,0);
+ for(let i=0;i<9;i++)B(hg,w-.3,.01,.04,'#c9ad84',0,b+.06,-4.4+i*1.1);
+ const wc='#ecdcc0';
+ B(hg,w,h,.3,wc,0,b,-d/2+.15);B(hg,.3,h,d,wc,-w/2+.15,b,0);B(hg,.3,h,d,wc,w/2-.15,b,0);
+ B(hg,1.7,h,.3,wc,-6.15,b,d/2-.15);B(hg,10.7,h,.3,wc,1.65,b,d/2-.15);B(hg,1.6,h-2.4,.3,wc,-4.5,b+2.4,d/2-.15);
+ [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(c=>B(hg,.32,h,.32,'#8a6847',c[0]*(w/2-.1),b,c[1]*(d/2-.1)));
+ [.25,4.75].forEach(x=>{[1,-1].forEach(sd=>{const zf=sd*(d/2+.03);B(hg,1.35,1.2,.1,'#f7f3ea',x,b+1.3,zf);B(hg,1.02,.88,.14,'#90a9b3',x,b+1.46,zf);B(hg,.42,1.15,.1,CATS.hotel.c,x-.92,b+1.32,zf);B(hg,.42,1.15,.1,CATS.hotel.c,x+.92,b+1.32,zf);});});
+ B(hg,1.4,.12,.1,'#8a6847',-4.5,b+2.35,d/2+.02);
+ const iw='#f7f2e8',ih=2.9;
+ B(hg,.15,ih,4.1,iw,-2,b,-2.95);B(hg,.15,ih,4.1,iw,-2,b,2.95);
+ B(hg,9,ih,.15,iw,2.5,b,-.9);B(hg,9,ih,.15,iw,2.5,b,.9);
+ B(hg,.15,ih,4.1,iw,2.5,b,-2.95);B(hg,.15,ih,4.1,iw,2.5,b,2.95);
+ const blank=['#869176','#b37c55','#5f86a0','#c4953a'];
+ [[.25,-1],[4.75,-1],[.25,1],[4.75,1]].forEach((r,i)=>{const sd=r[1];
+   B(hg,1.05,2.1,.08,'#8a5e3e',r[0],b,-sd*.8);
+   B(hg,.55,.32,.06,CATS.hotel.c,r[0],b+2.3,-sd*.79);
+   const bz=sd*-3.1;B(hg,1.9,.5,2.3,'#f6f3ec',r[0],b,sd*-3.2);B(hg,1.95,1.05,.15,'#a07650',r[0],b,sd*-4.6);
+   B(hg,1.92,.1,1.1,blank[i],r[0],b+.5,sd*-2.55);B(hg,.7,.18,.45,'#ffffff',r[0]-.45,b+.5,sd*-4.1);B(hg,.7,.18,.45,'#ffffff',r[0]+.45,b+.5,sd*-4.1);
+   B(hg,.5,.55,.5,'#8a6847',r[0]+1.45,b,sd*-4.3);B(hg,1.6,.02,1.1,shade(blank[i],1.15),r[0]-.2,b+.06,sd*-1.7);
+   B(hg,.05,.5,.4,'#e3eef0',r[0]+2.1,b+1.6,sd*-1.6);});
+ B(hg,2.6,1.1,.7,'#a07650',-4.6,b,-2.6);B(hg,2.8,.08,.9,'#e3d7bf',-4.6,b+1.1,-2.6);
+ B(hg,2,.55,.08,CATS.hotel.c,-4.6,b+1.9,-d/2+.34);B(hg,1.5,.16,.09,'#fdfcfa',-4.6,b+2,-d/2+.33);
+ B(hg,1.1,.85,.06,'#8a6847',-6.3,b+1.5,-d/2+.33);for(let k=0;k<6;k++)B(hg,.12,.2,.05,'#e2bf55',-6.6+(k%3)*.3,b+1.75-(k>2?.35:0),-d/2+.38);
+ B(hg,.9,.45,2,'#869176',-6.3,b,2.4);B(hg,.25,.5,2,'#7a8569',-6.65,b+.45,2.4);
+ Cy(hg,.3,.25,.5,'#c9a87f',-2.6,b,4.2,8);Sp(hg,.5,'#7fa65a',-2.6,b+.9,4.2,1);
+ B(hg,1.6,.03,1.1,CATS.hotel.c,-4.5,b+.06,4.1);
+ const hs=B(hg,1.3,.36,.06,CATS.hotel.c,-1.5,b+2.3,0);hs.rotation.y=Math.PI/2;
+ B(hg,.55,.42,.05,'#e3eef0',6.3,b+1.6,-.82);B(hg,.55,.42,.05,'#e3eef0',6.3,b+1.6,.82);
+ Cy(hg,.15,.15,.6,'#bf5545',6.6,b,-.6,8);
+ for(let k=0;k<5;k++)B(hg,.45,.5,.1,CATS.hotel.c,-1+k*.6,b+h-.75,d/2+.06);
+ B(hg,.7,.7,.08,'#c79a4b',-3.2,b+1.6,d/2+.06);
+ [[-7.7,3],[-7.7,-2]].forEach(p=>{B(hg,.6,.5,1.6,'#8a6847',p[0],0,p[1]);});
+ const rg=new THREE.Group();rg.position.y=b+h;hg.add(rg);
+ const rm=new THREE.MeshStandardMaterial({color:'#6f6a8c',roughness:.95,flatShading:true,transparent:true});
+ const rm2=new THREE.MeshStandardMaterial({color:'#57536f',roughness:.95,flatShading:true,transparent:true});
+ const roof=new THREE.Mesh(roofGeo(w+1.4,d+1.6,d*.42),rm);rg.add(roof);
+ const ridge=new THREE.Mesh(new THREE.BoxGeometry(w+1.5,.22,.45),rm2);ridge.position.y=d*.42-.02;rg.add(ridge);
+ const ch=new THREE.Mesh(new THREE.BoxGeometry(.8,2.6,.8),rm2);ch.position.set(4,1.1,-1.8);rg.add(ch);
+ hotelRoof.g=rg;hotelRoof.m=[rm,rm2];hotelRoof.y=b+h;
+ flowers(36.4,-44,12,1.2,['#e9a8b8','#f2f0ea','#b9a6d6']);flowers(55.6,-44,12,1.2,['#f3d36b','#f2f0ea']);
+ bush(37.6,-48.6,1,true);bush(54.6,-48.4,1,true);
+}
+/* --- Mini-ferme --- */
+const animals=[];
+{const g0=Z('ferme');const g=grp(g0,117,4);
+ B(g,10.4,.04,9,'#c4d89f',-60,0,13);
+ const fence=(x1,z1,x2,z2)=>{const L=Math.hypot(x2-x1,z2-z1),n=Math.max(1,Math.round(L/1.3)),a=Math.atan2(z2-z1,x2-x1);
+   for(let i=0;i<=n;i++){const t=i/n;Cy(g,.07,.08,1,'#a07650',x1+(x2-x1)*t,0,z1+(z2-z1)*t,5);}
+   [.45,.82].forEach(y=>{const r=B(g,L,.08,.06,'#a07650',(x1+x2)/2,y,(z1+z2)/2);r.rotation.y=-a;});};
+ fence(-65,8.5,-65,17.5);fence(-65,17.5,-55,17.5);fence(-55,17.5,-55,8.5);fence(-65,8.5,-61.5,8.5);fence(-58.5,8.5,-55,8.5);
+ house(g,-62.6,15,4.4,3.2,2.4,'#b06e52','#7a5a40',{win:1,door:false,shut:'#f3efe6'});
+ B(g,1.8,1.9,.12,'#8a5e3e',-62.6,.45,16.66);B(g,1.8,.1,.13,'#f3efe6',-62.6,1.35,16.68);
+ Cy(g,.13,.14,2.8,'#a07650',-61.6,0,8.5,6);Cy(g,.13,.14,2.8,'#a07650',-58.4,0,8.5,6);
+ B(g,3.8,.7,.14,CATS.sanit.c,-60,2.2,8.5);B(g,2.8,.22,.16,'#fdfcfa',-60,2.45,8.5);
+ [[-63.2,8.4],[-56.6,8.4]].forEach(p=>{B(g,.9,.65,.06,'#fdfcfa',p[0],.55,p[1]-.05);B(g,.7,.15,.07,CATS.sanit.c,p[0],.95,p[1]-.05);});
+ function beast(x,z,ry,body,head,s){const a=grp(g,x,z,ry);const bd=Sp(a,.55*s,body,0,.78*s,0,1);bd.scale.set(1,.82,1.32);Sp(a,.26*s,head,0,.98*s,.75*s,1);
+   [[-.25,.35],[.25,.35],[-.25,-.35],[.25,-.35]].forEach(l=>Cy(a,.06*s,.06*s,.5*s,head,l[0]*s,0,l[1]*s,5));a.userData.r=ry;animals.push(a);}
+ beast(-58,11.2,.5,'#f3efe6','#4a4741',1);beast(-56.8,13.6,2.1,'#f6f3ec','#4a4741',.95);beast(-59.6,10.4,-1,'#efe9dd','#4a4741',.85);
+ beast(-57.4,15.8,3.6,'#d9c7a3','#b59a76',.9);beast(-59.2,14.6,1.2,'#8a6a4d','#6e5440',.8);
+ [[-61,10.4,'#fbf8f2'],[-60.3,9.8,'#b5784f'],[-61.7,9.6,'#fbf8f2'],[-60.8,11.4,'#b5784f']].forEach(c=>{Sp(g,.2,c[2],c[0],.2,c[1],1);B(g,.06,.1,.12,'#bf5545',c[0],.36,c[1]+.05);});
+ [[-63.8,11],[-63.8,12.3]].forEach(p=>{const hb=Cy(g,.55,.55,1.1,'#e2c46f',p[0],0,p[1],12);hb.rotation.z=Math.PI/2;});
+ B(g,1.4,.4,.5,'#8a6847',-56.4,0,10.2);B(g,1.2,.05,.35,'#9fd3d6',-56.4,.4,10.2);
+ for(let i=0;i<14;i++)I('cone','#d9c27a',[rr(52.5,56),0,rr(13,14.2),.12,rr(.2,.35),.12,rand()*6],1);
+}
+/* --- Boutique & atelier déco --- */
+{const g=Z('atelier');
+ house(g,28,33.4,8,6,3.2,'#efe2cc','#8a6847',{win:2,shut:CATS.crea.c});
+ [[26,0],[30,1]].forEach((w,j)=>{for(let k=0;k<3;k++)B(g,.22,.22,.04,['#a5778a','#c4953a','#869176'][(k+j)%3],w[0]-.3+k*.3,1.78+(k%2)*.25,36.57);});
+ B(g,.08,.4,.08,'#5e574d',32.3,2.6,36.6);const bl=B(g,.1,.9,1.3,CATS.crea.c,32.3,1.65,37.3);B(g,.12,.3,.9,'#fdfcfa',32.3,2.05,37.3);
+ B(g,8,.25,3,'#c9a87f',28,0,38);
+ B(g,1.6,.04,1,CATS.crea.c,28,.25,37.1);
+ const ch=grp(g,25.2,38.6,.3);const a=new THREE.Mesh(new THREE.BoxGeometry(1,1.4,.08),mat(CATS.crea.c));a.position.set(0,.93,.22);a.rotation.x=-.28;ch.add(a);const bb=a.clone();bb.position.z=-.22;bb.rotation.x=.28;ch.add(bb);
+ [[29.8,.55],[31.6,-.55]].forEach(t=>{B(g,.1,.8,.8,'#8a6847',t[0],.25,38.6);});
+ B(g,2.6,.1,1.1,'#d6b48a',30.7,1.05,38.6);B(g,.9,.04,.6,CATS.crea.c,30.2,1.15,38.6);Cy(g,.18,.18,.3,'#5f86a0',31.6,1.15,38.5,10);
+ [[-1,1.2],[0,1.9],[1,1.3]].forEach((f,i)=>{B(g,.06,.9,1.1,'#a07650',32.04,f[1],33.4+f[0]*1.4);B(g,.08,.7,.9,['#e3eef0','#f1c9d1','#e2e6d8'][i],32.06,f[1]+.1,33.4+f[0]*1.4);});
+ flag(g,24,39.2,CATS.crea.c,4.4);
+ for(let k=0;k<3;k++){const p=Cy(g,.08,.08,2.6,'#9a948a',23.6,.1+k*.17,33.6+k*.2,6);p.rotation.x=Math.PI/2;}
+ bush(23.2,36.6,.9,true);bush(32.8,39.4,.8,true);
+}
+
+/* --- Végétation --- */
+const EX=[[38,54.5,-52.5,-39.5],[51,63,11,23],[43.5,58.5,26.5,37],[-67.5,-43,7.5,31],[-42,-33,22,29],[22,34,29.5,41],[-17,19,36,48.5],[-4.5,4.5,44,61],[-30,0,40,54],[-21.5,-6,28,44],[-51,-26,29,44],[9.5,23,28,42.5],[15,45.5,2.5,25.5],
+ [-32,-14,6,19],[-9,9,-1,8],[-20.5,-3,-15,-4],[4.5,17,-14.5,-4],[38,54,-14,2],[-56,-43,-12,-2],[20,32.5,-18,-6],[-61,59,-35,-25],[-59,30,-50.5,-41.5]];
+function free(x,z,m){if(!inIsland(x,z,.93))return false;if(EX.some(e=>x>e[0]-m&&x<e[1]+m&&z>e[2]-m&&z<e[3]+m))return false;for(const p of PATHPTS){const dx=p[0]-x,dz=p[1]-z,r=p[2]+m+.4;if(dx*dx+dz*dz<r*r)return false;}return true;}
+const placed=[];
+function tryTree(x,z,s,k){if(!free(x,z,1.5*s))return false;for(const p of placed){if((p[0]-x)**2+(p[1]-z)**2<(2.9*s)**2)return false;}placed.push([x,z]);tree(x,z,s,k);return true;}
+const kind=()=>{const r=rand();return r<.5?'round':r<.7?'pine':r<.82?'birch':r<.9?'bloom':'poplar';};
+for(let i=0;i<700;i++){const t=rand()*Math.PI*2,f=rr(.8,.93),p=edgePt(t);tryTree(p[0]*f,p[1]*f,rr(.9,1.35),kind());}
+for(let i=0;i<1400&&placed.length<300;i++){tryTree(rr(-70,70),rr(-58,58),rr(.75,1.25),kind());}
+for(let i=0;i<120;i++){const x=rr(-70,70),z=rr(-58,58);if(free(x,z,.8))bush(x,z,rr(.6,1.15),rand()<.35);}
+for(let i=0;i<46;i++){const x=rr(-66,66),z=rr(-54,54);if(free(x,z,1.2))flowers(x,z,rr(6,14)|0,rr(.8,1.6),pick([['#f3d36b','#f2f0ea'],['#e9a8b8','#f2f0ea'],['#b9a6d6','#f2f0ea'],['#e8935f','#f3d36b']]));}
+for(let i=0;i<2600;i++){const x=rr(-72,72),z=rr(-60,60);if(!inIsland(x,z,.98))continue;if(!free(x,z,.1)&&inIsland(x,z,.93))continue;const c=pick(['#9dbf78','#a9c983','#91b66d']);I('cone',c,[x,0,z,rr(.12,.2),rr(.35,.75),rr(.12,.2),rand()*6],1);}
+for(let i=0;i<40;i++){const x=rr(-66,66),z=rr(-54,54);if(free(x,z,.5))I('rock',pick(['#cdc2ae','#bfb39e']),[x,.1,z,rr(.35,.9),rr(.25,.55),rr(.3,.8),rand()*6]);}
+
+world.traverse(o=>{if(o.isMesh&&o.material&&!o.material.side){o.castShadow=true;o.receiveShadow=true;}});
+flushInst(world);
+
+/* --- Nuages (ombres seulement) & oiseaux --- */
+const clouds=[];
+const cloudMat=new THREE.MeshBasicMaterial({colorWrite:false,depthWrite:false});
+for(let i=0;i<5;i++){const c=new THREE.Group();const n=3+(rand()*3|0);for(let k=0;k<n;k++){const m=new THREE.Mesh(G.ico1,cloudMat);m.scale.set(rr(4,7),rr(2,3),rr(3.5,6));m.position.set(rr(-6,6),0,rr(-3,3));m.castShadow=true;c.add(m);}c.position.set(rr(-110,110),70,rr(-80,80));c.userData.v=rr(1.4,2.6);scene.add(c);clouds.push(c);}
+const birds=[];
+for(let i=0;i<4;i++){const b=new THREE.Group();const wl=new THREE.Group(),wr=new THREE.Group();B(wl,.9,.05,.35,'#5d5549',-.45,0,0);B(wr,.9,.05,.35,'#5d5549',.45,0,0);b.add(wl,wr);B(b,.18,.18,.6,'#5d5549',0,-.08,0);b.userData={wl:wl,wr:wr,a:i*1.6,r:38+i*7,h:24+i*2.5,sp:.12+i*.02};scene.add(b);birds.push(b);}
+
+/* --- Anneau de sélection --- */
+const selRing=new THREE.Mesh(new THREE.RingGeometry(5.4,6.1,56),new THREE.MeshBasicMaterial({color:'#fdfcfa',transparent:true,opacity:.95,depthWrite:false}));
+selRing.rotation.x=-Math.PI/2;selRing.visible=false;scene.add(selRing);
+
+/* ---------- Pastilles HTML ---------- */
+const labels=$('#labels');
+ZONES.forEach((z,i)=>{
+  const el=document.createElement('div');el.className='pin';el.style.setProperty('--c',CATS[z.cat].c);
+  el.innerHTML=`<span class="lbl">${z.n}</span><div class="dot">${iconSvg(z.icon)}<span class="num">${i+1}</span></div><div class="tail"></div>`;
+  el.addEventListener('click',e=>{e.stopPropagation();select(z.id);});
+  labels.appendChild(el);z.el=el;z.v=new THREE.Vector3(z.p[0],z.h+1,z.p[1]);
+});
+
+/* ---------- État ---------- */
+let current=null;
+const active=new Set(Object.keys(CATS));
+const selection=new Map();
+let fly=null;
+
+/* ---------- Filtres ---------- */
+const filters=$('#filters'), filters2=$('#filters2'), TOPK=[];
+function renderFilters(){
+  const all=active.size===Object.keys(CATS).length;
+  const chip=([k,c])=>`<button class="chip${active.has(k)?'':' off'}" data-k="${k}" style="--c:${c.c}" title="${c.n}"><i></i>${c.s||c.n}</button>`;
+  filters.innerHTML=`<button class="chip all${all?'':' off'}" data-all style="--c:#4e5644"><i></i>Tout</button>`+
+   Object.entries(CATS).filter(([k])=>!TOPK.includes(k)).map(chip).join('');
+  filters2.innerHTML=Object.entries(CATS).filter(([k])=>TOPK.includes(k)).map(chip).join('');
+}
+[filters,filters2].forEach(nav=>nav.addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  if(b.hasAttribute('data-all')){Object.keys(CATS).forEach(k=>active.add(k));}
+  else{const k=b.dataset.k;
+    if(active.size===Object.keys(CATS).length){active.clear();active.add(k);}
+    else if(active.has(k)){active.delete(k);if(!active.size)Object.keys(CATS).forEach(c=>active.add(c));}
+    else active.add(k);}
+  renderFilters();applyFilter();
+}));
+function zoneVisible(z){return active.has(z.cat)||z.items.some(it=>it[4]&&active.has(it[4]));}
+function applyFilter(){ZONES.forEach(z=>z.el.classList.toggle('dim',!zoneVisible(z)));if(!current)renderHome();else renderZone(current);}
+
+/* ---------- Légende ---------- */
+const panel=$('#panel');
+const total=ZONES.reduce((a,z)=>a+z.items.length,0);
+function renderHome(){
+  panel.innerHTML=`<div class="p-scroll">
+   <div class="cat" style="--c:#4e5644"><i></i>Plan interactif</div>
+   <h2>Toute la signalétique, <em>espace par espace</em></h2>
+   <p class="intro">Cliquez sur une pastille du plan ou dans la liste pour découvrir les supports adaptés à chaque bâtiment : enseignes, totems, panneaux, pictos, vitrines, adhésifs…</p>
+   <div class="sec">Légende du camping</div>
+   <ul class="zlist">${ZONES.map((z,i)=>`<li class="${zoneVisible(z)?'':'dim'}"><button data-z="${z.id}"><span class="zd" style="--c:${CATS[z.cat].c}">${iconSvg(z.icon)}</span><span class="zn">${i+1}. ${z.n}</span></button></li>`).join('')}</ul>
+  </div>`;
+}
+function renderZone(id){
+  const i=ZONES.findIndex(z=>z.id===id),z=ZONES[i],c=CATS[z.cat];
+  const items=z.items.map((it,k)=>({it,k})).filter(o=>active.has(o.it[4]||z.cat)||active.has(z.cat));
+  panel.innerHTML=`<div class="p-top"><button class="ghost" data-back>← Légende</button><div class="navs"><button class="ghost" data-prev title="Espace précédent">‹</button><button class="ghost" data-next title="Espace suivant">›</button></div></div>
+  <div class="p-scroll">
+   <div class="cat" style="--c:${c.c}"><i></i>${i+1} · ${c.n}</div>
+   <h2>${z.n}</h2>
+   <p class="intro">${z.intro}</p>
+   <div class="cards">${items.map(({it,k})=>{const cc=CATS[it[4]||z.cat].c;const key=z.id+'|'+k;const on=selection.has(key);
+     return `<div class="card" style="--c:${cc}"><div class="thumb">${sup(it[2],cc)}</div><div><h3>${it[0]}</h3><p>${it[1]}</p><div class="row"><span class="tag">${it[3]}</span><button class="add${on?' on':''}" data-add="${key}">${on?'✓ Retenu':'+ Retenir'}</button></div></div></div>`;}).join('')}</div>
+  </div>`;
+}
+panel.addEventListener('click',e=>{
+  const t=e.target.closest('button');if(!t)return;
+  if(t.dataset.z)select(t.dataset.z);
+  else if(t.hasAttribute('data-back'))goHome();
+  else if(t.hasAttribute('data-prev')||t.hasAttribute('data-next')){
+    const vis=ZONES.filter(zoneVisible);let i=vis.findIndex(z=>z.id===current);
+    i=(i+(t.hasAttribute('data-next')?1:-1)+vis.length)%vis.length;select(vis[i].id);
+  }else if(t.dataset.add){
+    const key=t.dataset.add;
+    if(selection.has(key))selection.delete(key);else selection.set(key,1);
+    const on=selection.has(key);t.classList.toggle('on',on);t.textContent=on?'✓ Retenu':'+ Retenir';updateCount();
+  }
+});
+
+/* ---------- Sélection ---------- */
+function updateCount(){$('#selCount').textContent=selection.size;}
+function selText(){
+  let out='Demande de devis : signalétique (Camping Plan Naturel)\n';
+  ZONES.forEach(z=>{const its=z.items.filter((_,k)=>selection.has(z.id+'|'+k));if(!its.length)return;out+='\n'+z.n+'\n';its.forEach(it=>out+='  - '+it[0]+' ('+it[3]+')\n');});
+  return out;
+}
+function renderModal(){
+  const body=$('#mBody');
+  if(!selection.size){body.innerHTML='<div class="empty">Aucun support retenu pour l\'instant.<br>Cliquez sur « + Retenir » dans la fiche d\'un espace.</div>';$('#mFoot').style.display='none';return;}
+  $('#mFoot').style.display='';
+  body.innerHTML=ZONES.map(z=>{const its=z.items.map((it,k)=>({it,k})).filter(o=>selection.has(z.id+'|'+o.k));if(!its.length)return'';
+   return `<div class="mgroup"><h4 style="--c:${CATS[z.cat].c}"><i></i>${z.n}</h4>${its.map(o=>`<div class="mitem"><span>${o.it[0]}</span><button data-rm="${z.id}|${o.k}" title="Retirer">×</button></div>`).join('')}</div>`;}).join('');
+  $('#mText').value=selText();$('#mDevis').href='devis#projet='+encodeURIComponent(selText());$('#mMsg').textContent='';
+}
+$('#bSel').onclick=()=>{renderModal();$('#modal').classList.add('open');};
+$('#mClose').onclick=()=>$('#modal').classList.remove('open');
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')$('#modal').classList.remove('open');const r=e.target.closest('[data-rm]');if(r){selection.delete(r.dataset.rm);updateCount();renderModal();if(current)renderZone(current);}});
+$('#mClear').onclick=()=>{selection.clear();updateCount();renderModal();if(current)renderZone(current);};
+$('#mCopy').onclick=async()=>{
+  const ta=$('#mText');
+  try{await navigator.clipboard.writeText(ta.value);$('#mMsg').textContent='Liste copiée ✓';}
+  catch(err){ta.focus();ta.select();$('#mMsg').textContent='Texte sélectionné : Ctrl/Cmd + C';}
+};
+
+/* ---------- Caméra ---------- */
+function flyTo(pos,target,dur){fly={p0:camera.position.clone(),t0:controls.target.clone(),p1:pos,t1:target,start:performance.now(),dur:dur||1400};controls.enabled=false;}
+function select(id){
+  const z=ZONES.find(z=>z.id===id);if(!z)return;
+  current=id;stopRotate();
+  ZONES.forEach(o=>o.el.classList.toggle('active',o.id===id));
+  const t=new THREE.Vector3(z.p[0],1.5,z.p[1]);
+  const dir=camera.position.clone().sub(controls.target);dir.y=0;
+  if(dir.lengthSq()<1)dir.set(1,0,1);dir.normalize();
+  flyTo(t.clone().add(dir.multiplyScalar(40)).add(new THREE.Vector3(0,33,0)),t);
+  selRing.position.set(z.p[0],.14,z.p[1]);selRing.visible=true;
+  renderZone(id);panel.querySelector('.p-scroll').scrollTop=0;
+}
+function goHome(){current=null;ZONES.forEach(o=>o.el.classList.remove('active'));selRing.visible=false;flyTo(HOME_POS.clone(),HOME_T.clone());renderHome();}
+$('#bHome').onclick=goHome;
+const bRot=$('#bRot');
+function stopRotate(){controls.autoRotate=false;bRot.classList.remove('on');}
+bRot.onclick=()=>{controls.autoRotate=!controls.autoRotate;bRot.classList.toggle('on',controls.autoRotate);};
+$('#bLbl').onclick=e=>{document.body.classList.toggle('show-labels');e.currentTarget.classList.toggle('on');};
+
+/* ---------- Clic dans la scène ---------- */
+const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();
+const pickables=Object.values(zoneGroups);
+let down=null,hoverZone=null;
+function pickZone(ev){
+  const r=renderer.domElement.getBoundingClientRect();
+  mouse.set((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);
+  ray.setFromCamera(mouse,camera);
+  const hit=ray.intersectObjects(pickables,true)[0];
+  if(!hit)return null;let o=hit.object;while(o&&!o.userData.zone)o=o.parent;
+  const id=o&&o.userData.zone;const z=ZONES.find(z=>z.id===id);
+  return z&&zoneVisible(z)?id:null;
+}
+renderer.domElement.addEventListener('pointerdown',e=>{down=[e.clientX,e.clientY];stopRotate();hideHint();});
+renderer.domElement.addEventListener('pointerup',e=>{if(!down)return;const moved=Math.hypot(e.clientX-down[0],e.clientY-down[1]);down=null;if(moved<5){const id=pickZone(e);if(id)select(id);}});
+renderer.domElement.addEventListener('pointermove',e=>{
+  if(e.buttons)return;const id=pickZone(e);
+  if(id!==hoverZone){ZONES.forEach(z=>z.el.querySelector('.lbl').style.opacity=z.id===id?1:'');hoverZone=id;renderer.domElement.style.cursor=id?'pointer':'grab';}
+});
+renderer.domElement.addEventListener('wheel',()=>{stopRotate();hideHint();},{passive:true});
+setTimeout(hideHint,10000);
+function hideHint(){const h=$('#hint');if(h)h.style.opacity=0;}
+
+/* ---------- Redimensionnement ---------- */
+function resize(){
+  const w=window.innerWidth,h=window.innerHeight;
+  renderer.setSize(w,h);camera.aspect=w/h;
+  if(w<=860)camera.setViewOffset(w,h,0,Math.round(h*.44/2)-60,w,h);
+  else camera.setViewOffset(w,h,0,Math.round(Math.min(Math.max(h*.34,230),360)/2)-20,w,h);
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize',resize);resize();
+
+/* ---------- Boucle ---------- */
+const tmp=new THREE.Vector3();
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+let last=performance.now(),first=true;
+function loop(now){
+  requestAnimationFrame(loop);
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(fly){
+    const k=Math.min(1,(now-fly.start)/fly.dur),e=ease(k);
+    camera.position.lerpVectors(fly.p0,fly.p1,e);controls.target.lerpVectors(fly.t0,fly.t1,e);camera.lookAt(controls.target);
+    if(k>=1){fly=null;controls.enabled=true;}
+  }else{
+    controls.update();
+    controls.target.x=Math.max(-72,Math.min(72,controls.target.x));controls.target.z=Math.max(-58,Math.min(58,controls.target.z));controls.target.y=Math.max(0,Math.min(6,controls.target.y));
+  }
+  const tt=now/1000;
+  flags.forEach((f,i)=>f.rotation.y=Math.sin(tt*1.6+i)*.22);
+  {const tg=current==='hotel'?1:0;hotelRoof.k+=(tg-hotelRoof.k)*Math.min(1,dt*3.5);const k=hotelRoof.k;hotelRoof.g.position.y=hotelRoof.y+k*9;hotelRoof.m.forEach(m=>m.opacity=1-k);hotelRoof.g.visible=k<.97;}
+  animals.forEach((a,i)=>{a.rotation.y=a.userData.r+Math.sin(tt*.35+i*1.7)*.5;});
+  ducks.forEach(d=>{const u=d.userData;u.a+=dt*u.sp;d.position.set(LX+Math.cos(u.a)*u.r*1.6,.12+Math.sin(tt*2+u.r)*.03,LZ+Math.sin(u.a)*u.r*1.3);d.rotation.y=-u.a;});
+  birds.forEach(b=>{const u=b.userData;u.a+=dt*u.sp;b.position.set(Math.cos(u.a)*u.r,u.h+Math.sin(tt+u.r)*1.5,Math.sin(u.a)*u.r*.8);b.rotation.y=-u.a;const f=Math.sin(tt*9+u.r)*.5;u.wl.rotation.z=f;u.wr.rotation.z=-f;});
+  clouds.forEach(c=>{c.position.x+=dt*c.userData.v;if(c.position.x>130)c.position.x=-130;});
+  if(selRing.visible){const s=1+Math.sin(tt*3)*.05;selRing.scale.set(s,s,s);}
+  renderer.render(scene,camera);
+  if(first){first=false;$('#loading').style.opacity=0;}
+  const w=window.innerWidth,h=window.innerHeight;
+  ZONES.forEach(z=>{
+    tmp.copy(z.v).project(camera);
+    const x=(tmp.x*.5+.5)*w,y=(-tmp.y*.5+.5)*h;
+    const vis=tmp.z<1&&x>-60&&x<w+60&&y>-60&&y<h+60;
+    z.el.style.display=vis?'':'none';
+    if(vis){z.el.style.transform=`translate(${x}px,${y}px) translate(-50%,-100%)`;z.el.style.zIndex=z.el.classList.contains('active')?999:Math.round((1-tmp.z)*1e5);}
+  });
+}
+renderFilters();renderHome();updateCount();
+if(location.hash.length>1){const hid=decodeURIComponent(location.hash.slice(1));if(ZONES.some(z=>z.id===hid))setTimeout(()=>select(hid),400);}
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

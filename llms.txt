@@ -1,18 +1,18 @@
 # Plan Naturel
 
-> Plan Naturel crée des plans de camping illustrés sur mesure (2D et 3D) pour campings, villages vacances, aires de camping-car et parcs de loisirs, partout en France, à distance.
+> Plan Naturel crée des plans de camping illustrés sur mesure (2D et 3D) pour campings de 1 à 5 étoiles, glampings, villages vacances, parcs résidentiels de loisirs, aires de camping-car, aires naturelles et campings municipaux, partout en France, à distance. Plans crayon ou aquarelle sur demande.
 
 ## Offre
 - Plan 2D de camping sur mesure : tracé des allées, emplacements numérotés, bâtiments, services, légende classique bilingue (FR/EN), 2 tours de corrections.
 - Légende typographique (en option) : typographie et couleurs de la charte du camping, pictogrammes dessinés, code couleur par catégorie d'hébergement (nom, surface, nombre de chambres).
-- Plan d'évacuation, panneaux et signalétique, plan 3D illustré, plan interactif web, QR code d'accueil, mise à jour ponctuelle, abonnement tout compris (49 €/mois), flyers et livrets d'accueil, création de site internet de camping. Options chiffrées sur devis.
+- Plan d'évacuation, panneaux et signalétique, plan 3D illustré, plan interactif web, QR code d'accueil, mise à jour ponctuelle, abonnement tout compris (de 19 à 69 €/mois selon la taille du camping), flyers et livrets d'accueil, création de site internet de camping. Options chiffrées sur devis.
 
 ## Options
-- Chiffrées sur devis selon le projet. Abonnement tout compris : 49 €/mois, engagement d'un an.
+- Chiffrées sur devis selon le projet. Abonnement tout compris : de 19 à 69 €/mois selon la taille du camping, engagement d'un an.
 - Détail : https://plannaturel.fr/options-plan-camping
 
 ## Tarifs (TVA non applicable, art. 293 B du CGI)
-- 200 € tout compris jusqu'à 49 emplacements (forfait 150 € + 50 € d'ouverture de dossier).
+- 200 € tout compris jusqu'à 49 emplacements.
 - Tranches : +3 €/emplacement de 50 à 100, +2 € de 101 à 200, +1 € de 201 à 600, +0,50 € au-delà de 600.
 - Exemple : 150 emplacements = 453 €.
 
@@ -25,8 +25,20 @@
 - Camping Bois Soleil (231 emplacements) : https://plannaturel.fr/plan-camping-bois-soleil
 - Camping Les Varennes (139 emplacements, 11 catégories) : https://plannaturel.fr/plan-camping-les-varennes
 - Camping Le Grand Pré : https://plannaturel.fr/plan-camping-le-grand-pre
+- Camping Moto Dordogne (cabanes, tentes, gîte, légende trilingue) : https://plannaturel.fr/plan-camping-moto-dordogne
+- Toutes les réalisations et les avant-après : https://plannaturel.fr/realisations
+
+## Signalétique
+- Panneaux dessinés à partir du plan, fabriqués en France (Made in France), livrés partout en France, en quatre langues (FR, EN, DE, NL) : https://plannaturel.fr/panneaux-signaletique-camping
+
+## Blog
+- Ouverture de saison : la check-list affichage et signalétique : https://plannaturel.fr/checklist-ouverture-saison-camping
+- Classement d'un camping en étoiles : comment s'y préparer : https://plannaturel.fr/classement-camping-etoiles-guide
+- Plan papier, plan interactif ou QR code : que choisir ? : https://plannaturel.fr/plan-papier-interactif-qr-code-camping
+- 7 signes qu'il est temps de refaire le plan de votre camping : https://plannaturel.fr/refaire-plan-camping-signes
+- Glamping et hébergements insolites : les mettre en valeur sur le plan : https://plannaturel.fr/glamping-hebergements-insolites-plan
 
 ## Contact
-- Email : plannaturel@gmail.com
+- Email : contact@plannaturel.fr
 - Téléphone : +33 6 81 89 67 52
 - Site : https://plannaturel.fr/

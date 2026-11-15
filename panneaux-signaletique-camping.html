@@ -5,20 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/styles.css">
 <style>[hidden]{display:none !important}[data-hover]{transition:box-shadow .2s ease, transform .2s ease}[data-hover]:hover{box-shadow:var(--shadow-md) !important;transform:translateY(-3px) !important}</style>
+
   <link rel="canonical" href="https://plannaturel.fr/panneaux-signaletique-camping">
   <meta property="og:url" content="https://plannaturel.fr/panneaux-signaletique-camping">
-  <meta property="og:image" content="https://plannaturel.fr/assets/plan-camping-bois-soleil-categories-hebergements.png">
+  <meta property="og:image" content="https://plannaturel.fr/assets/plan-camping-bois-soleil-detoure.webp">
   <meta property="og:image:width" content="1296">
   <meta property="og:image:height" content="958">
   <meta name="twitter:card" content="summary_large_image">
   <title>Panneaux et signalétique pour camping | Plan Naturel</title>
-  <meta name="description" content="Panneaux de camping dans le style de votre plan : entrée, directions, numéros d'emplacements, aire de jeux, piscine, animations, tri des déchets. Sur devis, selon le format et le nombre.">
+  <meta name="description" content="Signalétique de camping dans le style de votre plan : entrée, tarifs, directions, emplacements, sanitaires, piscine, sécurité, tri. Made in France, livrée partout en France.">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <meta name="theme-color" content="#faf7f2">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Panneaux et signalétique pour camping">
-  <meta property="og:description" content="Toute la signalétique de votre camping, dans le même style que votre plan.">
+  <meta property="og:description" content="Toute la signalétique de votre camping, dans le même style que votre plan, Made in France et livrée.">
   <link rel="stylesheet" href="assets/fonts/fonts.css">
   <style>
     :root {
@@ -49,10 +50,36 @@
     "name": "Panneaux et signalétique pour camping",
     "serviceType": "Conception de panneaux de signalétique",
     "areaServed": "FR",
-    "provider": { "@type": "ProfessionalService", "name": "Plan Naturel", "email": "plannaturel@gmail.com", "telephone": "+33681896752", "url": "https://plannaturel.fr/" }
+    "provider": { "@type": "ProfessionalService", "name": "Plan Naturel", "email": "contact@plannaturel.fr", "telephone": "+33681896752", "url": "https://plannaturel.fr/" }
   }
   </script>
+  <style>
+    @media (max-width: 860px) { [data-embed3d] { height: 86vh !important; min-height: 560px !important; } }
+    [data-drop] { position: relative; }
+    [data-drop] > button { font: inherit; font-weight: 600; font-size: 14px; color: var(--color-text); background: none; border: 0; padding: 10px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+    [data-drop-panel] { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-30%); padding-top: 12px; z-index: 60; }
+    [data-drop]:hover [data-drop-panel], [data-drop]:focus-within [data-drop-panel] { display: block; }
+    [data-drop-inner] { background: var(--color-bg); border: 1px solid var(--color-divider); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 22px 26px; display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 18px 28px; width: min(900px, 90vw); }
+    [data-drop-inner] a { display: block; padding: 4px 0; font-weight: 500 !important; font-size: 14px; color: var(--color-neutral-800) !important; text-decoration: none; white-space: normal !important; }
+    [data-drop-inner] a:hover { color: var(--color-accent-700) !important; }
+    [data-drop-inner] a[data-head] { font-weight: 700 !important; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text) !important; margin-bottom: 4px; }
+    [data-cta-fixed] { display: none !important; }
+    @media (max-width: 1240px) { [data-cta-fixed] { display: flex !important; } body { padding-bottom: 84px; } }
+    [data-menu-mobile], [data-tel-mobile] { display: none; }
+    [data-menu-mobile] summary { list-style: none; }
+    [data-menu-mobile] summary::-webkit-details-marker { display: none; }
+    [data-menu-mobile] summary svg { transform: none !important; }
+    [data-nav-desktop] a { white-space: nowrap; }
+    [data-nav-desktop] a[aria-current="page"], [data-menu-panel] a[aria-current="page"] { color: var(--color-accent-700) !important; }
+    @media (max-width: 1240px) {
+      [data-nav-desktop], [data-cta-desktop], [data-tel-desktop] { display: none !important; }
+      [data-menu-mobile] { display: block !important; }
+      [data-tel-mobile] { display: flex !important; }
+      [data-header-inner] { padding: 10px 16px !important; gap: 8px !important; flex-wrap: nowrap !important; }
+    }
+  </style>
 
+<style>[data-fill]>*{flex:1 1 var(--min);min-width:0;box-sizing:border-box}</style>
 </head>
 <body>
 
@@ -60,204 +87,280 @@
 <div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); overflow-x: clip;">
 
   <header style="position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--color-bg) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-divider);">
-    <div style="max-width: 1060px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: nowrap; margin-right: auto; min-width: 0;">
-        <a href="./" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text);">
+    <div data-header-inner="" style="max-width: 1160px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 22px;">
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: nowrap; margin-right: auto; flex-shrink: 0;">
+        <a href="./" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text); min-height: 44px;">
           <img src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 30px; width: auto;">
           <span style="font-family: var(--font-heading); font-size: 19px; letter-spacing: -0.02em; white-space: nowrap;">Plan Naturel</span>
         </a>
-        <a href="tel:+33681896752" style="font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; padding-left: 16px; border-left: 1px solid var(--color-divider);">06 81 89 67 52</a>
+        <a data-tel-desktop="" href="tel:+33681896752" style="font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; padding-left: 16px; border-left: 1px solid var(--color-divider);">06 81 89 67 52</a>
       </div>
-      <a href="./#prestations" style="font-size: 14px; font-weight: 600; text-decoration: none; color: var(--color-text); white-space: nowrap;">← Toutes les prestations</a>
-      <a class="btn btn-primary" href="./#devis" style="border-radius: 999px; white-space: nowrap;">Demander un devis</a>
+      <nav data-nav-desktop="" aria-label="Menu principal" style="display: flex; gap: 16px; align-items: center; font-size: 14px; font-weight: 600;">
+        <div data-drop="">
+          <button type="button" aria-haspopup="true">Prestations <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <div data-drop-panel="">
+          <div data-drop-inner="">
+            <div>
+              <a data-head="" href="plan-camping">Plans de camping</a>
+              <a href="plan-2d-camping">Plan 2D et légendes</a>
+              <a href="plan-3d-camping">Plan 3D illustré</a>
+              <a href="plan-aquarelle">Plan crayon ou aquarelle</a>
+              <a href="refonte-plan-camping">Refonte de plan existant</a>
+              <a href="plan-evacuation-camping">Plan d'évacuation</a>
+              <a href="formats-plan-camping">Formats et livraison</a>
+            </div>
+            <div>
+              <a data-head="" href="panneaux-signaletique-camping">Signalétique</a>
+              <a href="signaletique-terrain-camping">Terrain et fléchage</a>
+              <a href="signaletique-accueil-camping">Réception</a>
+              <a href="signaletique-sanitaires-camping">Sanitaires, laverie et animaux</a>
+              <a href="signaletique-piscine-camping">Espace aquatique</a>
+              <a href="signaletique-jeux-animations-camping">Jeux et animations</a>
+              <a href="signaletique-restauration-camping">Restauration et bar</a>
+              <a href="signaletique-tri-selectif-camping">Éco-gestes et tri</a>
+              <a href="plan-evacuation-camping#signaletique-securite">Sécurité</a>
+              <a href="signaletique-hotel-gite-camping">Hôtels et gîtes</a>
+              <a href="signaletique-decoration-camping">Création et décoration</a>
+            </div>
+            <div>
+              <a data-head="" href="supports-imprimes-camping">Imprimés</a>
+              <a href="flyer-brochure-camping">Flyers et brochures</a>
+              <a href="livret-accueil-camping">Livret d'accueil</a>
+              <a href="bloc-plan-camping">Blocs de plans à distribuer</a>
+              <a href="papeterie-camping">Bureautique</a>
+              <a href="documents-quotidien-camping">Documents du quotidien</a>
+            </div>
+            <div>
+              <a data-head="" href="web-camping">Web</a>
+              <a href="creation-site-internet-camping">Création et refonte de site</a>
+              <a href="plan-interactif-camping">Plan interactif</a>
+              <a href="qr-code-camping">QR codes d'accueil</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <a href="tarifs" style="text-decoration: none; color: var(--color-text); white-space: nowrap;">Tarifs</a>
+        <a href="obligations-affichage-camping" style="text-decoration: none; color: var(--color-text); white-space: nowrap;">Obligations d'affichage</a>
+        <a href="a-propos" style="text-decoration: none; color: var(--color-text); white-space: nowrap;">À propos</a>
+      </nav>
+      <a class="btn btn-primary" data-cta-desktop="" href="devis" style="border-radius: 999px; white-space: nowrap;">Demander un devis</a>
+      <a data-tel-mobile="" href="tel:+33681896752" aria-label="Appeler le 06 81 89 67 52" style="width: 44px; height: 44px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 999px; background: var(--color-accent-700); color: #fff; text-decoration: none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
+      </a>
+      <details data-menu-mobile="">
+        <summary aria-label="Menu" style="width: 44px; height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: 999px; cursor: pointer; color: var(--color-text);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </summary>
+        <div data-menu-panel="" style="position: absolute; left: 0; right: 0; top: 100%; background: var(--color-bg); border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 4px 16px 20px; display: flex; flex-direction: column; max-height: calc(100dvh - 65px); overflow-y: auto; overscroll-behavior: contain;">
+          <div style="padding: 14px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-neutral-700);">Prestations</div>
+          <a href="plan-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Plans de camping</a>
+          <a href="panneaux-signaletique-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Signalétique</a>
+          <a href="supports-imprimes-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Imprimés</a>
+          <a href="web-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Web</a>
+          <a href="tarifs" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Tarifs</a>
+          <a href="obligations-affichage-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Obligations d'affichage</a>
+          <a href="a-propos" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">À propos</a>
+          <a class="btn btn-primary" href="devis" style="border-radius: 999px; margin-top: 14px; padding: 13px; text-align: center; justify-content: center;">Demander un devis</a>
+          <a href="tel:+33681896752" style="margin-top: 8px; min-height: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600;">06 81 89 67 52</a>
+        </div>
+      </details>
     </div>
   </header>
+  <a class="btn btn-primary" data-cta-fixed="" href="devis" style="position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 30; justify-content: center; border-radius: 999px; padding: 14px; font-size: 15px; box-shadow: var(--shadow-lg);">Demander un devis gratuit</a>
 
-  <article style="max-width: 1060px; margin: 0 auto; padding: 56px 24px 0;">
+  <article style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 0;">
     <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 8px; color: var(--color-accent-700); margin-bottom: 10px;">Prestation</p>
-    <h1 style="font-size: clamp(34px, 4.6vw, 54px); margin: 0 0 18px; max-width: 22ch; text-wrap: pretty;">Panneaux et signalétique pour camping</h1>
-    <p style="font-size: 18px; max-width: 58ch; color: var(--color-neutral-800); margin: 0;">Nous dessinons vos panneaux aux couleurs et dans l'univers de votre camping : votre logo, votre charte, et le même style que votre plan. Mêmes couleurs, mêmes pictogrammes, même numérotation : le vacancier retrouve sur le terrain ce qu'il a vu sur le plan.</p>
+    <h1 style="font-size: clamp(34px, 4.6vw, 54px); margin: 0 0 18px; text-wrap: pretty;">Panneaux et signalétique pour camping</h1>
+    <p style="font-size: 18px; color: var(--color-neutral-800); margin: 0;">Nous dessinons vos panneaux à partir de votre plan : votre logo, votre charte, les mêmes couleurs, les mêmes pictogrammes et la même numérotation. Puis nous les faisons fabriquer en France (Made in France) et vous les livrons, prêts à poser.</p>
     <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
-      <a class="btn btn-primary" href="./#devis" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">Demander un devis</a>
+      <a class="btn btn-primary" href="devis" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">Demander un devis</a>
+      <a class="btn btn-secondary" href="#familles" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">Voir les familles</a>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--color-accent-2-700);">
+      <span>✓ Dans le style de votre plan</span><span>✓ Made in France</span><span>✓ Livré partout en France</span><span>✓ En quatre langues</span>
     </div>
 
-    <p style="font-size: 14px; color: var(--color-neutral-700); margin: 40px 0 0; max-width: 72ch;">Les couleurs des modèles ci-dessous sont données à titre d'exemple : chaque panneau est adapté à l'identité de votre camping.</p>
-    <section style="margin-top: 56px;">
-      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Orientation</h2>
-      <p style="color: var(--color-neutral-800); margin: 0 0 22px; max-width: 60ch;">Pour que chacun trouve son chemin sans passer par l'accueil.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 18px;">
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 210px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #2f4038; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Bienvenue</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="position: relative; height: 56px; background: #dfe8cf; border-radius: 4px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; padding: 5px;"><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="position: absolute; left: 30%; top: 44%; width: 9px; height: 9px; border-radius: 50%; background: #b3261e; box-shadow: 0 0 0 3px rgba(179,38,30,0.25);"></span></div><div style="display: flex; align-items: center; gap: 5px; white-space: nowrap;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #b3261e; flex-shrink: 0;"></span><strong>Vous êtes ici</strong></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
+    <section style="margin-top: 48px;">
+    <h2 style="font-size: clamp(24px, 2.8vw, 34px); margin: 0 0 6px;">Le plan 3D de la signalétique</h2>
+    <p style="color: var(--color-neutral-800); margin: 0 0 22px;">Tournez autour du camping, cliquez sur une pastille pour découvrir les supports de chaque espace, puis retenez ceux qui vous intéressent pour votre devis.</p>
+    <div data-embed3d="" style="height: 1100px; min-height: 560px; border: 1px solid var(--color-divider); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-surface); box-shadow: var(--shadow-sm);">
+      <iframe src="plan-3d-signaletique.html" title="Plan 3D interactif de la signalétique d'un camping" loading="lazy" style="display: block; width: 100%; height: 100%; border: 0;"></iframe>
+    </div>
+    <div style="display: flex; gap: 10px 26px; flex-wrap: wrap; margin-top: 16px; font-size: 14px; font-weight: 600;">
+      <a href="plan-3d-signaletique.html" target="_blank" rel="noopener" style="white-space: nowrap;">Ouvrir le plan 3D en plein écran →</a>
+      <a href="assets/brochure-plan-naturel.pdf" target="_blank" rel="noopener" style="white-space: nowrap;">Catalogue signalétique complet (PDF) →</a>
+    </div>
+  </section>
+
+  <section id="accompagnement" style="margin-top: 56px; background: var(--color-accent-2-100); border-radius: var(--radius-lg); padding: 36px; scroll-margin-top: 90px;">
+      <h2 style="font-size: clamp(24px, 2.6vw, 32px); margin: 0 0 6px;">Un accompagnement de A à Z</h2>
+      <p style="color: var(--color-neutral-800); margin: 0 0 28px;">Tout part de votre plan : il fournit à chaque panneau ses couleurs, ses pictogrammes et ses numéros. Le vacancier retrouve sur le terrain exactement ce qu'il a vu en arrivant.</p>
+      <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 32px; --min: 210px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; color: var(--color-accent-700);">01</span>
+          <strong style="font-size: 17px;">Conseil</strong>
+          <p style="font-size: 15px; color: var(--color-neutral-800); margin: 0;">Nous parcourons le camping avec vous et listons les supports utiles, espace par espace.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; color: var(--color-accent-700);">02</span>
+          <strong style="font-size: 17px;">Studio graphique</strong>
+          <p style="font-size: 15px; color: var(--color-neutral-800); margin: 0;">Chaque panneau est mis en page, puis montré sur une photo de votre camping : vous le validez en situation, avant toute fabrication.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; color: var(--color-accent-700);">03</span>
+          <strong style="font-size: 17px;">Atelier</strong>
+          <p style="font-size: 15px; color: var(--color-neutral-800); margin: 0;">Fabrication et contrôle de chaque support, dans le matériau adapté à son emplacement.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; color: var(--color-accent-700);">04</span>
+          <strong style="font-size: 17px;">Suivi</strong>
+          <p style="font-size: 15px; color: var(--color-neutral-800); margin: 0;">Devis détaillé, livraison partout en France et accessoires de pose fournis.</p>
+        </div>
+      </div>
+      <a href="tarifs" style="display: inline-block; margin-top: 26px; font-weight: 600;">Voir les tarifs →</a>
+    </section>
+
+  <section id="familles" style="margin-top: 64px; scroll-margin-top: 90px;">
+    <h2 style="font-size: clamp(24px, 2.6vw, 32px); margin: 0 0 6px;">La signalétique par famille</h2>
+    <p style="color: var(--color-neutral-800); margin: 0 0 22px;">Les mêmes familles que les filtres du plan 3D, de l'entrée à la piscine. Le panonceau de classement, le règlement intérieur et les consignes de sécurité en zone à risque suivent des modèles officiels : nous les mettons en page à l'identique, sans les redessiner.</p>
+    <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 16px; --min: 300px;">
+      <a href="signaletique-terrain-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #5f6d4c; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #5f6d4c; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Terrain et fléchage</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Entrée, parking, fléchage et emplacements : la signalétique qui guide vos vacanciers de la barrière jusqu'à leur emplacement.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Enseigne &amp; totem d'entrée</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Lettres découpées</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Bi-mâts bois ou alu</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panneau d'entrée avec vitrine</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panneau d'entrée &amp; tarifs</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Pavillons &amp; voiles personnalisés</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 18 autres</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-accueil-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #b37c55; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #b37c55; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Réception</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Le bâtiment d'accueil concentre l'information pratique : horaires, services, classement et numéros utiles.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Enseigne « Réception »</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panonceau de classement</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Horaires d'ouverture</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Services &amp; prestations</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Accessibilité PMR</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Numéros d'urgence</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 6 autres</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-sanitaires-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #5f86a0; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #5f86a0; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Sanitaires, laverie et animaux</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Blocs sanitaires, laverie et mini-ferme : pictogrammes, consignes et éco-gestes du quotidien.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Pictos Hommes / Femmes / PMR en découpe</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Pictogrammes standards</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Identification du bloc</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Éco-gestes eau &amp; lumière</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Chevalets de nettoyage</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Vidoir WC chimiques</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 10 autres</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-piscine-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #4b9aa2; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #4b9aa2; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Espace aquatique</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Affichages obligatoires, sécurité des baigneurs et informations claires pour chaque bassin.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Règlement de la piscine</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Profondeurs de bassins</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Pataugeoire &amp; jeux d'eau</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Toboggan</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Espace bien-être</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Interdictions &amp; pictos</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 1 autre</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-jeux-animations-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #c4953a; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #c4953a; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Jeux et animations</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Aire de jeux, terrain de pétanque et salle d'animation : règles, âges conseillés et programme de la semaine.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panneau aire de jeux réglementaire</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Pictos par structure</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panneau passe-tête</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Compteur de score</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panneau du boulodrome</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Fléchage boulodrome</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 6 autres</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-restauration-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #a0605f; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #a0605f; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Restauration et bar</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Un espace de restauration doit donner envie : enseigne visible, cartes lisibles et terrasse soignée.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Enseigne bar / snack</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Ardoises &amp; menus muraux</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Menus &amp; sets de table</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Épicerie &amp; dépôt de pain</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Décoration de vitrages</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Voiles &amp; parasols personnalisés</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 1 autre</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-tri-selectif-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #7d9a4c; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #7d9a4c; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Éco-gestes et tri</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Aidez vos vacanciers à bien trier : consignes par flux, compostage et sensibilisation.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panneaux de tri sélectif</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Adhésifs pour conteneurs</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Compostage</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Panneaux éco-responsables</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="plan-evacuation-camping#signaletique-securite" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #bf5545; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #bf5545; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Sécurité</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Point de rassemblement, consignes d'évacuation, risques et secours : les affichages réglementaires, en accord avec votre plan d'évacuation.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Point de rassemblement</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Consignes &amp; plan d'évacuation</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Risques incendie &amp; inondation</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Vidéosurveillance · Interdiction de fumer</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Gaz &amp; locaux techniques</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Secours &amp; urgences</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 1 autre</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-hotel-gite-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #7b7199; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #7b7199; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Hôtels et gîtes</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Pour les hôtels, gîtes et résidences du camping : signalétique d'extérieur et d'intérieur, de l'entrée jusqu'aux chambres.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Signalétique d'extérieur</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Signalétique d'intérieur</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Numéros de chambre</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Chambre</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Livret d'accueil</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Piscine &amp; espace bien-être</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 4 autres</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+      <a href="signaletique-decoration-camping" data-hover="" style="display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--color-surface); border-radius: var(--radius-lg); border-top: 4px solid #a5778a; text-decoration: none; color: var(--color-text);">
+        <span style="display: flex; align-items: center; gap: 9px;"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #a5778a; flex: none;"></span><strong style="font-family: var(--font-heading); font-weight: 500; font-size: 21px; line-height: 1.15;">Création et décoration</strong></span>
+        <span style="font-size: 14.5px; color: var(--color-neutral-800);">Tout ce qui fait l'identité du camping au-delà des panneaux : création graphique, rénovation, décoration et équipements.</span>
+        <ul style="list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;"><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Identité visuelle</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Cartes de visite &amp; papier en-tête</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Dépliants, brochures &amp; flyers</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Cartes de vœux</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Vectorisation</li><li style="font-size: 12.5px; background: var(--color-bg); border-radius: 999px; padding: 4px 10px;">Rénovation portes, comptoirs &amp; tables</li><li style="font-size: 12.5px; padding: 4px 4px; color: var(--color-neutral-700);">+ 7 autres</li></ul>
+        <span style="margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--color-accent-700);">Voir la famille →</span>
+      </a>
+    </div>
+  </section>
+
+    <section id="collections" style="margin-top: 72px; scroll-margin-top: 90px;">
+      <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 10px; color: var(--color-accent-700);">Collections</p>
+      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Un style, pour tout le camping</h2>
+      <p style="color: var(--color-neutral-800); margin: 0 0 22px;">Vous choisissez une collection une seule fois : tous vos panneaux suivent le même style, de l'entrée aux sanitaires. Voici le même panneau dans chacune.</p>
+      <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 18px; --min: 230px;">
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px;">
+          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 150px; display: flex; align-items: center; justify-content: center; padding: 12px;"><div style="width: 100%; max-width: 190px; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15); "><div style="background: #d98a2b; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Aire de jeux</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px;"><span>Âge conseillé</span><strong>3 à 12 ans</strong></div><div>Sous la surveillance des parents</div></div></div></div>
           <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Panneau d'entrée</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Le plan du camping en grand format, à l'arrivée, avec les services et le sens de circulation.</span>
+            <strong style="font-size: 16px;">À vos couleurs</strong>
+            <span style="font-size: 14px; color: var(--color-neutral-800);">Votre charte, votre typographie et les couleurs de votre plan. Notre recommandation.</span>
           </div>
         </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 220px;"><div style="display: flex; flex-direction: column; gap: 5px; align-items: center;"><div style="background: #2d7fa6; color: #ffffff; font-weight: 700; font-size: 12px; padding: 6px 24px 6px 10px; clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%); width: 150px; margin-left: 60px;">Piscine</div><div style="background: #2f4038; color: #ffffff; font-weight: 700; font-size: 12px; padding: 6px 10px 6px 24px; clip-path: polygon(12% 0, 100% 0, 100% 100%, 12% 100%, 0 50%); width: 150px; margin-right: 60px; text-align: right;">Accueil</div><div style="background: #3b5a2b; color: #ffffff; font-weight: 700; font-size: 12px; padding: 6px 24px 6px 10px; clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%); width: 150px; margin-left: 60px;">Sanitaires</div><div style="background: #d98a2b; color: #ffffff; font-weight: 700; font-size: 12px; padding: 6px 10px 6px 24px; clip-path: polygon(12% 0, 100% 0, 100% 100%, 12% 100%, 0 50%); width: 150px; margin-right: 60px; text-align: right;">Aire de jeux</div></div><span style="width: 9px; height: 26px; background: #7a5a3a; display: block;"></span></div>
-          </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px;">
+          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 150px; display: flex; align-items: center; justify-content: center; padding: 12px;"><div style="width: 100%; max-width: 190px; background: repeating-linear-gradient(90deg, #c9a274 0 14px, #bf966a 14px 16px, #cfa97c 16px 30px); border: 3px solid #6e4a31; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15); "><div style="background: #6e4a31; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Aire de jeux</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #3b2a1a; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px;"><span>Âge conseillé</span><strong>3 à 12 ans</strong></div><div>Sous la surveillance des parents</div></div></div></div>
           <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Panneaux directionnels</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Flèches vers les services principaux, placées aux croisements d'allées.</span>
+            <strong style="font-size: 16px;">Nature</strong>
+            <span style="font-size: 14px; color: var(--color-neutral-800);">Effet bois, tons chauds : il se fond dans les arbres. Idéal pour un camping au vert.</span>
           </div>
         </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><div style="background: #fbf9f5; color: #2f4038; border: 3px solid #2f4038; border-radius: 8px; padding: 8px 12px; font-family: var(--font-heading); font-size: 17px; text-align: center; line-height: 1.1; box-shadow: 0 4px 10px rgba(0,0,0,0.15); width: 170px;">Allée des Pins</div><div style="display: flex; gap: 10px;"><div style="background: #3b5a2b; color: #fbf9f5; border-radius: 6px 6px 2px 2px; padding: 6px 6px 14px; font-weight: 700; font-size: 12px; white-space: nowrap;">A 12</div><div style="background: #3b5a2b; color: #fbf9f5; border-radius: 6px 6px 2px 2px; padding: 6px 6px 14px; font-weight: 700; font-size: 12px; white-space: nowrap;">A 13</div><div style="background: #3b5a2b; color: #fbf9f5; border-radius: 6px 6px 2px 2px; padding: 6px 6px 14px; font-weight: 700; font-size: 12px; white-space: nowrap;">A 14</div></div></div><span style="width: 9px; height: 26px; background: #7a5a3a; display: block;"></span></div>
-          </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px;">
+          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 150px; display: flex; align-items: center; justify-content: center; padding: 12px;"><div style="width: 100%; max-width: 190px; background: #ffffff; border: 3px solid #1f3f66; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15); "><div style="background: #1f3f66; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Aire de jeux</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #1f3f66; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px;"><span>Âge conseillé</span><strong>3 à 12 ans</strong></div><div>Sous la surveillance des parents</div></div></div></div>
           <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Allées et emplacements</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Noms d'allées et numéros d'emplacements, cohérents avec la numérotation du plan.</span>
+            <strong style="font-size: 16px;">Classique</strong>
+            <span style="font-size: 14px; color: var(--color-neutral-800);">Fond blanc, bandeau de couleur, lisibilité maximale. Sobre et efficace partout.</span>
           </div>
         </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 220px;"><div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><div style="width: 84px; height: 84px; border-radius: 50%; background: #ffffff; border: 9px solid #b3261e; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 28px; line-height: 1; color: #1d1d1b; box-sizing: border-box;">10<span style="font-family: system-ui, sans-serif; font-weight: 700; font-size: 10px;">km/h</span></div><div style="background: #fbf9f5; color: #2f4038; border: 3px solid #2f4038; border-radius: 8px; padding: 8px 12px; font-family: var(--font-heading); font-size: 17px; text-align: center; line-height: 1.1; box-shadow: 0 4px 10px rgba(0,0,0,0.15); font-size: 12px; white-space: nowrap; padding: 6px 10px;">Priorité aux piétons</div></div><span style="width: 9px; height: 26px; background: #7a5a3a; display: block;"></span></div>
-          </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px;">
+          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 150px; display: flex; align-items: center; justify-content: center; padding: 12px;"><div style="width: 100%; max-width: 190px; background: linear-gradient(135deg, #e6e8ea, #c4c8cc 45%, #eef0f2 60%, #b9bdc2); border: 3px solid #5b6168; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15); "><div style="background: #3b3f44; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Aire de jeux</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2b2e31; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px;"><span>Âge conseillé</span><strong>3 à 12 ans</strong></div><div>Sous la surveillance des parents</div></div></div></div>
           <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Circulation</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Vitesse limitée, sens unique, parking, zone piétonne.</span>
+            <strong style="font-size: 16px;">Alu brossé</strong>
+            <span style="font-size: 14px; color: var(--color-neutral-800);">Aspect métal brossé, moderne et haut de gamme. Pour les établissements contemporains.</span>
           </div>
         </div>
       </div>
+      <p style="font-size: 14px; color: var(--color-neutral-800); margin: 16px 0 0;">Pour les espaces enfants, nous pouvons ajouter une touche plus ludique (personnages, couleurs vives) sans changer le reste de la collection.</p>
     </section>
 
-    <section style="margin-top: 56px;">
-      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Loisirs et équipements</h2>
-      <p style="color: var(--color-neutral-800); margin: 0 0 22px; max-width: 60ch;">Un panneau par équipement, avec ses règles et ses horaires.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 18px;">
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #d98a2b; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Aire de jeux</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Âge conseillé</span><strong>3 – 12 ans</strong></div><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Ouverte</span><strong>9 h – 21 h</strong></div><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Enfants sous la surveillance des parents</span></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Aire de jeux</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Âges conseillés, surveillance des parents, consignes d'utilisation.</span>
-          </div>
+<section id="packs" style="margin-top: 72px; scroll-margin-top: 90px;">
+      <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 10px; color: var(--color-accent-700);">Packs</p>
+      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Les packs les plus demandés</h2>
+      <p style="color: var(--color-neutral-800); margin: 0 0 22px;">Pour équiper une zone entière d'un coup, au meilleur prix. Chaque pack s'adapte à votre camping : on ajoute ou on retire des panneaux.</p>
+      <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 18px; --min: 240px;">
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <strong style="font-size: 17px;">Pack Entrée</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Le plan en grand et tout ce qu'il faut à l'arrivée.</p>
+          <ul style="font-size: 14px; color: var(--color-neutral-800); margin: 4px 0 0; padding-left: 18px;"><li style="margin: 0 0 4px;">Panneau d'entrée avec votre plan</li><li style="margin: 0 0 4px;">Panneau des tarifs modifiable</li><li style="margin: 0 0 4px;">Accueil des visiteurs</li><li style="margin: 0 0 4px;">Horaires des services</li></ul>
         </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #2d7fa6; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Espace aquatique</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Horaires</span><strong>10 h – 19 h</strong></div><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Douche obligatoire</span></div><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Shorts de bain interdits</span></div><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Baignade non surveillée</span></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Espace aquatique</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Horaires, hygiène, tenue de bain, surveillance, profondeur des bassins.</span>
-          </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <strong style="font-size: 17px;">Pack Sécurité</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Les consignes à afficher, en accord avec votre plan d'évacuation.</p>
+          <ul style="font-size: 14px; color: var(--color-neutral-800); margin: 4px 0 0; padding-left: 18px;"><li style="margin: 0 0 4px;">Plan d'évacuation</li><li style="margin: 0 0 4px;">Points de rassemblement</li><li style="margin: 0 0 4px;">Numéros d'urgence</li><li style="margin: 0 0 4px;">Consignes incendie et barbecue</li></ul>
         </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #3b5a2b; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">City stade</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Ouvert</span><strong>8 h – 22 h</strong></div><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Chaussures de sport</span></div><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Respect du voisinage après 22 h</span></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Terrain multisport</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Horaires d'utilisation et règles du terrain.</span>
-          </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <strong style="font-size: 17px;">Pack Piscine</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Les règles de l'espace aquatique, en quatre langues.</p>
+          <ul style="font-size: 14px; color: var(--color-neutral-800); margin: 4px 0 0; padding-left: 18px;"><li style="margin: 0 0 4px;">Règlement de la piscine</li><li style="margin: 0 0 4px;">Profondeur des bassins</li><li style="margin: 0 0 4px;">Baignade non surveillée</li><li style="margin: 0 0 4px;">Horaires</li></ul>
         </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="display: flex; align-items: flex-end; gap: 14px;"><div style="background: #6f8f3a; color: #ffffff; border: 3px solid #2f4038; border-radius: 8px; padding: 8px 12px; font-family: var(--font-heading); font-size: 17px; text-align: center; line-height: 1.1; box-shadow: 0 4px 10px rgba(0,0,0,0.15); width: 110px; font-size: 15px;">Mini-golf</div><div style="background: #fbf9f5; border: 3px solid #2f4038; border-radius: 50% 50% 6px 6px; width: 62px; padding: 8px 0 6px; text-align: center; color: #2f4038;"><div style="font-size: 10px; font-weight: 700;">TROU</div><div style="font-family: var(--font-heading); font-size: 26px; line-height: 1;">1</div><div style="font-size: 10px; font-weight: 700;">par 3</div></div></div><span style="width: 9px; height: 26px; background: #7a5a3a; display: block;"></span></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Mini-golf</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Panneau de départ et plaques de trous numérotées.</span>
-          </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <strong style="font-size: 17px;">Pack Sanitaires</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Une série complète pour vos blocs.</p>
+          <ul style="font-size: 14px; color: var(--color-neutral-800); margin: 4px 0 0; padding-left: 18px;"><li style="margin: 0 0 4px;">Repérage des blocs</li><li style="margin: 0 0 4px;">Pictogrammes de porte</li><li style="margin: 0 0 4px;">Bacs à vaisselle et à linge</li><li style="margin: 0 0 4px;">Vidoir WC chimique</li></ul>
         </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #7a5a3a; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Boulodrome</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Prêt de boules à l'accueil</span></div><div style="display: flex; gap: 6px; align-items: baseline;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; transform: translateY(-1px);"></span><span>Jeu jusqu'à 22 h</span></div><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Ping-pong</span><strong>à côté du bar</strong></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Boulodrome, ping-pong, jeux</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Petits panneaux pour chaque espace de jeu.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section style="margin-top: 56px;">
-      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Vie du camping</h2>
-      <p style="color: var(--color-neutral-800); margin: 0 0 22px; max-width: 60ch;">Les informations que vos vacanciers cherchent au quotidien.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 18px;">
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 210px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #c1477a; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Animations</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px;"><div style="text-align: center;"><div style="font-weight: 700; font-size: 10px;">L</div><div style="height: 34px; background: #2f3a34; border-radius: 2px; margin-top: 2px;"></div></div><div style="text-align: center;"><div style="font-weight: 700; font-size: 10px;">M</div><div style="height: 34px; background: #2f3a34; border-radius: 2px; margin-top: 2px;"></div></div><div style="text-align: center;"><div style="font-weight: 700; font-size: 10px;">M</div><div style="height: 34px; background: #2f3a34; border-radius: 2px; margin-top: 2px;"></div></div><div style="text-align: center;"><div style="font-weight: 700; font-size: 10px;">J</div><div style="height: 34px; background: #2f3a34; border-radius: 2px; margin-top: 2px;"></div></div><div style="text-align: center;"><div style="font-weight: 700; font-size: 10px;">V</div><div style="height: 34px; background: #2f3a34; border-radius: 2px; margin-top: 2px;"></div></div><div style="text-align: center;"><div style="font-weight: 700; font-size: 10px;">S</div><div style="height: 34px; background: #2f3a34; border-radius: 2px; margin-top: 2px;"></div></div><div style="text-align: center;"><div style="font-weight: 700; font-size: 10px;">D</div><div style="height: 34px; background: #2f3a34; border-radius: 2px; margin-top: 2px;"></div></div></div><div style="font-size: 10px; text-align: center;">Programme de la semaine</div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Programme d'animations</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Grand panneau avec zone pour afficher le programme de la semaine, modifiable chaque saison.</span>
-          </div>
-        </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #2f4038; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Horaires</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Accueil</span><strong>8 h – 20 h</strong></div><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Bar</span><strong>10 h – 23 h</strong></div><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Snack</span><strong>12 h – 21 h</strong></div><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Épicerie</span><strong>8 h – 12 h</strong></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Horaires des services</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Bar, snack, épicerie, laverie, accueil : horaires d'ouverture.</span>
-          </div>
-        </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; display: flex; align-items: stretch; overflow: hidden; width: 190px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #2f4038; color: #fbf9f5; font-family: var(--font-heading); font-size: 40px; padding: 6px 14px; display: flex; align-items: center;">B</div><div style="padding: 8px 10px; color: #2f4038; display: flex; flex-direction: column; justify-content: center; gap: 2px;"><strong style="font-family: var(--font-heading); font-size: 16px; font-weight: 400;">Sanitaires</strong><span style="font-size: 11px;">Laverie · Espace bébé</span></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Sanitaires</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Repérage des blocs, pictogrammes, laverie, espace bébé.</span>
-          </div>
-        </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 200px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #3b5a2b; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Point propre</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; text-align: center; font-weight: 700; font-size: 10px; color: #ffffff;"><div style="background: #1f7a3a; border-radius: 3px; padding: 14px 2px;">Verre</div><div style="background: #d9a400; border-radius: 3px; padding: 14px 2px; color: #2a1f10;">Emballages</div><div style="background: #5b5b5b; border-radius: 3px; padding: 14px 2px;">Ordures</div></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Point propre</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Consignes de tri, à reprendre dans les couleurs de votre commune.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section style="margin-top: 56px;">
-      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Sécurité et nature</h2>
-      <div style="height: 16px;"></div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 18px;">
-        <a href="plan-evacuation-camping" style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 210px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #b3261e; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Évacuation</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="position: relative; height: 56px; background: #dfe8cf; border-radius: 4px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; padding: 5px;"><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="background: #b9cf98; border-radius: 2px;"></span><span style="position: absolute; left: 30%; top: 44%; width: 9px; height: 9px; border-radius: 50%; background: #b3261e; box-shadow: 0 0 0 3px rgba(179,38,30,0.25);"></span></div><div style="background: #1f7a3a; color: #ffffff; font-weight: 700; font-size: 10px; text-align: center; padding: 3px; border-radius: 2px;">Point de rassemblement</div><div style="display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dotted #c9c2b3; padding-bottom: 3px;"><span>Urgence</span><strong>112</strong></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Consignes de sécurité</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Affiche d'évacuation, points de rassemblement, numéros d'urgence. <span style="text-decoration: underline;">Voir la page</span></span>
-          </div>
-        </a>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 160px;"><div style="background: #1f7a3a; color: #ffffff; border: 3px solid #ffffff; outline: 3px solid #1f7a3a; border-radius: 6px; width: 130px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;">Point de rassemblement</div><div style="font-family: var(--font-heading); font-size: 38px; line-height: 1; margin-top: 4px;">2</div></div><span style="width: 9px; height: 26px; background: #7a5a3a; display: block;"></span></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Points de rassemblement</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Panneaux sur le terrain, repris du plan d'évacuation.</span>
-          </div>
-        </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 14px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit;">
-          <div aria-hidden="true" style="background: #e9eddf; border-radius: 8px; height: 200px; display: flex; align-items: flex-end; justify-content: center; padding: 16px 12px 0; overflow: hidden;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 210px;"><div style="width: 100%; background: #fbf9f5; border: 3px solid #2f4038; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"><div style="background: #6f8f3a; color: #ffffff; font-family: var(--font-heading); font-size: 17px; padding: 7px 10px; text-align: center; line-height: 1.1;">Sentier nature</div><div style="padding: 8px 10px; font-size: 11px; line-height: 1.3; color: #2f4038; display: flex; flex-direction: column; gap: 4px;"><div style="display: grid; grid-template-columns: 52px 1fr; gap: 8px; align-items: center;"><div style="height: 52px; border-radius: 4px; background: #dfe8cf; border: 1px dashed #6f8f3a; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #3b5a2b;">photo</div><div><strong style="display: block; font-size: 12px;">L'aigrette garzette</strong><span>Vit dans les marais toute l'année</span></div></div></div></div><div style="display: flex; justify-content: space-between; width: 70%;"><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span><span style="width: 8px; height: 22px; background: #7a5a3a; display: block;"></span></div></div>
-          </div>
-          <div style="padding: 0 4px 6px; display: flex; flex-direction: column; gap: 4px;">
-            <strong style="font-size: 16px;">Panneaux pédagogiques</strong>
-            <span style="font-size: 14px; color: var(--color-neutral-800);">Faune, flore, patrimoine local, pour un sentier ou un coin nature.</span>
-          </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <strong style="font-size: 17px;">Pack Emplacements</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">La numérotation du plan sur le terrain.</p>
+          <ul style="font-size: 14px; color: var(--color-neutral-800); margin: 4px 0 0; padding-left: 18px;"><li style="margin: 0 0 4px;">Numéros d'emplacements</li><li style="margin: 0 0 4px;">Noms d'allées</li><li style="margin: 0 0 4px;">Plaques d'hébergement</li><li style="margin: 0 0 4px;">Poteaux à lattes aux croisements</li></ul>
         </div>
       </div>
     </section>
 
     <section style="margin-top: 72px;">
       <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Des panneaux qui fonctionnent vraiment</h2>
-      <p style="color: var(--color-neutral-800); margin: 0 0 28px; max-width: 62ch;">Vous n'avez rien de technique à gérer : nous nous occupons des détails pour que vos panneaux soient beaux, lisibles et durables.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 32px;">
+      <p style="color: var(--color-neutral-800); margin: 0 0 28px;">Vous n'avez rien de technique à gérer : nous nous occupons des détails pour que vos panneaux soient beaux, lisibles et durables.</p>
+      <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 32px; --min: 220px;">
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; color: var(--color-accent-700);">01</span>
           <strong style="font-size: 17px;">Des pictogrammes que tout le monde comprend</strong>
@@ -275,107 +378,183 @@
         </div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; color: var(--color-accent-700);">04</span>
-          <strong style="font-size: 17px;">Prêt pour votre fabricant</strong>
-          <p style="font-size: 15px; color: var(--color-neutral-800); margin: 0;">Nous préparons les fichiers directement avec votre fabricant de panneaux. Vous n'avez qu'à les transmettre, sans aller-retour.</p>
+          <strong style="font-size: 17px;">En quatre langues</strong>
+          <p style="font-size: 15px; color: var(--color-neutral-800); margin: 0;">Français, anglais, allemand et néerlandais sur les panneaux de consignes : vos vacanciers étrangers comprennent les règles du premier coup.</p>
         </div>
       </div>
     </section>
 
-    <section style="margin-top: 64px;">
-      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Matériaux</h2>
-      <p style="color: var(--color-neutral-800); margin: 0 0 22px; max-width: 62ch;">Nous vous conseillons le bon matériau selon l'endroit et le budget, et adaptons le dessin en conséquence.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 18px;">
+<section id="fabrication" style="margin-top: 64px; scroll-margin-top: 90px;">
+      <p style="font-family: var(--font-heading); font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.12; margin: 0 0 10px; color: var(--color-accent-700);">Fabrication</p>
+      <h2 style="font-size: clamp(24px, 2.4vw, 30px); margin: 0 0 6px;">Made in France, livrés partout en France</h2>
+      <p style="color: var(--color-neutral-800); margin: 0 0 22px;">Panneaux PVC, aluminium composite, autocollants : nous faisons fabriquer vos supports en France (Made in France) et vous les livrons prêts à poser. Nous vous conseillons le bon matériau selon l'endroit et le budget.</p>
+      <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 18px; --min: 220px;">
         <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 6px;">
-          <strong style="font-size: 16px;">Bois gravé</strong>
+          <strong style="font-size: 16px;">Aluminium composite</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Léger, rigide et en couleurs, idéal pour les plans et les panneaux chargés d'informations.</p>
+          <span style="font-size: 13px; font-weight: 600; color: var(--color-accent-700);">Plan d'entrée, règlements, tarifs</span>
+        </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <strong style="font-size: 16px;">PVC épais</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Économique et facile à fixer, pour les panneaux d'intérieur et les zones abritées.</p>
+          <span style="font-size: 13px; font-weight: 600; color: var(--color-accent-700);">Sanitaires, laverie, réception</span>
+        </div>
+        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 6px;">
+          <strong style="font-size: 16px;">Bois</strong>
           <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Chaleureux et naturel, il se fond dans le paysage du camping.</p>
-          <span style="font-size: 13px; font-weight: 600; color: var(--color-accent-700);">Entrée, sentier nature, noms d'allées</span>
+          <span style="font-size: 13px; font-weight: 600; color: var(--color-accent-700);">Entrée, poteaux à lattes, sentier nature</span>
         </div>
         <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 6px;">
-          <strong style="font-size: 16px;">Dibond</strong>
-          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Léger et en couleurs, idéal pour les plans et les panneaux avec beaucoup d'informations.</p>
-          <span style="font-size: 13px; font-weight: 600; color: var(--color-accent-700);">Plan d'entrée, règlements, horaires</span>
-        </div>
-        <div style="background: var(--color-surface); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 6px;">
-          <strong style="font-size: 16px;">HPL</strong>
-          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Très solide, il résiste au soleil, aux chocs et aux graffitis. Parfait pour les zones très fréquentées.</p>
-          <span style="font-size: 13px; font-weight: 600; color: var(--color-accent-700);">Piscine, aire de jeux, city stade</span>
+          <strong style="font-size: 16px;">Autocollants</strong>
+          <p style="font-size: 14px; color: var(--color-neutral-800); margin: 0;">Pour les vitres, les portes, les bornes, et pour mettre à jour un panneau sans le refaire.</p>
+          <span style="font-size: 13px; font-weight: 600; color: var(--color-accent-700);">Portes, vitrines, tarifs de la saison</span>
         </div>
       </div>
-      <p style="font-size: 14px; color: var(--color-neutral-800); margin: 18px 0 0; max-width: 72ch;">Chaque panneau est pensé pour être lu facilement là où il est placé : depuis la voiture à l'entrée, à pied dans les allées, ou de près devant un règlement.</p>
+      <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 10px 32px; --min: 220px; margin-top: 22px; font-size: 14px; color: var(--color-neutral-800);">
+        <div>✓ Impression directe sur le support, pas d'adhésif qui se décolle</div>
+        <div>✓ Protection contre les UV et les intempéries</div>
+        <div>✓ Angles arrondis, sans arête coupante</div>
+        <div>✓ Formats standards ou sur mesure</div>
+      </div>
+      <p style="font-size: 14px; color: var(--color-neutral-800); margin: 18px 0 0;">Chaque panneau est pensé pour être lu facilement là où il est placé : depuis la voiture à l'entrée, à pied dans les allées, ou de près devant un règlement.</p>
     </section>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 64px;">
       <div>
         <h2 style="font-size: clamp(22px, 2.2vw, 28px); margin-top: 0;">Ce que nous livrons</h2>
-        <p style="color: var(--color-neutral-800);">Des fichiers prêts à imprimer, aux bonnes dimensions, que vous transmettez directement à votre imprimeur ou fabricant de panneaux.</p>
+        <p style="color: var(--color-neutral-800);">Vos panneaux fabriqués, livrés chez vous et prêts à poser, après validation de chaque visuel. Vous gardez aussi les fichiers, pour les refaire à l'identique plus tard.</p>
       </div>
       <div>
         <h2 style="font-size: clamp(22px, 2.2vw, 28px); margin-top: 0;">Tarif</h2>
-        <p style="color: var(--color-neutral-800);">Sur devis, selon le format et le nombre. Commandés avec votre plan, ils coûtent moins cher car ils en reprennent les éléments. La fabrication et la pose se font chez le prestataire de votre choix.</p>
+        <p style="color: var(--color-neutral-800);">Sur devis, selon le format, le matériau et le nombre, fabrication et livraison comprises. Commandés avec votre plan, ils coûtent moins cher car ils en reprennent les éléments. Pose non comprise.</p>
       </div>
     </div>
 
     <div style="background: var(--color-accent-2-100); border-radius: var(--radius-lg); padding: 40px; margin: 56px 0 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; align-items: center;">
       <div>
         <h2 style="font-size: clamp(22px, 2.2vw, 28px); margin: 0 0 8px;">La signalétique de votre camping</h2>
-        <p style="color: var(--color-neutral-800); margin: 0; max-width: 44ch;">Dites-nous quels panneaux il vous faut et leurs formats : nous revenons avec un prix ferme et un délai.</p>
+        <p style="color: var(--color-neutral-800); margin: 0;">Commencez par votre plan, ou dites-nous quels panneaux il vous faut : nous revenons avec un prix ferme, livraison comprise, et un délai.</p>
       </div>
       <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <a class="btn btn-primary" href="./#devis" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">Demander un devis</a>
+        <a class="btn btn-primary" href="devis" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">Demander un devis</a>
         <a class="btn btn-secondary" href="tel:+33681896752" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">06 81 89 67 52</a>
       </div>
     </div>
   </article>
 
+  <section style="max-width: 1160px; margin: 0 auto; padding: 0 24px 64px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;"><h2 style="font-size: clamp(24px, 2.8vw, 34px); margin: 0;">Quelques réalisations</h2><a href="realisations" style="font-size: 14px; font-weight: 600;">Toutes les réalisations →</a></div>
+    <div data-fill="" style="display: flex; flex-wrap: wrap; gap: 22px; --min: 240px; margin-top: 22px;">
+      <a href="plan-camping-moto-dordogne" style="display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--color-text);">
+        <div style="aspect-ratio: 4 / 3; padding: 5% 6%; box-sizing: border-box;"><img loading="lazy" decoding="async" src="assets/plan-camping-moto-dordogne-detoure-1400.webp" srcset="assets/plan-camping-moto-dordogne-detoure-800.webp 800w, assets/plan-camping-moto-dordogne-detoure-1400.webp 1400w, assets/plan-camping-moto-dordogne-detoure.webp 2400w" sizes="(max-width: 600px) 90vw, 360px" alt="Plan illustré du Camping Moto Dordogne : cabanes, tentes, services pour les motards et légende trilingue" style="filter: drop-shadow(0 10px 14px rgba(46, 43, 37, 0.2)); width: 100%; height: 100%; object-fit: contain; display: block;"></div>
+        <span style="font-family: var(--font-heading); font-size: 20px;">Camping Moto Dordogne</span>
+        <span style="font-size: 14px; color: var(--color-neutral-700);">Cabanes, cabanes de luxe et tentes au cœur des arbres, avec un espace dédié aux motards</span>
+      </a>
+      <a href="plan-camping-le-grand-pre" style="display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--color-text);">
+        <div style="aspect-ratio: 4 / 3; padding: 5% 6%; box-sizing: border-box;"><img loading="lazy" decoding="async" src="assets/plan-camping-le-grand-pre-detoure-1400.webp" srcset="assets/plan-camping-le-grand-pre-detoure-800.webp 800w, assets/plan-camping-le-grand-pre-detoure-1400.webp 1400w, assets/plan-camping-le-grand-pre-detoure.webp 2400w" sizes="(max-width: 600px) 90vw, 360px" alt="Plan 2D du camping Le Grand Pré, secteurs A à H avec emplacements nus et locatifs" style="filter: drop-shadow(0 10px 14px rgba(46, 43, 37, 0.2)); width: 100%; height: 100%; object-fit: contain; display: block;"></div>
+        <span style="font-family: var(--font-heading); font-size: 20px;">Le Grand Pré</span>
+        <span style="font-size: 14px; color: var(--color-neutral-700);">Emplacements nus et locatifs, secteurs A à H</span>
+      </a>
+      <a href="plan-camping-le-jard" style="display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--color-text);">
+        <div style="aspect-ratio: 4 / 3; padding: 5% 6%; box-sizing: border-box;"><img loading="lazy" decoding="async" src="assets/plan-camping-le-jard-detoure-1400.webp" srcset="assets/plan-camping-le-jard-detoure-800.webp 800w, assets/plan-camping-le-jard-detoure-1400.webp 1400w, assets/plan-camping-le-jard-detoure.webp 2400w" sizes="(max-width: 600px) 90vw, 360px" alt="Plan 2D du camping Yelloh! Village Le Jard, plus de 800 emplacements en huit secteurs" style="filter: drop-shadow(0 10px 14px rgba(46, 43, 37, 0.2)); width: 100%; height: 100%; object-fit: contain; display: block;"></div>
+        <span style="font-family: var(--font-heading); font-size: 20px;">Yelloh! Village Le Jard</span>
+        <span style="font-size: 14px; color: var(--color-neutral-700);">Plus de 800 emplacements répartis en huit secteurs</span>
+      </a>
+    </div>
+  </section>
+
   <footer style="background: var(--color-surface); border-top: 1px solid var(--color-divider);">
-    <div style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 0; display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 48px 24px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 32px 48px; align-items: start;">
       <div>
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 34px; width: auto;">
           <span style="font-family: var(--font-heading); font-size: 20px; letter-spacing: -0.02em;">Plan Naturel</span>
         </div>
-        <p style="font-size: 14px; color: var(--color-neutral-800); margin: 16px 0 0; max-width: 30ch;">Plans illustrés sur mesure pour campings, villages vacances, aires de camping-car et parcs de loisirs. Partout en France.</p>
+        <p style="font-size: 14px; color: var(--color-neutral-800); margin: 16px 0 0; max-width: 38ch;">Plans illustrés sur mesure pour campings, glampings, villages vacances, aires de camping-car et parcs de loisirs. Partout en France.</p>
       </div>
-
-      <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-        <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Prestations</div>
-        <a href="./#prestations" style="text-decoration: none; color: var(--color-text);">Plan 2D sur mesure</a>
-        <a href="./#legendes" style="text-decoration: none; color: var(--color-text);">Légende typographique</a>
-        <a href="options-plan-camping" style="text-decoration: none; color: var(--color-text);">Toutes les options</a>
-        <a href="options-plan-camping#plan" style="text-decoration: none; color: var(--color-text);">Plan 3D illustré</a>
-        <a href="plan-evacuation-camping" style="text-decoration: none; color: var(--color-text);">Plan d'évacuation</a>
-        <a href="panneaux-signaletique-camping" style="text-decoration: none; color: var(--color-text);">Panneaux et signalétique</a>
-        <a href="supports-imprimes-camping" style="text-decoration: none; color: var(--color-text);">Livret d'accueil</a>
-        <a href="supports-imprimes-camping" style="text-decoration: none; color: var(--color-text);">Flyer et brochure</a>
-        <a href="abonnement-plan-camping" style="text-decoration: none; color: var(--color-text);">Abonnement</a>
-        <a href="creation-site-internet-camping" style="text-decoration: none; color: var(--color-text);">Site internet</a>
-        <a href="./#tarifs" style="text-decoration: none; color: var(--color-text);">Tarifs et estimation</a>
-        <a href="./#methode" style="text-decoration: none; color: var(--color-text);">Notre méthode</a>
-      </nav>
-
-      <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-        <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Réalisations</div>
-        <a href="plan-camping-bois-soleil" style="text-decoration: none; color: var(--color-text);">Camping Bois Soleil</a>
-        <a href="plan-camping-le-grand-pre" style="text-decoration: none; color: var(--color-text);">Camping Le Grand Pré</a>
-        <a href="plan-camping-les-varennes" style="text-decoration: none; color: var(--color-text);">Camping Les Varennes</a>
-        <a href="plan-camping-le-jard" style="text-decoration: none; color: var(--color-text);">Yelloh! Village Le Jard</a>
-      </nav>
-
       <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
         <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Nous contacter</div>
-        <a href="mailto:plannaturel@gmail.com" style="font-weight: 600;">plannaturel@gmail.com</a>
+        <a href="mailto:contact@plannaturel.fr" style="font-weight: 600;">contact@plannaturel.fr</a>
         <a href="tel:+33681896752" style="font-weight: 600;">06 81 89 67 52</a>
-        <a class="btn btn-primary" href="./#devis" style="border-radius: 999px; margin-top: 10px; text-align: center;">Demander un devis</a>
+        <a class="btn btn-primary" href="devis" style="border-radius: 999px; margin-top: 6px; align-self: flex-start;">Demander un devis</a>
       </div>
     </div>
-
+    <div style="max-width: 1160px; margin: 0 auto; padding: 40px 24px 0;">
+      <div style="border-top: 1px solid var(--color-divider); padding-top: 36px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 30px 28px; align-items: start;">
+        <nav aria-label="Plans de camping" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="plan-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Plans de camping</a>
+          <a href="plan-2d-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan 2D et légendes</a>
+          <a href="plan-3d-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan 3D illustré</a>
+          <a href="plan-aquarelle" style="text-decoration: none; color: var(--color-neutral-800);">Plan crayon ou aquarelle</a>
+          <a href="refonte-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Refonte de plan existant</a>
+          <a href="plan-evacuation-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan d'évacuation</a>
+          <a href="formats-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Formats et livraison</a>
+        </nav>
+        <nav aria-label="Signalétique" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="panneaux-signaletique-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Signalétique</a>
+          <a href="signaletique-terrain-camping" style="text-decoration: none; color: var(--color-neutral-800);">Terrain et fléchage</a>
+          <a href="signaletique-accueil-camping" style="text-decoration: none; color: var(--color-neutral-800);">Réception</a>
+          <a href="signaletique-sanitaires-camping" style="text-decoration: none; color: var(--color-neutral-800);">Sanitaires, laverie et animaux</a>
+          <a href="signaletique-piscine-camping" style="text-decoration: none; color: var(--color-neutral-800);">Espace aquatique</a>
+          <a href="signaletique-jeux-animations-camping" style="text-decoration: none; color: var(--color-neutral-800);">Jeux et animations</a>
+          <a href="signaletique-restauration-camping" style="text-decoration: none; color: var(--color-neutral-800);">Restauration et bar</a>
+          <a href="signaletique-tri-selectif-camping" style="text-decoration: none; color: var(--color-neutral-800);">Éco-gestes et tri</a>
+          <a href="plan-evacuation-camping#signaletique-securite" style="text-decoration: none; color: var(--color-neutral-800);">Sécurité</a>
+          <a href="signaletique-hotel-gite-camping" style="text-decoration: none; color: var(--color-neutral-800);">Hôtels et gîtes</a>
+          <a href="signaletique-decoration-camping" style="text-decoration: none; color: var(--color-neutral-800);">Création et décoration</a>
+        </nav>
+        <nav aria-label="Imprimés" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="supports-imprimes-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Imprimés</a>
+          <a href="flyer-brochure-camping" style="text-decoration: none; color: var(--color-neutral-800);">Flyers et brochures</a>
+          <a href="livret-accueil-camping" style="text-decoration: none; color: var(--color-neutral-800);">Livret d'accueil</a>
+          <a href="bloc-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Blocs de plans à distribuer</a>
+          <a href="papeterie-camping" style="text-decoration: none; color: var(--color-neutral-800);">Bureautique</a>
+          <a href="documents-quotidien-camping" style="text-decoration: none; color: var(--color-neutral-800);">Documents du quotidien</a>
+        </nav>
+        <nav aria-label="Web" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="web-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Web</a>
+          <a href="creation-site-internet-camping" style="text-decoration: none; color: var(--color-neutral-800);">Création et refonte de site</a>
+          <a href="plan-interactif-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan interactif</a>
+          <a href="qr-code-camping" style="text-decoration: none; color: var(--color-neutral-800);">QR codes d'accueil</a>
+        </nav>
+        <nav aria-label="Nos réalisations" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="realisations" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Nos réalisations</a>
+          <a href="realisations" style="text-decoration: none; color: var(--color-neutral-800);">Toutes les réalisations</a>
+          <a href="plan-camping-bois-soleil" style="text-decoration: none; color: var(--color-neutral-800);">Camping Bois Soleil</a>
+          <a href="plan-camping-le-grand-pre" style="text-decoration: none; color: var(--color-neutral-800);">Camping Le Grand Pré</a>
+          <a href="plan-camping-les-varennes" style="text-decoration: none; color: var(--color-neutral-800);">Camping Les Varennes</a>
+          <a href="plan-camping-le-jard" style="text-decoration: none; color: var(--color-neutral-800);">Yelloh! Village Le Jard</a>
+          <a href="plan-camping-moto-dordogne" style="text-decoration: none; color: var(--color-neutral-800);">Camping Moto Dordogne</a>
+        </nav>
+        <nav aria-label="Tarifs" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="tarifs" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Tarifs</a>
+          <a href="tarifs" style="text-decoration: none; color: var(--color-neutral-800);">Estimer mon plan</a>
+          <a href="abonnement-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Abonnement</a>
+          <a href="options-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Toutes les options</a>
+        </nav>
+        <nav aria-label="Obligations d'affichage" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="obligations-affichage-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Obligations d'affichage</a>
+          <a href="obligations-affichage-camping" style="text-decoration: none; color: var(--color-neutral-800);">Le guide</a>
+          <a href="classement-camping" style="text-decoration: none; color: var(--color-neutral-800);">Préparer son classement</a>
+        </nav>
+        <nav aria-label="À propos" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="a-propos" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">À propos</a>
+          <a href="a-propos" style="text-decoration: none; color: var(--color-neutral-800);">Méthode, avis et équipe</a>
+          <a href="faq" style="text-decoration: none; color: var(--color-neutral-800);">Questions fréquentes</a>
+          <a href="blog" style="text-decoration: none; color: var(--color-neutral-800);">Blog</a>
+          <a href="devis" style="text-decoration: none; color: var(--color-neutral-800);">Demander un devis</a>
+        </nav>
+      </div>
+    </div>
     <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
-      <div style="border-top: 1px solid var(--color-divider); margin-top: 48px; padding: 22px 0 32px; display: flex; gap: 18px 26px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--color-neutral-700);">
+      <div style="border-top: 1px solid var(--color-divider); margin-top: 40px; padding: 22px 0 32px; display: flex; gap: 12px 26px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--color-neutral-700);">
         <span data-copy="">© 2026 Plan Naturel</span>
         <span data-legal="" style="margin-left: auto; display: flex; gap: 8px 20px; flex-wrap: wrap;">
           <a href="mentions-legales">Mentions légales</a>
           <a href="cgv">CGV</a>
           <a href="confidentialite">Politique de confidentialité</a>
+          <a href="assets/brochure-plan-naturel.pdf" target="_blank" rel="noopener">Catalogue</a>
+          <a href="faq">FAQ</a>
         </span>
       </div>
     </div>

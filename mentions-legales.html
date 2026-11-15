@@ -36,6 +36,31 @@
     a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent-700); outline-offset: 3px; }
   </style>
 
+  <style>
+    @media (max-width: 860px) { [data-embed3d] { height: 86vh !important; min-height: 560px !important; } }
+    [data-drop] { position: relative; }
+    [data-drop] > button { font: inherit; font-weight: 600; font-size: 14px; color: var(--color-text); background: none; border: 0; padding: 10px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+    [data-drop-panel] { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-30%); padding-top: 12px; z-index: 60; }
+    [data-drop]:hover [data-drop-panel], [data-drop]:focus-within [data-drop-panel] { display: block; }
+    [data-drop-inner] { background: var(--color-bg); border: 1px solid var(--color-divider); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 22px 26px; display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 18px 28px; width: min(900px, 90vw); }
+    [data-drop-inner] a { display: block; padding: 4px 0; font-weight: 500 !important; font-size: 14px; color: var(--color-neutral-800) !important; text-decoration: none; white-space: normal !important; }
+    [data-drop-inner] a:hover { color: var(--color-accent-700) !important; }
+    [data-drop-inner] a[data-head] { font-weight: 700 !important; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text) !important; margin-bottom: 4px; }
+    [data-cta-fixed] { display: none !important; }
+    @media (max-width: 1240px) { [data-cta-fixed] { display: flex !important; } body { padding-bottom: 84px; } }
+    [data-menu-mobile], [data-tel-mobile] { display: none; }
+    [data-menu-mobile] summary { list-style: none; }
+    [data-menu-mobile] summary::-webkit-details-marker { display: none; }
+    [data-menu-mobile] summary svg { transform: none !important; }
+    [data-nav-desktop] a { white-space: nowrap; }
+    [data-nav-desktop] a[aria-current="page"], [data-menu-panel] a[aria-current="page"] { color: var(--color-accent-700) !important; }
+    @media (max-width: 1240px) {
+      [data-nav-desktop], [data-cta-desktop], [data-tel-desktop] { display: none !important; }
+      [data-menu-mobile] { display: block !important; }
+      [data-tel-mobile] { display: flex !important; }
+      [data-header-inner] { padding: 10px 16px !important; gap: 8px !important; flex-wrap: nowrap !important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -43,19 +68,88 @@
 <div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); overflow-x: clip;">
 
   <header style="position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--color-bg) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-divider);">
-    <div style="max-width: 820px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: nowrap; margin-right: auto; min-width: 0;">
-        <a href="./" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text);">
+    <div data-header-inner="" style="max-width: 1160px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 22px;">
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: nowrap; margin-right: auto; flex-shrink: 0;">
+        <a href="./" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text); min-height: 44px;">
           <img src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 30px; width: auto;">
           <span style="font-family: var(--font-heading); font-size: 19px; letter-spacing: -0.02em; white-space: nowrap;">Plan Naturel</span>
         </a>
-        <a href="tel:+33681896752" style="font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; padding-left: 16px; border-left: 1px solid var(--color-divider);">06 81 89 67 52</a>
+        <a data-tel-desktop="" href="tel:+33681896752" style="font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; padding-left: 16px; border-left: 1px solid var(--color-divider);">06 81 89 67 52</a>
       </div>
-      <a href="./" style="font-size: 14px; font-weight: 600; text-decoration: none; color: var(--color-text); white-space: nowrap;">← Retour au site</a>
+      <nav data-nav-desktop="" aria-label="Menu principal" style="display: flex; gap: 16px; align-items: center; font-size: 14px; font-weight: 600;">
+        <div data-drop="">
+          <button type="button" aria-haspopup="true">Prestations <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <div data-drop-panel="">
+          <div data-drop-inner="">
+            <div>
+              <a data-head="" href="plan-camping">Plans de camping</a>
+              <a href="plan-2d-camping">Plan 2D et légendes</a>
+              <a href="plan-3d-camping">Plan 3D illustré</a>
+              <a href="plan-aquarelle">Plan crayon ou aquarelle</a>
+              <a href="refonte-plan-camping">Refonte de plan existant</a>
+              <a href="plan-evacuation-camping">Plan d'évacuation</a>
+              <a href="formats-plan-camping">Formats et livraison</a>
+            </div>
+            <div>
+              <a data-head="" href="panneaux-signaletique-camping">Signalétique</a>
+              <a href="signaletique-terrain-camping">Terrain et fléchage</a>
+              <a href="signaletique-accueil-camping">Réception</a>
+              <a href="signaletique-sanitaires-camping">Sanitaires, laverie et animaux</a>
+              <a href="signaletique-piscine-camping">Espace aquatique</a>
+              <a href="signaletique-jeux-animations-camping">Jeux et animations</a>
+              <a href="signaletique-restauration-camping">Restauration et bar</a>
+              <a href="signaletique-tri-selectif-camping">Éco-gestes et tri</a>
+              <a href="plan-evacuation-camping#signaletique-securite">Sécurité</a>
+              <a href="signaletique-hotel-gite-camping">Hôtels et gîtes</a>
+              <a href="signaletique-decoration-camping">Création et décoration</a>
+            </div>
+            <div>
+              <a data-head="" href="supports-imprimes-camping">Imprimés</a>
+              <a href="flyer-brochure-camping">Flyers et brochures</a>
+              <a href="livret-accueil-camping">Livret d'accueil</a>
+              <a href="bloc-plan-camping">Blocs de plans à distribuer</a>
+              <a href="papeterie-camping">Bureautique</a>
+              <a href="documents-quotidien-camping">Documents du quotidien</a>
+            </div>
+            <div>
+              <a data-head="" href="web-camping">Web</a>
+              <a href="creation-site-internet-camping">Création et refonte de site</a>
+              <a href="plan-interactif-camping">Plan interactif</a>
+              <a href="qr-code-camping">QR codes d'accueil</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <a href="tarifs" style="text-decoration: none; color: var(--color-text); white-space: nowrap;">Tarifs</a>
+        <a href="obligations-affichage-camping" style="text-decoration: none; color: var(--color-text); white-space: nowrap;">Obligations d'affichage</a>
+        <a href="a-propos" style="text-decoration: none; color: var(--color-text); white-space: nowrap;">À propos</a>
+      </nav>
+      <a class="btn btn-primary" data-cta-desktop="" href="devis" style="border-radius: 999px; white-space: nowrap;">Demander un devis</a>
+      <a data-tel-mobile="" href="tel:+33681896752" aria-label="Appeler le 06 81 89 67 52" style="width: 44px; height: 44px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 999px; background: var(--color-accent-700); color: #fff; text-decoration: none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
+      </a>
+      <details data-menu-mobile="">
+        <summary aria-label="Menu" style="width: 44px; height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-divider); border-radius: 999px; cursor: pointer; color: var(--color-text);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </summary>
+        <div data-menu-panel="" style="position: absolute; left: 0; right: 0; top: 100%; background: var(--color-bg); border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); padding: 4px 16px 20px; display: flex; flex-direction: column; max-height: calc(100dvh - 65px); overflow-y: auto; overscroll-behavior: contain;">
+          <div style="padding: 14px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-neutral-700);">Prestations</div>
+          <a href="plan-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Plans de camping</a>
+          <a href="panneaux-signaletique-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Signalétique</a>
+          <a href="supports-imprimes-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Imprimés</a>
+          <a href="web-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider); padding-left: 12px;">Web</a>
+          <a href="tarifs" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Tarifs</a>
+          <a href="obligations-affichage-camping" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">Obligations d'affichage</a>
+          <a href="a-propos" style="padding: 13px 0; font-size: 16px; font-weight: 600; text-decoration: none; color: var(--color-text); border-bottom: 1px solid var(--color-divider);">À propos</a>
+          <a class="btn btn-primary" href="devis" style="border-radius: 999px; margin-top: 14px; padding: 13px; text-align: center; justify-content: center;">Demander un devis</a>
+          <a href="tel:+33681896752" style="margin-top: 8px; min-height: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600;">06 81 89 67 52</a>
+        </div>
+      </details>
     </div>
   </header>
+  <a class="btn btn-primary" data-cta-fixed="" href="devis" style="position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 30; justify-content: center; border-radius: 999px; padding: 14px; font-size: 15px; box-shadow: var(--shadow-lg);">Demander un devis gratuit</a>
 
-  <article style="max-width: 820px; margin: 0 auto; padding: 56px 24px 80px;">
+  <article style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 80px;">
     <h1 style="font-size: clamp(32px, 4vw, 46px); margin: 0 0 12px;">Mentions légales</h1>
     <p style="color: var(--color-neutral-700); font-size: 14px; margin: 0 0 40px;">Dernière mise à jour : septembre 2026</p>
 
@@ -66,17 +160,17 @@
       Forme juridique&nbsp;: micro-entreprise<br>
       Siège social&nbsp;: 1 rue de la Convention, 75015 Paris<br>
       SIRET&nbsp;: 883 888 646 00030<br>
-      Numéro de TVA intracommunautaire&nbsp;: non applicable — TVA non applicable, art. 293 B du CGI<br>
+      Numéro de TVA intracommunautaire&nbsp;: non applicable (TVA non applicable, art. 293 B du CGI)<br>
       Responsable de la publication&nbsp;: Pierre-Nicolas Marton<br>
       Téléphone&nbsp;: <a href="tel:+33681896752">06 81 89 67 52</a><br>
-      Email&nbsp;: <a href="mailto:plannaturel@gmail.com">plannaturel@gmail.com</a>
+      Email&nbsp;: <a href="mailto:contact@plannaturel.fr">contact@plannaturel.fr</a>
     </p>
 
     <h2 style="font-size: 24px; margin-top: 40px;">Hébergement</h2>
-    <p style="color: var(--color-neutral-800);">Le site est hébergé par&nbsp;: GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — <a href="https://github.com">github.com</a>.</p>
+    <p style="color: var(--color-neutral-800);">Le site est hébergé par&nbsp;: GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis, <a href="https://github.com">github.com</a>.</p>
 
     <h2 style="font-size: 24px; margin-top: 40px;">Propriété intellectuelle</h2>
-    <p style="color: var(--color-neutral-800);">L'ensemble des éléments composant ce site — structure, textes, mise en page, identité graphique — est la propriété de Plan Naturel et protégé par le droit d'auteur. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+    <p style="color: var(--color-neutral-800);">L'ensemble des éléments composant ce site (structure, textes, mise en page, identité graphique) est la propriété de Plan Naturel et protégé par le droit d'auteur. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
     <p style="color: var(--color-neutral-800);">Les plans présentés dans la rubrique Réalisations ont été créés par Plan Naturel pour ses clients. Ils sont reproduits ici à titre de référence professionnelle, avec l'accord des établissements concernés. Les noms et logos des campings et villages vacances cités demeurent la propriété de leurs titulaires respectifs.</p>
 
     <h2 style="font-size: 24px; margin-top: 40px;">Responsabilité</h2>
@@ -97,59 +191,102 @@
         <h2 style="font-size: 22px; margin: 0 0 6px;">Une question sur un projet&nbsp;?</h2>
         <p style="color: var(--color-neutral-800); margin: 0;">Écrivez-nous, nous répondons sous 48&nbsp;heures.</p>
       </div>
-      <a class="btn btn-primary" href="./#devis" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">Demander un devis</a>
+      <a class="btn btn-primary" href="devis" style="border-radius: 999px; padding: 13px 26px; white-space: nowrap; flex-shrink: 0;">Demander un devis</a>
     </div>
   </article>
 
   <footer style="background: var(--color-surface); border-top: 1px solid var(--color-divider);">
-    <div style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 0; display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 48px 24px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 32px 48px; align-items: start;">
       <div>
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="assets/logo-plan-naturel.png" alt="Plan Naturel, plans de camping sur mesure" style="height: 34px; width: auto;">
           <span style="font-family: var(--font-heading); font-size: 20px; letter-spacing: -0.02em;">Plan Naturel</span>
         </div>
-        <p style="font-size: 14px; color: var(--color-neutral-800); margin: 16px 0 0; max-width: 30ch;">Plans illustrés sur mesure pour campings, villages vacances, aires de camping-car et parcs de loisirs. Partout en France.</p>
+        <p style="font-size: 14px; color: var(--color-neutral-800); margin: 16px 0 0; max-width: 38ch;">Plans illustrés sur mesure pour campings, glampings, villages vacances, aires de camping-car et parcs de loisirs. Partout en France.</p>
       </div>
-
-      <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-        <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Prestations</div>
-        <a href="./#prestations" style="text-decoration: none; color: var(--color-text);">Plan 2D sur mesure</a>
-        <a href="./#legendes" style="text-decoration: none; color: var(--color-text);">Légende typographique</a>
-        <a href="options-plan-camping" style="text-decoration: none; color: var(--color-text);">Toutes les options</a>
-        <a href="options-plan-camping#plan" style="text-decoration: none; color: var(--color-text);">Plan 3D illustré</a>
-        <a href="plan-evacuation-camping" style="text-decoration: none; color: var(--color-text);">Plan d'évacuation</a>
-        <a href="panneaux-signaletique-camping" style="text-decoration: none; color: var(--color-text);">Panneaux et signalétique</a>
-        <a href="supports-imprimes-camping" style="text-decoration: none; color: var(--color-text);">Livret d'accueil</a>
-        <a href="supports-imprimes-camping" style="text-decoration: none; color: var(--color-text);">Flyer et brochure</a>
-        <a href="abonnement-plan-camping" style="text-decoration: none; color: var(--color-text);">Abonnement</a>
-        <a href="creation-site-internet-camping" style="text-decoration: none; color: var(--color-text);">Site internet</a>
-        <a href="./#tarifs" style="text-decoration: none; color: var(--color-text);">Tarifs et estimation</a>
-        <a href="./#methode" style="text-decoration: none; color: var(--color-text);">Notre méthode</a>
-      </nav>
-
-      <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
-        <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Réalisations</div>
-        <a href="plan-camping-bois-soleil" style="text-decoration: none; color: var(--color-text);">Camping Bois Soleil</a>
-        <a href="plan-camping-le-grand-pre" style="text-decoration: none; color: var(--color-text);">Camping Le Grand Pré</a>
-        <a href="plan-camping-les-varennes" style="text-decoration: none; color: var(--color-text);">Camping Les Varennes</a>
-        <a href="plan-camping-le-jard" style="text-decoration: none; color: var(--color-text);">Yelloh! Village Le Jard</a>
-      </nav>
-
       <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
         <div style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-neutral-700); margin-bottom: 2px;">Nous contacter</div>
-        <a href="mailto:plannaturel@gmail.com" style="font-weight: 600;">plannaturel@gmail.com</a>
+        <a href="mailto:contact@plannaturel.fr" style="font-weight: 600;">contact@plannaturel.fr</a>
         <a href="tel:+33681896752" style="font-weight: 600;">06 81 89 67 52</a>
-        <a class="btn btn-primary" href="./#devis" style="border-radius: 999px; margin-top: 10px; text-align: center;">Demander un devis</a>
+        <a class="btn btn-primary" href="devis" style="border-radius: 999px; margin-top: 6px; align-self: flex-start;">Demander un devis</a>
       </div>
     </div>
-
+    <div style="max-width: 1160px; margin: 0 auto; padding: 40px 24px 0;">
+      <div style="border-top: 1px solid var(--color-divider); padding-top: 36px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 30px 28px; align-items: start;">
+        <nav aria-label="Plans de camping" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="plan-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Plans de camping</a>
+          <a href="plan-2d-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan 2D et légendes</a>
+          <a href="plan-3d-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan 3D illustré</a>
+          <a href="plan-aquarelle" style="text-decoration: none; color: var(--color-neutral-800);">Plan crayon ou aquarelle</a>
+          <a href="refonte-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Refonte de plan existant</a>
+          <a href="plan-evacuation-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan d'évacuation</a>
+          <a href="formats-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Formats et livraison</a>
+        </nav>
+        <nav aria-label="Signalétique" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="panneaux-signaletique-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Signalétique</a>
+          <a href="signaletique-terrain-camping" style="text-decoration: none; color: var(--color-neutral-800);">Terrain et fléchage</a>
+          <a href="signaletique-accueil-camping" style="text-decoration: none; color: var(--color-neutral-800);">Réception</a>
+          <a href="signaletique-sanitaires-camping" style="text-decoration: none; color: var(--color-neutral-800);">Sanitaires, laverie et animaux</a>
+          <a href="signaletique-piscine-camping" style="text-decoration: none; color: var(--color-neutral-800);">Espace aquatique</a>
+          <a href="signaletique-jeux-animations-camping" style="text-decoration: none; color: var(--color-neutral-800);">Jeux et animations</a>
+          <a href="signaletique-restauration-camping" style="text-decoration: none; color: var(--color-neutral-800);">Restauration et bar</a>
+          <a href="signaletique-tri-selectif-camping" style="text-decoration: none; color: var(--color-neutral-800);">Éco-gestes et tri</a>
+          <a href="plan-evacuation-camping#signaletique-securite" style="text-decoration: none; color: var(--color-neutral-800);">Sécurité</a>
+          <a href="signaletique-hotel-gite-camping" style="text-decoration: none; color: var(--color-neutral-800);">Hôtels et gîtes</a>
+          <a href="signaletique-decoration-camping" style="text-decoration: none; color: var(--color-neutral-800);">Création et décoration</a>
+        </nav>
+        <nav aria-label="Imprimés" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="supports-imprimes-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Imprimés</a>
+          <a href="flyer-brochure-camping" style="text-decoration: none; color: var(--color-neutral-800);">Flyers et brochures</a>
+          <a href="livret-accueil-camping" style="text-decoration: none; color: var(--color-neutral-800);">Livret d'accueil</a>
+          <a href="bloc-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Blocs de plans à distribuer</a>
+          <a href="papeterie-camping" style="text-decoration: none; color: var(--color-neutral-800);">Bureautique</a>
+          <a href="documents-quotidien-camping" style="text-decoration: none; color: var(--color-neutral-800);">Documents du quotidien</a>
+        </nav>
+        <nav aria-label="Web" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="web-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Web</a>
+          <a href="creation-site-internet-camping" style="text-decoration: none; color: var(--color-neutral-800);">Création et refonte de site</a>
+          <a href="plan-interactif-camping" style="text-decoration: none; color: var(--color-neutral-800);">Plan interactif</a>
+          <a href="qr-code-camping" style="text-decoration: none; color: var(--color-neutral-800);">QR codes d'accueil</a>
+        </nav>
+        <nav aria-label="Nos réalisations" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="realisations" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Nos réalisations</a>
+          <a href="realisations" style="text-decoration: none; color: var(--color-neutral-800);">Toutes les réalisations</a>
+          <a href="plan-camping-bois-soleil" style="text-decoration: none; color: var(--color-neutral-800);">Camping Bois Soleil</a>
+          <a href="plan-camping-le-grand-pre" style="text-decoration: none; color: var(--color-neutral-800);">Camping Le Grand Pré</a>
+          <a href="plan-camping-les-varennes" style="text-decoration: none; color: var(--color-neutral-800);">Camping Les Varennes</a>
+          <a href="plan-camping-le-jard" style="text-decoration: none; color: var(--color-neutral-800);">Yelloh! Village Le Jard</a>
+          <a href="plan-camping-moto-dordogne" style="text-decoration: none; color: var(--color-neutral-800);">Camping Moto Dordogne</a>
+        </nav>
+        <nav aria-label="Tarifs" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="tarifs" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Tarifs</a>
+          <a href="tarifs" style="text-decoration: none; color: var(--color-neutral-800);">Estimer mon plan</a>
+          <a href="abonnement-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Abonnement</a>
+          <a href="options-plan-camping" style="text-decoration: none; color: var(--color-neutral-800);">Toutes les options</a>
+        </nav>
+        <nav aria-label="Obligations d'affichage" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="obligations-affichage-camping" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">Obligations d'affichage</a>
+          <a href="obligations-affichage-camping" style="text-decoration: none; color: var(--color-neutral-800);">Le guide</a>
+          <a href="classement-camping" style="text-decoration: none; color: var(--color-neutral-800);">Préparer son classement</a>
+        </nav>
+        <nav aria-label="À propos" style="display: flex; flex-direction: column; gap: 7px; font-size: 13.5px;">
+          <a href="a-propos" style="font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text); text-decoration: none; margin-bottom: 4px;">À propos</a>
+          <a href="a-propos" style="text-decoration: none; color: var(--color-neutral-800);">Méthode, avis et équipe</a>
+          <a href="faq" style="text-decoration: none; color: var(--color-neutral-800);">Questions fréquentes</a>
+          <a href="blog" style="text-decoration: none; color: var(--color-neutral-800);">Blog</a>
+          <a href="devis" style="text-decoration: none; color: var(--color-neutral-800);">Demander un devis</a>
+        </nav>
+      </div>
+    </div>
     <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
-      <div style="border-top: 1px solid var(--color-divider); margin-top: 48px; padding: 22px 0 32px; display: flex; gap: 18px 26px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--color-neutral-700);">
+      <div style="border-top: 1px solid var(--color-divider); margin-top: 40px; padding: 22px 0 32px; display: flex; gap: 12px 26px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--color-neutral-700);">
         <span data-copy="">© 2026 Plan Naturel</span>
         <span data-legal="" style="margin-left: auto; display: flex; gap: 8px 20px; flex-wrap: wrap;">
           <a href="mentions-legales">Mentions légales</a>
           <a href="cgv">CGV</a>
           <a href="confidentialite">Politique de confidentialité</a>
+          <a href="assets/brochure-plan-naturel.pdf" target="_blank" rel="noopener">Catalogue</a>
+          <a href="faq">FAQ</a>
         </span>
       </div>
     </div>
