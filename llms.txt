@@ -12,9 +12,8 @@
 - Détail : https://plannaturel.fr/options-plan-camping
 
 ## Tarifs (TVA non applicable, art. 293 B du CGI)
-- 200 € tout compris jusqu'à 49 emplacements.
-- Tranches : +3 €/emplacement de 50 à 100, +2 € de 101 à 200, +1 € de 201 à 600, +0,50 € au-delà de 600.
-- Exemple : 150 emplacements = 453 €.
+- Prix du plan 2D selon le nombre d'emplacements, sur devis gratuit sous 48 h. Estimation en ligne : https://plannaturel.fr/tarifs
+- Abonnement tout compris : de 19 à 69 €/mois selon la taille du camping.
 
 ## Délais et livraison
 - Délai moyen : 3 semaines. Modifications sous 48 h.
@@ -37,6 +36,8 @@
 - Plan papier, plan interactif ou QR code : que choisir ? : https://plannaturel.fr/plan-papier-interactif-qr-code-camping
 - 7 signes qu'il est temps de refaire le plan de votre camping : https://plannaturel.fr/refaire-plan-camping-signes
 - Glamping et hébergements insolites : les mettre en valeur sur le plan : https://plannaturel.fr/glamping-hebergements-insolites-plan
+
+- Plan de camping : les 8 informations à y faire figurer : https://plannaturel.fr/plan-camping-informations-indispensables
 
 ## Contact
 - Email : contact@plannaturel.fr
